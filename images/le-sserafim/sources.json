@@ -1,0 +1,90 @@
+{
+  "publisher": "SOURCE MUSIC",
+  "rights": "Official promotional images; copyright remains with the respective rights holders. Public availability is not an open license. No affiliation or endorsement.",
+  "assets": [
+    {
+      "file": "group-wide.jpg",
+      "url": "https://sourcemusic.com/resources/main/f5281561-dffb-455f-9b33-e15064606c08.jpg",
+      "source_page": "https://www.sourcemusic.com/artist/profile/LE%20SSERAFIM",
+      "retrieved_at": "2026-09-28",
+      "bytes": 363335,
+      "sha256": "469c816fc82076093f410213fa943fea5cab994cad8dee890cde2822a4258a46"
+    },
+    {
+      "file": "group-mobile.jpg",
+      "url": "https://sourcemusic.com/resources/main/9a80ba75-0f97-484c-987c-affead4e28d9.jpg",
+      "source_page": "https://www.sourcemusic.com/artist/profile/LE%20SSERAFIM",
+      "retrieved_at": "2026-09-28",
+      "bytes": 247730,
+      "sha256": "667f483f266db6859bd5f3645000009c2669a4e60806679e7fc5ab5890ce9dff"
+    },
+    {
+      "file": "wordmark.png",
+      "url": "https://sourcemusic.com/resources/artist/ee7a25f9-b7a4-4422-bb36-1206a7896f9b.png",
+      "source_page": "https://www.sourcemusic.com/artist/profile/LE%20SSERAFIM",
+      "retrieved_at": "2026-09-28",
+      "bytes": 10622,
+      "sha256": "8cb60cf3db9636f77ef8dd287ca185133f28c0419d17ffbb2b545e1c4cbc0f24"
+    },
+    {
+      "file": "portrait-1.jpg",
+      "url": "https://sourcemusic.com/resources/main/b0b79ecf-e6ac-42d9-b1d8-e6266556688a.jpg",
+      "source_page": "https://www.sourcemusic.com/artist/profile/LE%20SSERAFIM",
+      "retrieved_at": "2026-09-28",
+      "bytes": 565839,
+      "sha256": "f938998520cfb2d350c163162cf9a2dc50f80a94f489d67e0137cb01e0750d84"
+    },
+    {
+      "file": "portrait-2.jpg",
+      "url": "https://sourcemusic.com/resources/main/b86a31f5-0a83-4531-8a9c-97e7dcf55f82.jpg",
+      "source_page": "https://www.sourcemusic.com/artist/profile/LE%20SSERAFIM",
+      "retrieved_at": "2026-09-28",
+      "bytes": 565084,
+      "sha256": "ec6cc6cdc60f4a629981c59465cbdc41edc3c1c1ad8434f3b48930eb8fbd58da"
+    },
+    {
+      "file": "portrait-3.jpg",
+      "url": "https://sourcemusic.com/resources/main/5a51ff01-55be-4e21-9434-9f85d2ddb19d.jpg",
+      "source_page": "https://www.sourcemusic.com/artist/profile/LE%20SSERAFIM",
+      "retrieved_at": "2026-09-28",
+      "bytes": 446529,
+      "sha256": "874342b1034c9534eeb335c0b53220e8d3d16fe219af49b46dff3684afbc7778"
+    },
+    {
+      "file": "portrait-4.jpg",
+      "url": "https://sourcemusic.com/resources/main/fc708e60-7988-41cf-93f3-93a0c3e870e6.jpg",
+      "source_page": "https://www.sourcemusic.com/artist/profile/LE%20SSERAFIM",
+      "retrieved_at": "2026-09-28",
+      "bytes": 392667,
+      "sha256": "42db1783225b13c095a67717c383f83fe014cdc2f67225dac0e8cb5d37e22939"
+    },
+    {
+      "file": "portrait-5.jpg",
+      "url": "https://sourcemusic.com/resources/main/f483b510-2a20-4419-8a7c-f7e62bb337db.jpg",
+      "source_page": "https://www.sourcemusic.com/artist/profile/LE%20SSERAFIM",
+      "retrieved_at": "2026-09-28",
+      "bytes": 315470,
+      "sha256": "b87ac523b27f38a60b28910d29e1e0aa945f98606d2eff2d00bdc6fc08c01cf9"
+    },
+    {
+      "file": "pureflow-macau-poster.png",
+      "publisher": "iMe",
+      "url": "https://ime.co/wp-content/uploads/2026/07/%E6%9C%AA%E5%91%BD%E5%90%8D%E8%A8%AD%E8%A8%88.png",
+      "source_page": "https://ime.co/blog/tour/2026-le-sserafim-tour-pureflow-in-macau/",
+      "retrieved_at": "2026-09-30",
+      "bytes": 1778692,
+      "sha256": "46cddc8e8c8596e6beb885909219e19c82d6dacf4a19b851f83b9fa100f7b111",
+      "role": "Official PUREFLOW Macau announcement poster; not confirmed LED artwork."
+    },
+    {
+      "file": "pureflow-macau-poster-led.webp",
+      "publisher": "iMe",
+      "derived_from": "pureflow-macau-poster.png",
+      "transformation": "WebP quality 86, original 1080x1350 dimensions retained; no artwork or crop changes.",
+      "derived_at": "2026-09-30",
+      "bytes": 154456,
+      "sha256": "1b03bdb9397dfd51b64dfaccb914887f4c5a24a04a4a1c60efe61c7ad9eade3f",
+      "role": "Optimized runtime LED texture; original organizer PNG preserved."
+    }
+  ]
+}
