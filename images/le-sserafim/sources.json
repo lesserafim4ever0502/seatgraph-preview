@@ -85,6 +85,56 @@
       "bytes": 154456,
       "sha256": "1b03bdb9397dfd51b64dfaccb914887f4c5a24a04a4a1c60efe61c7ad9eade3f",
       "role": "Optimized runtime LED texture; original organizer PNG preserved."
+    },
+    {
+      "file": "portrait-1-thumb.jpg",
+      "publisher": "SOURCE MUSIC",
+      "derived_from": "portrait-1.jpg",
+      "transformation": "420px-wide JPEG thumbnail, full original frame retained; quality 84.",
+      "derived_at": "2026-10-09",
+      "bytes": 51516,
+      "sha256": "710f797671a75962356d5217bdb9f8b45ab28c97145b9a8832d58fed0bcdafff",
+      "role": "Homepage thumbnail; full original is retained for the portrait lightbox."
+    },
+    {
+      "file": "portrait-2-thumb.jpg",
+      "publisher": "SOURCE MUSIC",
+      "derived_from": "portrait-2.jpg",
+      "transformation": "420px-wide JPEG thumbnail, full original frame retained; quality 84.",
+      "derived_at": "2026-10-09",
+      "bytes": 51336,
+      "sha256": "befee84c50eaef7a9b5108a4e19a6b9006162f8b6660f38c35d4d7028fa0178b",
+      "role": "Homepage thumbnail; full original is retained for the portrait lightbox."
+    },
+    {
+      "file": "portrait-3-thumb.jpg",
+      "publisher": "SOURCE MUSIC",
+      "derived_from": "portrait-3.jpg",
+      "transformation": "420px-wide JPEG thumbnail, full original frame retained; quality 84.",
+      "derived_at": "2026-10-09",
+      "bytes": 43896,
+      "sha256": "856fefa9ea5700aa2af398c67b1a4c8a38819dceadfe43baa946834b61921031",
+      "role": "Homepage thumbnail; full original is retained for the portrait lightbox."
+    },
+    {
+      "file": "portrait-4-thumb.jpg",
+      "publisher": "SOURCE MUSIC",
+      "derived_from": "portrait-4.jpg",
+      "transformation": "420px-wide JPEG thumbnail, full original frame retained; quality 84.",
+      "derived_at": "2026-10-09",
+      "bytes": 40481,
+      "sha256": "827493037e0c88aa97bdcdc8040fbaf8d3711922d7adc853ecf10346599bdd41",
+      "role": "Homepage thumbnail; full original is retained for the portrait lightbox."
+    },
+    {
+      "file": "portrait-5-thumb.jpg",
+      "publisher": "SOURCE MUSIC",
+      "derived_from": "portrait-5.jpg",
+      "transformation": "420px-wide JPEG thumbnail, full original frame retained; quality 84.",
+      "derived_at": "2026-10-09",
+      "bytes": 30941,
+      "sha256": "7c9099f86c0f4d5ae964378ca2389bcef8c55612c99a94f369c8f03df0b77261",
+      "role": "Homepage thumbnail; full original is retained for the portrait lightbox."
     }
   ]
 }
