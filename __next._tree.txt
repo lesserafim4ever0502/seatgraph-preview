@@ -3,5 +3,5 @@
 :HL["/seatgraph-preview/_next/static/css/f4fc582e3ce5c5fd.css","style"]
 :HL["/seatgraph-preview/_next/static/css/42bab9527c96538e.css","style"]
 :HL["/seatgraph-preview/fonts/seatgraph-ui.woff2","font",{"crossOrigin":"anonymous","type":"font/woff2"}]
-:HL["/seatgraph-preview/brand/seatgraph-mark-light.svg","image"]
-0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}},"staleTime":300,"buildId":"7Qij9wNCCDrTXwj18YjW2"}
+:HL["/seatgraph-preview/brand/seatgraph-mark-light.svg?v=geometric-s","image"]
+0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}},"staleTime":300,"buildId":"VYZ_CrAlpP6ItcQAG5cch"}
