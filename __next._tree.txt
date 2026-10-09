@@ -1,5 +1,6 @@
-:HL["/seatgraph-preview/_next/static/css/9da078f9235b26d4.css","style"]
-:HL["/seatgraph-preview/_next/static/css/26a056afd3983d19.css","style"]
-:HL["/seatgraph-preview/_next/static/css/e716d43ecedde6db.css","style"]
-:HL["/seatgraph-preview/_next/static/css/48971b968bf43eb2.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}},"staleTime":300,"buildId":"aWLIGND7oZVIpESZvg2ux"}
+:HL["/seatgraph-preview/_next/static/css/a47d7461d4a63c57.css","style"]
+:HL["/seatgraph-preview/_next/static/css/c476c7c07d83e9bd.css","style"]
+:HL["/seatgraph-preview/_next/static/css/60bc275d9402625a.css","style"]
+:HL["/seatgraph-preview/_next/static/css/e71545994023abc2.css","style"]
+:HL["/seatgraph-preview/fonts/seatgraph-ui.woff2","font",{"crossOrigin":"anonymous","type":"font/woff2"}]
+0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}},"staleTime":300,"buildId":"X8yD6AFwTs1xSjt7q0q9l"}
