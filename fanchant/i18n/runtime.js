@@ -70,18 +70,14 @@
   }
   function syncDocument() {
     scheduled = false;
-    // Add tools after hydration; no edits to generated React markup or bundles.
-    const navigation = document.querySelector('.sg-header nav, .editorial-nav, .venue-topbar');
-    if (navigation && !navigation.querySelector('[data-fanchant-link]')) {
-      const script = document.querySelector('script[src$="/i18n/runtime.js"]');
-      if (script) {
-        const link = document.createElement('a');
-        link.href = new URL('../fanchant/', script.src).href;
-        link.dataset.fanchantLink = '';
-        link.dataset.i18n = 'fanchant.nav';
-        link.textContent = t('fanchant.nav');
-        navigation.append(link);
-      }
+    const script = document.querySelector('script[src$="i18n/runtime.js"]');
+    if (script) {
+      const root = new URL('../../', script.src);
+      document.querySelectorAll('[data-site-route]').forEach(link => {
+        const url = new URL(link.dataset.siteRoute.slice(1), root);
+        url.searchParams.set(config.queryParameter, locale);
+        if (link.href !== url.href) link.href = url.href;
+      });
     }
     document.documentElement.lang = locale;
     const walker = document.createTreeWalker(document.documentElement, NodeFilter.SHOW_TEXT, {

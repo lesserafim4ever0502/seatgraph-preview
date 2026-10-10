@@ -15,38 +15,40 @@
 <body class="sg-site fanchant-page">
   <a class="skip-link" href="#trainer" data-i18n="fanchant.skip">跳至训练器</a>
   <header class="sg-header">
-    <a class="sg-brand" href="../" aria-label="SeatGraph 首页"><img src="../brand/seatgraph-mark-light.svg?v=grandstand-focus" width="32" height="32" alt=""><strong>SeatGraph</strong><span>观演参考</span></a>
+    <a class="sg-brand" href="../" data-site-route="/" aria-label="SeatGraph 首页"><img src="../brand/seatgraph-mark-light.svg?v=grandstand-focus" width="32" height="32" alt=""><strong>SeatGraph</strong></a>
     <nav aria-label="主导航">
-      <a href="../" data-i18n="fanchant.home">首页</a>
-      <a href="../venue/" data-i18n="fanchant.venue">场馆视野</a>
-      <a href="../support/" data-i18n="fanchant.support">应援地图</a>
-      <a href="./" aria-current="page" data-fanchant-link data-i18n="fanchant.nav">应援训练</a>
+      <a href="../" data-site-route="/" data-i18n="fanchant.home">首页</a>
+      <a href="../venue/" data-site-route="/venue/" data-i18n="fanchant.venue">场馆视野</a>
+      <a href="../support/" data-site-route="/support/" data-i18n="fanchant.support">应援地图</a>
+      <a href="./" data-site-route="/fanchant/" aria-current="page" data-fanchant-link data-i18n="fanchant.nav">应援训练</a>
     </nav>
     <div class="account"></div>
   </header>
   <main id="trainer" class="trainer" data-i18n-ignore>
     <div class="trainer-heading">
       <div><p class="trainer-eyebrow">FANCHANT TRAINER</p><h1 data-i18n="fanchant.heading">应援训练器</h1></div>
-      <p class="trainer-intro" data-i18n="fanchant.intro">戴上耳机，一句一句练到熟悉。</p>
+      <a class="trainer-back" href="../#guide-main" data-site-route="/#guide-main" data-i18n="fanchant.backHome">返回选区首页</a>
     </div>
     <p id="boot-status" role="status" data-i18n="fanchant.loading">正在载入示例…</p>
     <noscript>此训练器需要启用 JavaScript / JavaScript is required.</noscript>
     <div id="trainer-content" hidden>
-      <section class="song-header" aria-labelledby="song-title">
-        <div><label for="song-select" data-i18n="fanchant.song">歌曲</label><select id="song-select"><option value="current">BOOMPALA</option></select></div>
-        <div class="song-title"><h2 id="song-title">BOOMPALA</h2><p id="song-artist">LE SSERAFIM</p></div>
-        <span id="mode-label" class="trainer-tag"></span>
-      </section>
-      <p id="sample-note" class="sample-note" data-i18n="fanchant.sampleNote">演示数据：Cue 内容与时间仅用于验证训练流程，并非官方应援谱。请按自己的音源编辑。</p>
-      <section class="audio-source" aria-labelledby="audio-heading">
-        <div><h2 id="audio-heading" data-i18n="fanchant.localAudio">选择本地音频</h2><p data-i18n="fanchant.audioPrivacy">MP3 / M4A / WAV · 仅在此浏览器播放，不上传。刷新后需重新选择。</p></div>
-        <label class="file-button"><span data-i18n="fanchant.chooseAudio">选择音频文件</span><input id="audio-file" type="file" accept=".mp3,.m4a,.wav,audio/mpeg,audio/mp4,audio/wav" data-i18n-aria="fanchant.chooseAudio"></label>
-        <p id="audio-status" class="audio-status" role="status"></p>
-        <p id="audio-error" class="trainer-error" role="alert" hidden></p>
-        <audio id="local-audio" preload="metadata"></audio>
-      </section>
+      <div class="trainer-setup">
+        <section class="song-header" aria-labelledby="song-title">
+          <div class="song-title"><h2 id="song-title" class="sr-only">BOOMPALA</h2><label class="sr-only" for="song-select" data-i18n="fanchant.song">歌曲</label><select id="song-select"><option value="current">BOOMPALA</option></select><p id="song-artist">LE SSERAFIM</p></div>
+          <span id="mode-label" class="sr-only"></span>
+        </section>
+        <section class="audio-source" aria-labelledby="audio-heading">
+          <div class="audio-description"><h2 id="audio-heading" data-i18n="fanchant.localAudio">本地音频</h2><p id="audio-status" class="audio-status" role="status"></p></div>
+          <label class="file-button"><span data-i18n="fanchant.chooseAudio">选择音频文件</span><input id="audio-file" type="file" accept=".mp3,.m4a,.wav,audio/mpeg,audio/mp4,audio/wav" data-i18n-aria="fanchant.chooseAudio"></label>
+          <p class="audio-privacy" data-i18n="fanchant.audioPrivacy">MP3 / M4A / WAV · 本机播放，不上传；刷新后需重选。</p>
+          <p id="audio-error" class="trainer-error" role="alert" hidden></p>
+          <audio id="local-audio" preload="metadata"></audio>
+        </section>
+      </div>
+      <p id="sample-note" class="sample-note" data-i18n="fanchant.sampleNote">示例应援与时间，非官方应援谱；请按音源校准。</p>
       <div class="training-workspace">
         <section class="practice-workspace" aria-labelledby="current-heading">
+          <div class="practice-toolbar"><div class="training-modes" role="group" data-i18n-aria="fanchant.trainingMode"><button type="button" data-mode="learn" aria-pressed="true" data-i18n="fanchant.learn">学习</button><button type="button" data-mode="practice" aria-pressed="false" data-i18n="fanchant.practice">练习</button><button type="button" data-mode="test" aria-pressed="false" data-i18n="fanchant.test">考试</button></div></div>
           <div id="cue-stage" class="cue-stage" data-phase="waiting">
             <div class="cue-stage-heading"><h2 id="current-heading" data-i18n="fanchant.currentCue">当前应援</h2><span id="cue-phase" role="status" aria-live="polite"></span></div>
             <p id="cue-countdown" class="cue-countdown" aria-live="off"></p>
@@ -54,6 +56,11 @@
             <p id="cue-note" class="cue-note"></p>
             <p id="cue-reveal" class="cue-reveal"></p>
           </div>
+      <div class="transport" role="region" data-i18n-aria="fanchant.playbackControls">
+
+        <div class="transport-buttons"><button id="play" type="button" class="primary" disabled data-i18n="fanchant.play">播放</button><button id="loop" type="button" disabled aria-pressed="false" data-i18n="fanchant.startLoop">循环此句</button><label class="rate-control"><span data-i18n="fanchant.speed">速度</span><select id="rate"><option value="0.5">0.5×</option><option value="0.75">0.75×</option><option value="0.85">0.85×</option><option value="1" selected>1.0×</option><option value="1.25">1.25×</option></select></label></div>
+        <p id="loop-status" class="trainer-help"></p>
+      </div>
           <section class="timeline-section" aria-labelledby="timeline-heading">
             <div class="section-heading"><h2 id="timeline-heading" data-i18n="fanchant.timeline">时间轴</h2><output id="audio-time" for="seek">00:00 / 00:00</output></div>
             <label class="sr-only" for="seek" data-i18n="fanchant.seek">播放进度</label>
@@ -87,15 +94,11 @@
         </form>
       </section>
       <section class="data-tools" aria-labelledby="data-heading">
-        <div><h2 id="data-heading" data-i18n="fanchant.myCues">我的应援数据</h2><p id="storage-status" class="trainer-help" role="status"></p></div>
+        <details class="data-backup"><summary id="data-heading" data-i18n="fanchant.myCues">我的应援数据</summary>
         <div class="data-actions"><label class="file-button"><span data-i18n="fanchant.import">导入 JSON</span><input id="import-json" type="file" accept=".json,application/json" data-i18n-aria="fanchant.import"></label><button id="export-json" type="button" data-i18n="fanchant.export">导出 JSON</button></div>
-        <p id="notice" class="trainer-notice" role="status" hidden></p>
+        </details><p id="storage-status" class="trainer-help" role="status"></p><p id="notice" class="trainer-notice" role="status" hidden></p>
       </section>
-      <div class="transport" role="region" data-i18n-aria="fanchant.playbackControls">
-        <div class="training-modes" role="group" data-i18n-aria="fanchant.trainingMode"><button type="button" data-mode="learn" aria-pressed="true" data-i18n="fanchant.learn">学习</button><button type="button" data-mode="practice" aria-pressed="false" data-i18n="fanchant.practice">练习</button><button type="button" data-mode="test" aria-pressed="false" data-i18n="fanchant.test">考试</button></div>
-        <div class="transport-buttons"><button id="play" type="button" class="primary" disabled data-i18n="fanchant.play">播放</button><button id="loop" type="button" disabled aria-pressed="false" data-i18n="fanchant.startLoop">循环此句</button><label class="rate-control"><span data-i18n="fanchant.speed">速度</span><select id="rate"><option value="0.5">0.5×</option><option value="0.75">0.75×</option><option value="0.85">0.85×</option><option value="1" selected>1.0×</option><option value="1.25">1.25×</option></select></label></div>
-        <p id="loop-status" class="trainer-help"></p>
-      </div>
+
     </div>
   </main>
 </body>
