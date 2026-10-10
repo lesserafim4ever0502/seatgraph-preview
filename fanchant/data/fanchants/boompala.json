@@ -1,0 +1,15 @@
+{
+  "id": "boompala-demo",
+  "artistId": "le-sserafim",
+  "artist": "LE SSERAFIM",
+  "title": "BOOMPALA",
+  "audioOffset": 0,
+  "sample": true,
+  "cues": [
+    { "id": "sample-1", "time": 5, "type": "group_name", "text": "LE SSERAFIM", "note": "Sample timing only / 仅示例时间" },
+    { "id": "sample-2", "time": 12, "prepareAt": 9, "type": "member_name", "text": "김채원 사쿠라 허윤진 카즈하 홍은채" },
+    { "id": "sample-3", "time": 20, "type": "clap", "text": "👏 👏" },
+    { "id": "sample-4", "time": 32, "type": "chant", "text": "BOOMPALA!" },
+    { "id": "sample-5", "time": 45, "type": "action", "text": "🙌" }
+  ]
+}

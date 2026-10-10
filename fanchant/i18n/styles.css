@@ -1,0 +1,13 @@
+.language-control { display: inline-flex; align-items: center; gap: .35rem; flex-shrink: 0; padding: .35rem .55rem; border: 1px solid currentColor; border-radius: 6px; font: 500 12px/1.4 system-ui, sans-serif; }
+.language-control select { max-width: 8rem; padding: .15rem; border: 0; color: inherit; background: transparent; font: inherit; cursor: pointer; }
+.language-control select option { color: #211b2a; background: #fff; }
+.language-control:focus-within { outline: 2px solid #785cba; outline-offset: 3px; }
+.editorial-header .account { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; }
+.venue-topbar { flex-wrap: wrap; gap: .75rem; }
+html[lang='en'] .editorial-nav { flex-wrap: wrap; }
+html[lang='en'] .arena-controls { overflow-wrap: anywhere; }
+.editorial-nav:has([data-fanchant-link]) { flex-wrap: wrap; gap: 8px 20px; }
+.editorial-header:has([data-fanchant-link]) { height: auto; min-height: 82px; padding-block: 12px; }
+.venue-topbar [data-fanchant-link] { display: inline-flex; align-items: center; min-height: 44px; }
+.editorial-nav [data-fanchant-link] { min-height: 44px; }
+@media (max-width: 640px) { .language-control { padding: .25rem .4rem; font-size: 11px; } .editorial-header .account { gap: .35rem; } .venue-topbar .language-control { margin-left: auto; } }
