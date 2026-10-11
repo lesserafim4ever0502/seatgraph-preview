@@ -1,4 +1,5 @@
-import { DataError, MAX_JSON_BYTES, parseSong, parseSongJSON, STORAGE_KEY } from './model.js?v=9c508cbacb94';
+import { DataError, MAX_JSON_BYTES, parseSong, parseSongJSON, STORAGE_KEY } from './model.js?v=0a5e64bba347';
+import { youtubeId } from './youtube.js?v=0a5e64bba347';
 export const LIBRARY_KEY = 'seatgraph.fanchant.library.v2';
 export const MAX_LIBRARY_BYTES = 8 * MAX_JSON_BYTES;
 export const PROGRESS = ['new', 'learning', 'mastered'];
@@ -14,7 +15,14 @@ export function parseCatalog(value) {
         const data = object(item);
         if (!Number.isInteger(data.order) || data.order < 1 || ![1, 2, 3].includes(data.priority) || typeof data.official !== 'boolean' || typeof data.tourVariant !== 'boolean')
             throw new DataError('invalidObject', 'catalog');
-        return { song: parseSong(data.song), order: data.order, official: data.official, priority: data.priority, tourVariant: data.tourVariant };
+        let video;
+        if (data.video !== undefined) {
+            const input = object(data.video);
+            if (typeof input.url !== 'string' || !/^https:\/\/www\.youtube\.com\/watch\?v=[\w-]{11}$/.test(input.url) || !youtubeId(input.url) || typeof input.title !== 'string' || !input.title.trim() || input.title.length > 300 || typeof input.publisher !== 'string' || !input.publisher.trim() || input.publisher.length > 100 || !['audio', 'mv', 'performance'].includes(input.kind) || typeof input.verifiedAt !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(input.verifiedAt))
+                throw new DataError('invalidObject', 'catalog.video');
+            video = { url: input.url, title: input.title, publisher: input.publisher, kind: input.kind, verifiedAt: input.verifiedAt };
+        }
+        return { song: parseSong(data.song), order: data.order, official: data.official, priority: data.priority, tourVariant: data.tourVariant, ...(video ? { video } : {}) };
     });
     if (new Set(entries.map(item => item.song.id)).size !== entries.length || new Set(entries.map(item => item.order)).size !== entries.length)
         throw new DataError('duplicateId', 'catalog');

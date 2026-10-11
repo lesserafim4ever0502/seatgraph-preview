@@ -1,8 +1,8 @@
-import { TrainingMediaPlayer } from './media.js?v=9c508cbacb94';
-import { youtubeId } from './youtube.js?v=9c508cbacb94';
-import { answerVisible, cueEnd, cueSeekTime, formatTime, getCueState, getLoopRange, toAudioTime, toSongTime } from './engine.js?v=9c508cbacb94';
-import { CUE_TYPES, DataError, parseSong } from './model.js?v=9c508cbacb94';
-import { LIBRARY_KEY, MAX_LIBRARY_BYTES, PROGRESS, loadLibrary, parseBackup, parseCueLines, parseLibrary, saveLibrary, shiftSong } from './library.js?v=9c508cbacb94';
+import { TrainingMediaPlayer } from './media.js?v=0a5e64bba347';
+import { youtubeId } from './youtube.js?v=0a5e64bba347';
+import { answerVisible, cueEnd, cueSeekTime, formatTime, getCueState, getLoopRange, toAudioTime, toSongTime } from './engine.js?v=0a5e64bba347';
+import { CUE_TYPES, DataError, parseSong } from './model.js?v=0a5e64bba347';
+import { LIBRARY_KEY, MAX_LIBRARY_BYTES, PROGRESS, loadLibrary, parseBackup, parseCueLines, parseLibrary, saveLibrary, shiftSong } from './library.js?v=0a5e64bba347';
 const storage = {
     getItem: (key) => window.localStorage.getItem(key),
     setItem: (key, value) => window.localStorage.setItem(key, value),
@@ -142,7 +142,7 @@ export class FanchantTrainer {
             void this.player.selectVideo(this.el('youtube-url').value);
         });
         this.on(this.el('youtube-reference'), 'click', () => {
-            const source = this.song.sources?.find(source => youtubeId(source.url));
+            const source = this.catalog.find(entry => entry.song.id === this.song.id)?.video ?? this.song.sources?.find(source => youtubeId(source.url));
             if (source) {
                 this.el('youtube-url').value = source.url;
                 void this.player.selectVideo(source.url);
@@ -482,11 +482,29 @@ export class FanchantTrainer {
             link.textContent = source.label;
             links.append(link);
         }
-        const video = this.song.sources?.find(source => youtubeId(source.url));
+        const video = entry?.video;
+        const fallback = this.song.sources?.find(source => youtubeId(source.url));
         const reference = this.el('youtube-reference');
         reference.hidden = !video;
         if (video)
-            write(reference, this.t('useReferenceVideo', { source: video.label }));
+            write(reference, this.t('loadOfficialVideo', { kind: this.t(`video_${video.kind}`) }));
+        else {
+            reference.hidden = !fallback;
+            if (fallback)
+                write(reference, this.t('useReferenceVideo', { source: fallback.label }));
+        }
+        const info = this.el('youtube-reference-info');
+        info.hidden = !video;
+        if (video)
+            write(info, this.t('curatedVideoInfo', { title: video.title, publisher: video.publisher }));
+        const note = this.el('youtube-version-note');
+        note.hidden = !video;
+        if (video)
+            write(note, this.t(entry?.tourVariant ? 'videoTourVersion' : 'videoVersionHelp'));
+        const original = this.el('youtube-reference-original');
+        original.hidden = !video;
+        if (video)
+            original.href = video.url;
     }
     renderSetlist() {
         const query = this.el('song-search').value.trim().toLocaleLowerCase();

@@ -39,7 +39,11 @@
 .youtube-input-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; }
 .youtube-input-row input { width: 100%; }
 .youtube-source .trainer-help { margin-top: 8px; }
-.trainer #youtube-reference { margin-top: 8px; font-size: 12px; text-align: left; }
+.youtube-reference-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; }
+.trainer #youtube-reference { font-size: 14px; text-align: left; }
+.youtube-reference-actions a { font-size: 12px; }
+.youtube-custom { margin-top: 12px; }
+.youtube-custom form { margin-top: 8px; }
 .youtube-privacy summary { min-height: 44px; padding-block: 10px; cursor: pointer; font-size: 12px; color: var(--sg-muted); }
 .youtube-policy-links { display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: 12px; padding-block: 8px; }
 .youtube-policy-links a { min-height: 44px; display: inline-flex; align-items: center; }
