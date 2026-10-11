@@ -3,14 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="description" content="SeatGraph Fanchant Trainer：使用本地音频学习、循环练习和编辑应援 Cue。">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="description" content="SeatGraph Fanchant Trainer：使用 YouTube 在线视频或本地音频学习、循环练习和编辑应援 Cue。">
   <title>Fanchant Trainer · SeatGraph</title>
-  <link rel="stylesheet" href="site.css?v=853c406c5363">
-  <link rel="stylesheet" href="i18n/styles.css?v=853c406c5363">
-  <link rel="stylesheet" href="styles.css?v=853c406c5363">
-  <script src="i18n/catalog.js?v=853c406c5363"></script>
-  <script src="i18n/runtime.js?v=853c406c5363"></script>
-  <script type="module" src="lib/app.js?v=853c406c5363"></script>
+  <link rel="stylesheet" href="site.css?v=2fcaa9cf1e18">
+  <link rel="stylesheet" href="i18n/styles.css?v=2fcaa9cf1e18">
+  <link rel="stylesheet" href="styles.css?v=2fcaa9cf1e18">
+  <script src="i18n/catalog.js?v=2fcaa9cf1e18"></script>
+  <script src="i18n/runtime.js?v=2fcaa9cf1e18"></script>
+  <script type="module" src="lib/app.js?v=2fcaa9cf1e18"></script>
 </head>
 <body class="sg-site fanchant-page">
   <a class="skip-link" href="#trainer" data-i18n="fanchant.skip">跳至训练器</a>
@@ -38,9 +39,15 @@
           <span id="mode-label" class="sr-only"></span>
         </section>
         <section class="audio-source" aria-labelledby="audio-heading">
-          <div class="audio-description"><h2 id="audio-heading" data-i18n="fanchant.localAudio">本地音频</h2><p id="audio-status" class="audio-status" role="status"></p></div>
-          <label class="file-button"><span data-i18n="fanchant.chooseAudio">选择音频文件</span><input id="audio-file" type="file" accept=".mp3,.m4a,.wav,audio/mpeg,audio/mp4,audio/wav" data-i18n-aria="fanchant.chooseAudio"></label>
-          <p class="audio-privacy" data-i18n="fanchant.audioPrivacy">MP3 / M4A / WAV · 本机播放，不上传；刷新后需重选。</p>
+          <div class="audio-description"><h2 id="audio-heading" data-i18n="fanchant.playbackSource">播放来源</h2><p id="audio-status" class="audio-status" role="status"></p></div>
+          <label class="media-source-label"><span class="sr-only" data-i18n="fanchant.playbackSource">播放来源</span><select id="media-source"><option value="youtube" data-i18n="fanchant.youtubeOnline">YouTube 在线视频</option><option value="local" data-i18n="fanchant.localAudio">本地音频</option></select></label>
+          <div id="youtube-source" class="youtube-source">
+            <form id="youtube-form"><label for="youtube-url" data-i18n="fanchant.youtubeURL">YouTube 视频链接</label><div class="youtube-input-row"><input id="youtube-url" type="text" inputmode="url" maxlength="2048" placeholder="https://youtu.be/…" autocomplete="off"><button type="submit" data-i18n="fanchant.youtubeLoad">同意并载入视频</button></div></form>
+            <button id="youtube-reference" type="button" hidden></button>
+            <p class="trainer-help" data-i18n="fanchant.youtubeConsent">载入即同意下方条款与隐私说明；不会自动播放。请使用允许嵌入的官方或获授权视频。</p>
+            <details class="youtube-privacy"><summary data-i18n="fanchant.youtubePrivacyTitle">在线播放条款与隐私说明</summary><p class="trainer-help" data-i18n="fanchant.youtubePrivacy">本站使用 YouTube API Services。点击载入后会连接 YouTube/Google，向其发送视频 ID、IP、浏览器信息和本站来源；播放器可能使用 Cookie 并显示广告。本站不下载视频、不提取音频、不读取 YouTube 账号，链接和播放数据仅用于当前会话，不进入应援备份。使用在线播放须同意 YouTube 服务条款及本说明；可清除视频停止播放器。</p><p class="youtube-policy-links"><a href="https://www.youtube.com/t/terms" target="_blank" rel="noopener noreferrer" data-i18n="fanchant.youtubeTerms">YouTube 服务条款</a><a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" data-i18n="fanchant.googlePrivacy">Google 隐私政策</a></p></details>
+          </div>
+          <div id="local-source" class="local-source" hidden><label class="file-button"><span data-i18n="fanchant.chooseAudio">选择音频文件</span><input id="audio-file" type="file" accept=".mp3,.m4a,.wav,audio/mpeg,audio/mp4,audio/wav" data-i18n-aria="fanchant.chooseAudio"></label><p class="audio-privacy" data-i18n="fanchant.audioPrivacy">MP3 / M4A / WAV · 本机播放，不上传；刷新后需重选。</p></div>
           <p id="audio-error" class="trainer-error" role="alert" hidden></p>
           <audio id="local-audio" preload="metadata"></audio>
         </section>
@@ -67,6 +74,7 @@
       <div class="training-workspace">
         <section class="practice-workspace" aria-labelledby="current-heading">
           <div class="practice-toolbar"><div class="training-modes" role="group" data-i18n-aria="fanchant.trainingMode"><button type="button" data-mode="learn" aria-pressed="true" data-i18n="fanchant.learn">学习</button><button type="button" data-mode="practice" aria-pressed="false" data-i18n="fanchant.practice">练习</button><button type="button" data-mode="test" aria-pressed="false" data-i18n="fanchant.test">考试</button></div></div>
+          <section id="youtube-panel" class="youtube-panel" hidden aria-label="YouTube"><div class="youtube-player-shell"><div id="youtube-player" class="youtube-player"></div></div><div class="youtube-player-actions"><a id="youtube-original" href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" data-i18n="fanchant.youtubeOriginal">在 YouTube 打开</a><button id="youtube-clear" type="button" disabled data-i18n="fanchant.youtubeClear">清除视频</button></div><p class="trainer-help" data-i18n="fanchant.youtubePracticeHelp">按视频实际时间校准 Cue。广告、前奏和版本差异可能影响提示；播放器离开屏幕或切到后台时暂停。禁止嵌入的视频请打开原页或改用本地音频。</p></section>
           <div id="cue-stage" class="cue-stage" data-phase="waiting">
             <div class="cue-stage-heading"><h2 id="current-heading" data-i18n="fanchant.currentCue">当前应援</h2><span id="cue-phase" role="status" aria-live="polite"></span></div>
             <p id="cue-countdown" class="cue-countdown" aria-live="off"></p>

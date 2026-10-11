@@ -1,7 +1,8 @@
-import { LocalAudioPlayer } from './audio.js?v=853c406c5363';
-import { answerVisible, cueEnd, cueSeekTime, formatTime, getCueState, getLoopRange, toAudioTime, toSongTime } from './engine.js?v=853c406c5363';
-import { CUE_TYPES, DataError, parseSong } from './model.js?v=853c406c5363';
-import { LIBRARY_KEY, MAX_LIBRARY_BYTES, PROGRESS, loadLibrary, parseBackup, parseCueLines, parseLibrary, saveLibrary, shiftSong } from './library.js?v=853c406c5363';
+import { TrainingMediaPlayer } from './media.js?v=2fcaa9cf1e18';
+import { youtubeId } from './youtube.js?v=2fcaa9cf1e18';
+import { answerVisible, cueEnd, cueSeekTime, formatTime, getCueState, getLoopRange, toAudioTime, toSongTime } from './engine.js?v=2fcaa9cf1e18';
+import { CUE_TYPES, DataError, parseSong } from './model.js?v=2fcaa9cf1e18';
+import { LIBRARY_KEY, MAX_LIBRARY_BYTES, PROGRESS, loadLibrary, parseBackup, parseCueLines, parseLibrary, saveLibrary, shiftSong } from './library.js?v=2fcaa9cf1e18';
 const storage = {
     getItem: (key) => window.localStorage.getItem(key),
     setItem: (key, value) => window.localStorage.setItem(key, value),
@@ -36,7 +37,7 @@ export class FanchantTrainer {
     events = new AbortController();
     downloads = new Map();
     player;
-    constructor(root, demo, catalog = []) {
+    constructor(root, demo, catalog = [], loadYouTube) {
         this.root = root;
         this.demo = demo;
         this.catalog = catalog;
@@ -49,7 +50,7 @@ export class FanchantTrainer {
         }
         catch { /* Warning from loadLibrary is displayed below. */ }
         this.storageWarning = loaded.warning ?? '';
-        this.player = new LocalAudioPlayer(this.el('local-audio'));
+        this.player = new TrainingMediaPlayer(this.el('local-audio'), this.el('youtube-player'), loadYouTube);
         this.bind();
         this.rebuild();
         this.unsubscribe = this.player.subscribe(snapshot => this.render(snapshot));
@@ -71,6 +72,7 @@ export class FanchantTrainer {
         write(notice, this.t(key, parameters));
         notice.hidden = false;
     }
+    clearMedia() { this.player.clear(); this.el('youtube-url').value = ''; }
     errorMessage(error) {
         return error instanceof DataError ? this.t(error.code, { field: error.field }) : this.t('readFailed');
     }
@@ -132,6 +134,21 @@ export class FanchantTrainer {
         });
     }
     bind() {
+        this.on(this.el('media-source'), 'change', () => {
+            this.player.useSource(this.el('media-source').value === 'youtube' ? 'youtube' : 'local');
+        });
+        this.on(this.el('youtube-form'), 'submit', event => {
+            event.preventDefault();
+            void this.player.selectVideo(this.el('youtube-url').value);
+        });
+        this.on(this.el('youtube-reference'), 'click', () => {
+            const source = this.song.sources?.find(source => youtubeId(source.url));
+            if (source) {
+                this.el('youtube-url').value = source.url;
+                void this.player.selectVideo(source.url);
+            }
+        });
+        this.on(this.el('youtube-clear'), 'click', () => this.clearMedia());
         this.on(this.el('audio-file'), 'change', () => {
             const input = this.el('audio-file');
             const file = input.files?.[0];
@@ -315,7 +332,7 @@ export class FanchantTrainer {
             this.conflict = false;
             this.el('storage-conflict').hidden = true;
             this.importGeneration++;
-            this.player.clear();
+            this.clearMedia();
             this.selectedId = null;
             this.editing = false;
             this.closeEditor(false);
@@ -356,7 +373,7 @@ export class FanchantTrainer {
             key.preventDefault();
             this.openEditor();
         });
-        this.on(window, 'pagehide', () => { this.player.clear(); this.releaseDownloads(); });
+        this.on(window, 'pagehide', () => { this.clearMedia(); this.releaseDownloads(); });
     }
     runEdit(action) {
         try {
@@ -465,6 +482,11 @@ export class FanchantTrainer {
             link.textContent = source.label;
             links.append(link);
         }
+        const video = this.song.sources?.find(source => youtubeId(source.url));
+        const reference = this.el('youtube-reference');
+        reference.hidden = !video;
+        if (video)
+            write(reference, this.t('useReferenceVideo', { source: video.label }));
     }
     renderSetlist() {
         const query = this.el('song-search').value.trim().toLocaleLowerCase();
@@ -492,7 +514,21 @@ export class FanchantTrainer {
     }
     render(snapshot) {
         write(this.el('mode-label'), this.t(this.mode));
-        write(this.el('audio-status'), snapshot.loading ? this.t('audioLoading', { name: snapshot.fileName }) : snapshot.fileName ? this.t('audioReady', { name: snapshot.fileName }) : this.t('noAudio'));
+        const online = snapshot.source === 'youtube';
+        this.el('media-source').value = online ? 'youtube' : 'local';
+        setHidden(this.el('youtube-source'), !online);
+        setHidden(this.el('local-source'), online);
+        setHidden(this.el('youtube-panel'), !online || !snapshot.videoId);
+        this.el('youtube-clear').disabled = !snapshot.videoId && !snapshot.loading;
+        const original = this.el('youtube-original');
+        original.href = snapshot.videoId ? `https://www.youtube.com/watch?v=${snapshot.videoId}` : 'https://www.youtube.com/';
+        write(this.el('audio-status'), online ? this.t(snapshot.loading ? 'youtubeLoading' : snapshot.ready ? 'youtubeLoaded' : 'noVideo') : snapshot.loading ? this.t('audioLoading', { name: snapshot.fileName }) : snapshot.fileName ? this.t('audioReady', { name: snapshot.fileName }) : this.t('noAudio'));
+        const rates = snapshot.rates?.length ? snapshot.rates : online ? [1] : [0.5, 0.75, 0.85, 1, 1.25];
+        const rate = this.el('rate');
+        if (Array.from(rate.options ?? rate.children).map(option => option.value).join('|') !== rates.join('|'))
+            rate.replaceChildren(...rates.map(value => new Option(`${value}×`, String(value))));
+        rate.value = String(snapshot.rate);
+        rate.disabled = online && !snapshot.ready;
         const error = this.el('audio-error');
         setHidden(error, !snapshot.error);
         if (snapshot.error)
@@ -521,7 +557,7 @@ export class FanchantTrainer {
         if (stage.dataset.phase !== state.phase)
             stage.dataset.phase = state.phase;
         write(this.el('cue-phase'), this.t(!state.current && !state.next && this.song.cues.length ? 'finished' : state.phase));
-        write(this.el('cue-countdown'), !snapshot.ready ? this.t('chooseAudioFirst') : state.current ? this.t('cueNow') : state.countdown === null ? '' : this.t('countdown', { seconds: state.countdown.toFixed(1) }));
+        write(this.el('cue-countdown'), !snapshot.ready ? this.t('chooseMediaFirst') : state.current ? this.t('cueNow') : state.countdown === null ? '' : this.t('countdown', { seconds: state.countdown.toFixed(1) }));
         const shown = state.current ?? state.next;
         const visible = shown && answerVisible(this.mode, this.song.cues, this.song.cues.indexOf(shown), state.time);
         write(this.el('cue-text'), !shown ? this.t(this.song.cues.length ? 'complete' : 'noCues') : visible ? shown.text : this.t(state.current ? 'recall' : 'concealed'));
@@ -675,7 +711,7 @@ export class FanchantTrainer {
         this.player.pause();
         this.player.stopLoop();
         if (song.id !== this.song.id)
-            this.player.clear();
+            this.clearMedia();
         this.library = next;
         this.history.delete(song.id);
         this.song = song;
@@ -694,7 +730,7 @@ export class FanchantTrainer {
             return;
         }
         this.importGeneration++;
-        this.player.clear();
+        this.clearMedia();
         this.selectedId = null;
         this.editing = false;
         this.closeEditor(false);
@@ -720,7 +756,7 @@ export class FanchantTrainer {
             if ('songs' in backup) {
                 const defaults = [...this.catalog.map(item => item.song), this.demo].filter(song => !backup.songs.some(item => item.id === song.id));
                 const next = parseLibrary({ ...backup, songs: [...backup.songs, ...defaults] });
-                this.player.clear();
+                this.clearMedia();
                 this.history.clear();
                 this.library = next;
                 this.song = next.songs.find(song => song.id === next.selectedId);

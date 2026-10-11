@@ -33,6 +33,21 @@
 .file-button { position: relative; display: inline-flex; flex-wrap: nowrap; align-items: center; justify-content: center; padding: 8px 14px; border: 1px solid var(--sg-line); background: var(--sg-surface); border-radius: var(--sg-radius); cursor: pointer; overflow: hidden; font-size: 14px; }
 .file-button input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
 .audio-source .trainer-error { grid-column: 1 / -1; }
+.media-source-label select { width: 100%; padding: 8px 12px; }
+.youtube-source, .local-source { grid-column: 1 / -1; min-width: 0; }
+.youtube-source form { display: grid; gap: 6px; font-size: 12px; }
+.youtube-input-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; }
+.youtube-input-row input { width: 100%; }
+.youtube-source .trainer-help { margin-top: 8px; }
+.trainer #youtube-reference { margin-top: 8px; font-size: 12px; text-align: left; }
+.youtube-privacy summary { min-height: 44px; padding-block: 10px; cursor: pointer; font-size: 12px; color: var(--sg-muted); }
+.youtube-policy-links { display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: 12px; padding-block: 8px; }
+.youtube-policy-links a { min-height: 44px; display: inline-flex; align-items: center; }
+.youtube-panel { margin-bottom: 16px; }
+.youtube-player-shell { width: 100%; aspect-ratio: 16 / 9; min-height: 200px; background: #111; }
+.youtube-player, .youtube-player iframe { width: 100%; height: 100%; min-height: 200px; border: 0; display: block; }
+.youtube-player-actions { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-block: 8px; font-size: 12px; }
+.youtube-player-actions a { display: inline-flex; align-items: center; min-height: 44px; }
 .trainer .sample-note { color: var(--sg-muted); font-size: 12px; line-height: 1.7; margin: 12px 0 18px; }
 .training-workspace { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(300px, 1fr); align-items: stretch; background: var(--sg-surface); border: 1px solid var(--sg-line); border-radius: 12px; overflow: hidden; }
 .practice-workspace, .cue-library { min-width: 0; padding: 20px; }
@@ -108,6 +123,8 @@
   .audio-source { padding: 14px 0 0; border-inline-start: 0; border-top: 1px solid var(--sg-line); }
 }
 @media (max-width: 480px) {
+  .youtube-input-row { grid-template-columns: minmax(0, 1fr); }
+  .youtube-input-row button { justify-self: start; }
   .trainer { padding-top: 18px; }
   .trainer-heading { gap: 8px; margin-bottom: 16px; align-items: start; }
   .trainer-back { max-width: 106px; font-size: 12px; }
