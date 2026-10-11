@@ -1,8 +1,8 @@
-import { TrainingMediaPlayer } from './media.js?v=f8ab5b21ba3a';
-import { youtubeId } from './youtube.js?v=f8ab5b21ba3a';
-import { answerVisible, cueEnd, cueSeekTime, formatTime, getCueState, getLoopRange, toAudioTime, toSongTime } from './engine.js?v=f8ab5b21ba3a';
-import { CUE_TYPES, DataError, parseSong } from './model.js?v=f8ab5b21ba3a';
-import { LIBRARY_KEY, MAX_LIBRARY_BYTES, PROGRESS, loadLibrary, parseBackup, parseCueLines, parseLibrary, saveLibrary, shiftSong } from './library.js?v=f8ab5b21ba3a';
+import { TrainingMediaPlayer } from './media.js?v=abaf346a4aa8';
+import { youtubeId } from './youtube.js?v=abaf346a4aa8';
+import { answerVisible, cueEnd, cueSeekTime, formatTime, getCueState, getLoopRange, toAudioTime, toSongTime } from './engine.js?v=abaf346a4aa8';
+import { CUE_TYPES, DataError, parseSong } from './model.js?v=abaf346a4aa8';
+import { LIBRARY_KEY, MAX_LIBRARY_BYTES, PROGRESS, loadLibrary, parseBackup, parseCueLines, parseLibrary, saveLibrary, shiftSong } from './library.js?v=abaf346a4aa8';
 const storage = {
     getItem: (key) => window.localStorage.getItem(key),
     setItem: (key, value) => window.localStorage.setItem(key, value),
@@ -42,7 +42,7 @@ export class FanchantTrainer {
         this.demo = demo;
         this.catalog = catalog;
         const defaults = [...catalog.map(item => item.song), demo];
-        const loaded = loadLibrary(storage, defaults, catalog.find(item => item.song.id === 'boompala')?.song.id ?? demo.id);
+        const loaded = loadLibrary(storage, defaults, catalog[0]?.song.id ?? demo.id);
         this.library = loaded.library;
         this.song = this.library.songs.find(song => song.id === this.library.selectedId);
         try {
@@ -315,7 +315,7 @@ export class FanchantTrainer {
         this.on(this.el('reload-library'), 'click', () => {
             if (!window.confirm(this.t('reloadConfirm')))
                 return;
-            const loaded = loadLibrary(storage, [...this.catalog.map(item => item.song), this.demo], this.demo.id);
+            const loaded = loadLibrary(storage, [...this.catalog.map(item => item.song), this.demo], this.catalog[0]?.song.id ?? this.demo.id);
             if (loaded.warning) {
                 this.message(loaded.warning);
                 return;

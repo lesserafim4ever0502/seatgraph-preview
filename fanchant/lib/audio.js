@@ -1,4 +1,4 @@
-import { loopBoundary } from './engine.js?v=f8ab5b21ba3a';
+import { loopBoundary } from './engine.js?v=abaf346a4aa8';
 /** The media element is the only playback clock; no timer accumulates elapsed time. */
 export class LocalAudioPlayer {
     audio;
