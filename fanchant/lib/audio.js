@@ -1,4 +1,4 @@
-import { loopBoundary } from './engine.js';
+import { loopBoundary } from './engine.js?v=b7c74cf7dc6c';
 /** The media element is the only playback clock; no timer accumulates elapsed time. */
 export class LocalAudioPlayer {
     audio;
@@ -147,9 +147,9 @@ export class LocalAudioPlayer {
         this.emit();
     }
     startLoop(range) {
-        if (!this.ready || range.start < 0 || range.end > this.audio.duration || range.end <= range.start)
+        if (!this.ready || !Number.isFinite(range.start) || !Number.isFinite(range.end) || range.start < 0 || range.end > this.audio.duration || range.end <= range.start)
             return;
-        this.loop = range;
+        this.loop = { ...range };
         this.audio.currentTime = range.start;
         this.emit();
         void this.play();

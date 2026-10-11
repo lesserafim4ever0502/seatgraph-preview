@@ -41,6 +41,29 @@ export function parseSong(value) {
             throw new DataError('invalidObject', 'sample');
         song.sample = input.sample;
     }
+    if (input.timingStatus !== undefined) {
+        if (!['unverified', 'anchors', 'user'].includes(String(input.timingStatus)))
+            throw new DataError('invalidObject', 'timingStatus');
+        song.timingStatus = input.timingStatus;
+    }
+    if (input.versionNote !== undefined)
+        song.versionNote = text(input.versionNote, 'versionNote', 1000);
+    if (input.sources !== undefined) {
+        if (!Array.isArray(input.sources) || input.sources.length > 10)
+            throw new DataError('invalidObject', 'sources');
+        song.sources = input.sources.map((source) => {
+            const item = record(source, 'source');
+            const url = text(item.url, 'source.url', 2000);
+            try {
+                if (new URL(url).protocol !== 'https:')
+                    throw Error();
+            }
+            catch {
+                throw new DataError('invalidObject', 'source.url');
+            }
+            return { label: text(item.label, 'source.label', 200), url };
+        });
+    }
     if (!Array.isArray(input.cues) || input.cues.length > 1000)
         throw new DataError('invalidCues', 'cues');
     const ids = new Set();
@@ -66,12 +89,18 @@ export function parseSong(value) {
         times.add(cue.time);
         if (item.prepareAt !== undefined)
             cue.prepareAt = number(item.prepareAt, `${field}.prepareAt`, 0, cue.time);
+        if (item.endTime !== undefined) {
+            cue.endTime = number(item.endTime, `${field}.endTime`, cue.time + 0.01, song.duration ?? 86400);
+        }
         for (const key of ['romanization', 'translation', 'note']) {
             if (item[key] !== undefined)
                 cue[key] = text(item[key], `${field}.${key}`);
         }
         return cue;
     }).sort((a, b) => a.time - b.time);
+    // An editor-created song must remain reloadable and importable after export.
+    if (new TextEncoder().encode(JSON.stringify(song, null, 2) + '\n').length > MAX_JSON_BYTES)
+        throw new DataError('tooLarge');
     return song;
 }
 export function parseSongJSON(raw) {

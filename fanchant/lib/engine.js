@@ -20,7 +20,7 @@ export function getNextCue(cues, time) {
     return cues[nextIndex(cues, time)];
 }
 export function cueEnd(cues, index) {
-    return Math.min(cues[index].time + ACTIVE_SECONDS, cues[index + 1]?.time ?? Infinity);
+    return Math.min(cues[index].endTime ?? cues[index].time + ACTIVE_SECONDS, cues[index + 1]?.time ?? Infinity);
 }
 export function getCurrentCue(cues, time) {
     const index = nextIndex(cues, time) - 1;
@@ -41,14 +41,16 @@ export function answerVisible(mode, cues, index, time) {
     return mode === 'practice' ? time >= cues[index].time : time >= cueEnd(cues, index);
 }
 export function getLoopRange(cue, offset, duration, preRoll = DEFAULT_PRE_ROLL, postRoll = DEFAULT_POST_ROLL) {
+    if (![cue.time, cue.endTime ?? cue.time, offset, preRoll, postRoll].every(Number.isFinite) || preRoll < 0 || postRoll <= 0)
+        return null;
     const at = toAudioTime(cue.time, offset);
     if (!Number.isFinite(duration) || duration <= 0 || at < 0 || at >= duration)
         return null;
-    const start = Math.max(0, at - preRoll), end = Math.min(duration, at + postRoll);
+    const start = Math.max(0, at - preRoll), end = Math.min(duration, Math.max(at + postRoll, toAudioTime(cue.endTime ?? cue.time, offset)));
     return end > start ? { start, end } : null;
 }
 export const loopBoundary = (time, range) => time >= range.end ? range.start : null;
-export const cueSeekTime = (cue, offset = 0, duration = Infinity) => Math.min(duration, Math.max(0, toAudioTime(cue.time, offset) - DEFAULT_PRE_ROLL));
+export const cueSeekTime = (cue, offset = 0, duration = Infinity, preRoll = DEFAULT_PRE_ROLL) => Math.min(duration, Math.max(0, toAudioTime(cue.time, offset) - preRoll));
 export function formatTime(time, decimals = false) {
     const raw = Math.max(0, Number.isFinite(time) ? time : 0);
     const safe = decimals ? Math.round(raw * 100) / 100 : raw;

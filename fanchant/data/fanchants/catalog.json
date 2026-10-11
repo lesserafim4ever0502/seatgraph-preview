@@ -1,0 +1,752 @@
+[
+  {
+    "order": 1,
+    "official": true,
+    "priority": 1,
+    "tourVariant": false,
+    "song": {
+      "id": "celebration",
+      "artistId": "le-sserafim",
+      "artist": "LE SSERAFIM",
+      "title": "CELEBRATION",
+      "timingStatus": "anchors",
+      "versionNote": "官方资料只标注部分起点；其余逐句时间和持续时间需按自己的音源录入。",
+      "sources": [
+        {
+          "label": "日本官网 · 官方应援谱",
+          "url": "https://www.le-sserafim.jp/fanchant/0cebacae864a"
+        },
+        {
+          "label": "Weverse · 官方应援资料",
+          "url": "https://weverse.io/lesserafim/notice/35082"
+        },
+        {
+          "label": "YouTube · 粉丝应援教学（非官方）",
+          "url": "https://www.youtube.com/watch?v=NwAzcOZ-Tpo"
+        },
+        {
+          "label": "Bilibili · 搜索应援教学",
+          "url": "https://search.bilibili.com/all?keyword=LE%20SSERAFIM%20CELEBRATION%20%E5%BA%94%E6%8F%B4%E6%B3%95"
+        },
+        {
+          "label": "YouTube · 搜索应援教学",
+          "url": "https://www.youtube.com/results?search_query=LE%20SSERAFIM%20CELEBRATION%20fanchant%20guide"
+        }
+      ],
+      "cues": [
+        {
+          "id": "celebration-official-anchor-1",
+          "time": 104,
+          "type": "member_name",
+          "text": "김채원 사쿠라 허윤진 카즈하 홍은채",
+          "note": "官方谱明确标注的起点；这里只提供学习提示，并非完整逐句应援谱。持续时间请按音源校准。"
+        }
+      ]
+    }
+  },
+  {
+    "order": 2,
+    "official": false,
+    "priority": 3,
+    "tourVariant": false,
+    "song": {
+      "id": "creatures",
+      "artistId": "le-sserafim",
+      "artist": "LE SSERAFIM",
+      "title": "Creatures",
+      "timingStatus": "unverified",
+      "versionNote": "截至 2026-10-11，用户的 24 首总表未收录独立官方应援法；可跟唱或自行添加 Cue。",
+      "sources": [
+        {
+          "label": "Bilibili · 搜索应援教学",
+          "url": "https://search.bilibili.com/all?keyword=LE%20SSERAFIM%20Creatures%20%E5%BA%94%E6%8F%B4%E6%B3%95"
+        },
+        {
+          "label": "YouTube · 搜索应援教学",
+          "url": "https://www.youtube.com/results?search_query=LE%20SSERAFIM%20Creatures%20fanchant%20guide"
+        }
+      ],
+      "cues": []
+    }
+  },
+  {
+    "order": 3,
+    "official": true,
+    "priority": 2,
+    "tourVariant": false,
+    "song": {
+      "id": "eve-psyche",
+      "artistId": "le-sserafim",
+      "artist": "LE SSERAFIM",
+      "title": "Eve, Psyche & The Bluebeard’s wife",
+      "timingStatus": "unverified",
+      "versionNote": "已提供学习资料入口，尚未录入逐句时间。",
+      "sources": [
+        {
+          "label": "Weverse · 官方应援资料",
+          "url": "https://weverse.io/lesserafim/notice/13317"
+        },
+        {
+          "label": "Bilibili · 搜索应援教学",
+          "url": "https://search.bilibili.com/all?keyword=LE%20SSERAFIM%20Eve%2C%20Psyche%20%26%20The%20Bluebeard%E2%80%99s%20wife%20%E5%BA%94%E6%8F%B4%E6%B3%95"
+        },
+        {
+          "label": "YouTube · 搜索应援教学",
+          "url": "https://www.youtube.com/results?search_query=LE%20SSERAFIM%20Eve%2C%20Psyche%20%26%20The%20Bluebeard%E2%80%99s%20wife%20fanchant%20guide"
+        }
+      ],
+      "cues": []
+    }
+  },
+  {
+    "order": 4,
+    "official": false,
+    "priority": 3,
+    "tourVariant": false,
+    "song": {
+      "id": "need-your-company",
+      "artistId": "le-sserafim",
+      "artist": "LE SSERAFIM",
+      "title": "Need Your Company",
+      "timingStatus": "unverified",
+      "versionNote": "截至 2026-10-11，用户的 24 首总表未收录独立官方应援法；可跟唱或自行添加 Cue。",
+      "sources": [
+        {
+          "label": "Bilibili · 搜索应援教学",
+          "url": "https://search.bilibili.com/all?keyword=LE%20SSERAFIM%20Need%20Your%20Company%20%E5%BA%94%E6%8F%B4%E6%B3%95"
+        },
+        {
+          "label": "YouTube · 搜索应援教学",
+          "url": "https://www.youtube.com/results?search_query=LE%20SSERAFIM%20Need%20Your%20Company%20fanchant%20guide"
+        }
+      ],
+      "cues": []
+    }
+  },
+  {
+    "order": 5,
+    "official": false,
+    "priority": 3,
+    "tourVariant": false,
+    "song": {
+      "id": "sonder",
+      "artistId": "le-sserafim",
+      "artist": "LE SSERAFIM",
+      "title": "Sonder",
+      "timingStatus": "unverified",
+      "versionNote": "截至 2026-10-11，用户的 24 首总表未收录独立官方应援法；可跟唱或自行添加 Cue。",
+      "sources": [
+        {
+          "label": "Bilibili · 搜索应援教学",
+          "url": "https://search.bilibili.com/all?keyword=LE%20SSERAFIM%20Sonder%20%E5%BA%94%E6%8F%B4%E6%B3%95"
+        },
+        {
+          "label": "YouTube · 搜索应援教学",
+          "url": "https://www.youtube.com/results?search_query=LE%20SSERAFIM%20Sonder%20fanchant%20guide"
+        }
+      ],
+      "cues": []
+    }
+  },
+  {
+    "order": 6,
+    "official": false,
+    "priority": 3,
+    "tourVariant": false,
+    "song": {
+      "id": "trust-exercise",
+      "artistId": "le-sserafim",
+      "artist": "LE SSERAFIM",
+      "title": "Trust Exercise",
+      "timingStatus": "unverified",
+      "versionNote": "截至 2026-10-11，用户的 24 首总表未收录独立官方应援法；可跟唱或自行添加 Cue。",
+      "sources": [
+        {
+          "label": "Bilibili · 搜索应援教学",
+          "url": "https://search.bilibili.com/all?keyword=LE%20SSERAFIM%20Trust%20Exercise%20%E5%BA%94%E6%8F%B4%E6%B3%95"
+        },
+        {
+          "label": "YouTube · 搜索应援教学",
+          "url": "https://www.youtube.com/results?search_query=LE%20SSERAFIM%20Trust%20Exercise%20fanchant%20guide"
+        }
+      ],
+      "cues": []
+    }
+  },
+  {
+    "order": 7,
+    "official": true,
+    "priority": 2,
+    "tourVariant": true,
+    "song": {
+      "id": "hot",
+      "artistId": "le-sserafim",
+      "artist": "LE SSERAFIM",
+      "title": "HOT",
+      "timingStatus": "anchors",
+      "versionNote": "官方资料只标注部分起点；其余逐句时间和持续时间需按自己的音源录入。 总表注明巡演 Remix / 特别编曲，标准音源的时点不能直接套用；请另行校准。",
+      "sources": [
+        {
+          "label": "日本官网 · 官方应援谱",
+          "url": "https://www.le-sserafim.jp/fanchant/27c83425e93e"
+        },
+        {
+          "label": "Weverse · 官方应援资料",
+          "url": "https://weverse.io/lesserafim/notice/25606"
+        },
+        {
+          "label": "Bilibili · 搜索应援教学",
+          "url": "https://search.bilibili.com/all?keyword=LE%20SSERAFIM%20HOT%20%E5%BA%94%E6%8F%B4%E6%B3%95"
+        },
+        {
+          "label": "YouTube · 搜索应援教学",
+          "url": "https://www.youtube.com/results?search_query=LE%20SSERAFIM%20HOT%20fanchant%20guide"
+        }
+      ],
+      "cues": [
+        {
+          "id": "hot-official-anchor-1",
+          "time": 5,
+          "type": "group_name",
+          "text": "LE SSERAFIM",
+          "note": "官方谱明确标注的起点；这里只提供学习提示，并非完整逐句应援谱。持续时间请按音源校准。"
+        }
+      ]
+    }
+  },
+  {
+    "order": 8,
+    "official": true,
+    "priority": 3,
+    "tourVariant": false,
+    "song": {
+      "id": "perfect-night",
+      "artistId": "le-sserafim",
+      "artist": "LE SSERAFIM",
+      "title": "Perfect Night",
+      "timingStatus": "unverified",
+      "versionNote": "已提供学习资料入口，尚未录入逐句时间。",
+      "sources": [
+        {
+          "label": "Weverse · 官方应援资料",
+          "url": "https://weverse.io/lesserafim/notice/15950"
+        },
+        {
+          "label": "Bilibili · 搜索应援教学",
+          "url": "https://search.bilibili.com/all?keyword=LE%20SSERAFIM%20Perfect%20Night%20%E5%BA%94%E6%8F%B4%E6%B3%95"
+        },
+        {
+          "label": "YouTube · 搜索应援教学",
+          "url": "https://www.youtube.com/results?search_query=LE%20SSERAFIM%20Perfect%20Night%20fanchant%20guide"
+        }
+      ],
+      "cues": []
+    }
+  },
+  {
+    "order": 9,
+    "official": true,
+    "priority": 3,
+    "tourVariant": false,
+    "song": {
+      "id": "blue-flame",
+      "artistId": "le-sserafim",
+      "artist": "LE SSERAFIM",
+      "title": "Blue Flame",
+      "timingStatus": "unverified",
+      "versionNote": "已提供学习资料入口，尚未录入逐句时间。",
+      "sources": [
+        {
+          "label": "Weverse · 官方应援资料汇总",
+          "url": "https://weverse.io/lesserafim/notice/37414"
+        },
+        {
+          "label": "Bilibili · 搜索应援教学",
+          "url": "https://search.bilibili.com/all?keyword=LE%20SSERAFIM%20Blue%20Flame%20%E5%BA%94%E6%8F%B4%E6%B3%95"
+        },
+        {
+          "label": "YouTube · 搜索应援教学",
+          "url": "https://www.youtube.com/results?search_query=LE%20SSERAFIM%20Blue%20Flame%20fanchant%20guide"
+        }
+      ],
+      "cues": []
+    }
+  },
+  {
+    "order": 10,
+    "official": true,
+    "priority": 3,
+    "tourVariant": true,
+    "song": {
+      "id": "easy",
+      "artistId": "le-sserafim",
+      "artist": "LE SSERAFIM",
+      "title": "EASY",
+      "timingStatus": "unverified",
+      "versionNote": "已提供学习资料入口，尚未录入逐句时间。 总表注明巡演 Remix / 特别编曲，标准音源的时点不能直接套用；请另行校准。",
+      "sources": [
+        {
+          "label": "日本官网 · 官方应援谱",
+          "url": "https://www.le-sserafim.jp/fanchant/26bc5be4f1a3"
+        },
+        {
+          "label": "Weverse · 官方应援资料",
+          "url": "https://weverse.io/lesserafim/notice/17716"
+        },
+        {
+          "label": "Bilibili · 搜索应援教学",
+          "url": "https://search.bilibili.com/all?keyword=LE%20SSERAFIM%20EASY%20%E5%BA%94%E6%8F%B4%E6%B3%95"
+        },
+        {
+          "label": "YouTube · 搜索应援教学",
+          "url": "https://www.youtube.com/results?search_query=LE%20SSERAFIM%20EASY%20fanchant%20guide"
+        }
+      ],
+      "cues": []
+    }
+  },
+  {
+    "order": 11,
+    "official": true,
+    "priority": 2,
+    "tourVariant": false,
+    "song": {
+      "id": "1800-hot-n-fun",
+      "artistId": "le-sserafim",
+      "artist": "LE SSERAFIM",
+      "title": "1-800-hot-n-fun",
+      "timingStatus": "unverified",
+      "versionNote": "已提供学习资料入口，尚未录入逐句时间。",
+      "sources": [
+        {
+          "label": "日本官网 · 官方应援谱",
+          "url": "https://www.le-sserafim.jp/fanchant/9a143be180a0"
+        },
+        {
+          "label": "Weverse · 官方应援资料",
+          "url": "https://weverse.io/lesserafim/notice/21978"
+        },
+        {
+          "label": "Bilibili · 搜索应援教学",
+          "url": "https://search.bilibili.com/all?keyword=LE%20SSERAFIM%201-800-hot-n-fun%20%E5%BA%94%E6%8F%B4%E6%B3%95"
+        },
+        {
+          "label": "YouTube · 搜索应援教学",
+          "url": "https://www.youtube.com/results?search_query=LE%20SSERAFIM%201-800-hot-n-fun%20fanchant%20guide"
+        }
+      ],
+      "cues": []
+    }
+  },
+  {
+    "order": 12,
+    "official": false,
+    "priority": 3,
+    "tourVariant": false,
+    "song": {
+      "id": "saki",
+      "artistId": "le-sserafim",
+      "artist": "LE SSERAFIM",
+      "title": "Saki",
+      "timingStatus": "unverified",
+      "versionNote": "截至 2026-10-11，用户的 24 首总表未收录独立官方应援法；可跟唱或自行添加 Cue。",
+      "sources": [
+        {
+          "label": "Bilibili · 搜索应援教学",
+          "url": "https://search.bilibili.com/all?keyword=LE%20SSERAFIM%20Saki%20%E5%BA%94%E6%8F%B4%E6%B3%95"
+        },
+        {
+          "label": "YouTube · 搜索应援教学",
+          "url": "https://www.youtube.com/results?search_query=LE%20SSERAFIM%20Saki%20fanchant%20guide"
+        }
+      ],
+      "cues": []
+    }
+  },
+  {
+    "order": 13,
+    "official": true,
+    "priority": 1,
+    "tourVariant": false,
+    "song": {
+      "id": "boompala",
+      "artistId": "le-sserafim",
+      "artist": "LE SSERAFIM",
+      "title": "BOOMPALA",
+      "timingStatus": "anchors",
+      "versionNote": "官方资料只标注部分起点；其余逐句时间和持续时间需按自己的音源录入。",
+      "sources": [
+        {
+          "label": "日本官网 · 官方应援谱",
+          "url": "https://www.le-sserafim.jp/fanchant/d15876306d41"
+        },
+        {
+          "label": "Weverse · 官方应援资料",
+          "url": "https://weverse.io/lesserafim/notice/36106"
+        },
+        {
+          "label": "YouTube · 粉丝应援教学（非官方）",
+          "url": "https://www.youtube.com/watch?v=uwUD26YHrvM"
+        },
+        {
+          "label": "Bilibili · 搜索应援教学",
+          "url": "https://search.bilibili.com/all?keyword=LE%20SSERAFIM%20BOOMPALA%20%E5%BA%94%E6%8F%B4%E6%B3%95"
+        },
+        {
+          "label": "YouTube · 搜索应援教学",
+          "url": "https://www.youtube.com/results?search_query=LE%20SSERAFIM%20BOOMPALA%20fanchant%20guide"
+        }
+      ],
+      "cues": [
+        {
+          "id": "boompala-official-anchor-1",
+          "time": 20,
+          "type": "chant",
+          "text": "开场短口号：跟随官方蓝色应援标记",
+          "note": "官方谱明确标注的起点；这里只提供学习提示，并非完整逐句应援谱。持续时间请按音源校准。"
+        },
+        {
+          "id": "boompala-official-anchor-2",
+          "time": 155,
+          "type": "member_name",
+          "text": "김채원 사쿠라 허윤진 카즈하 홍은채",
+          "note": "官方谱明确标注的起点；这里只提供学习提示，并非完整逐句应援谱。持续时间请按音源校准。"
+        }
+      ]
+    }
+  },
+  {
+    "order": 14,
+    "official": true,
+    "priority": 2,
+    "tourVariant": false,
+    "song": {
+      "id": "antifragile",
+      "artistId": "le-sserafim",
+      "artist": "LE SSERAFIM",
+      "title": "ANTIFRAGILE",
+      "timingStatus": "unverified",
+      "versionNote": "已提供学习资料入口，尚未录入逐句时间。",
+      "sources": [
+        {
+          "label": "Weverse · 官方应援资料汇总",
+          "url": "https://weverse.io/lesserafim/notice/37414"
+        },
+        {
+          "label": "Bilibili · 搜索应援教学",
+          "url": "https://search.bilibili.com/all?keyword=LE%20SSERAFIM%20ANTIFRAGILE%20%E5%BA%94%E6%8F%B4%E6%B3%95"
+        },
+        {
+          "label": "YouTube · 搜索应援教学",
+          "url": "https://www.youtube.com/results?search_query=LE%20SSERAFIM%20ANTIFRAGILE%20fanchant%20guide"
+        }
+      ],
+      "cues": []
+    }
+  },
+  {
+    "order": 15,
+    "official": true,
+    "priority": 1,
+    "tourVariant": false,
+    "song": {
+      "id": "irony",
+      "artistId": "le-sserafim",
+      "artist": "LE SSERAFIM",
+      "title": "Irony",
+      "timingStatus": "unverified",
+      "versionNote": "已提供学习资料入口，尚未录入逐句时间。",
+      "sources": [
+        {
+          "label": "Weverse · 官方应援资料汇总",
+          "url": "https://weverse.io/lesserafim/notice/37414"
+        },
+        {
+          "label": "Bilibili · 搜索应援教学",
+          "url": "https://search.bilibili.com/all?keyword=LE%20SSERAFIM%20Irony%20%E5%BA%94%E6%8F%B4%E6%B3%95"
+        },
+        {
+          "label": "YouTube · 搜索应援教学",
+          "url": "https://www.youtube.com/results?search_query=LE%20SSERAFIM%20Irony%20fanchant%20guide"
+        }
+      ],
+      "cues": []
+    }
+  },
+  {
+    "order": 16,
+    "official": true,
+    "priority": 2,
+    "tourVariant": false,
+    "song": {
+      "id": "crazy",
+      "artistId": "le-sserafim",
+      "artist": "LE SSERAFIM",
+      "title": "CRAZY",
+      "timingStatus": "unverified",
+      "versionNote": "已提供学习资料入口，尚未录入逐句时间。",
+      "sources": [
+        {
+          "label": "日本官网 · 官方应援谱",
+          "url": "https://www.le-sserafim.jp/fanchant/281ed50f400d"
+        },
+        {
+          "label": "Weverse · 官方应援资料",
+          "url": "https://weverse.io/lesserafim/notice/21977"
+        },
+        {
+          "label": "Bilibili · 搜索应援教学",
+          "url": "https://search.bilibili.com/all?keyword=LE%20SSERAFIM%20CRAZY%20%E5%BA%94%E6%8F%B4%E6%B3%95"
+        },
+        {
+          "label": "YouTube · 搜索应援教学",
+          "url": "https://www.youtube.com/results?search_query=LE%20SSERAFIM%20CRAZY%20fanchant%20guide"
+        }
+      ],
+      "cues": []
+    }
+  },
+  {
+    "order": 17,
+    "official": true,
+    "priority": 1,
+    "tourVariant": true,
+    "song": {
+      "id": "spaghetti",
+      "artistId": "le-sserafim",
+      "artist": "LE SSERAFIM",
+      "title": "SPAGHETTI",
+      "timingStatus": "unverified",
+      "versionNote": "已提供学习资料入口，尚未录入逐句时间。 总表注明巡演 Remix / 特别编曲，标准音源的时点不能直接套用；请另行校准。",
+      "sources": [
+        {
+          "label": "日本官网 · 官方应援谱",
+          "url": "https://www.le-sserafim.jp/fanchant/e7669e1b8c72"
+        },
+        {
+          "label": "Weverse · 官方应援资料",
+          "url": "https://weverse.io/lesserafim/notice/31003"
+        },
+        {
+          "label": "Bilibili · 搜索应援教学",
+          "url": "https://search.bilibili.com/all?keyword=LE%20SSERAFIM%20SPAGHETTI%20%E5%BA%94%E6%8F%B4%E6%B3%95"
+        },
+        {
+          "label": "YouTube · 搜索应援教学",
+          "url": "https://www.youtube.com/results?search_query=LE%20SSERAFIM%20SPAGHETTI%20fanchant%20guide"
+        }
+      ],
+      "cues": []
+    }
+  },
+  {
+    "order": 18,
+    "official": true,
+    "priority": 3,
+    "tourVariant": true,
+    "song": {
+      "id": "unforgiven",
+      "artistId": "le-sserafim",
+      "artist": "LE SSERAFIM",
+      "title": "UNFORGIVEN",
+      "timingStatus": "unverified",
+      "versionNote": "已提供学习资料入口，尚未录入逐句时间。 总表注明巡演 Remix / 特别编曲，标准音源的时点不能直接套用；请另行校准。",
+      "sources": [
+        {
+          "label": "Weverse · 官方应援资料",
+          "url": "https://weverse.io/lesserafim/notice/13315"
+        },
+        {
+          "label": "Bilibili · 搜索应援教学",
+          "url": "https://search.bilibili.com/all?keyword=LE%20SSERAFIM%20UNFORGIVEN%20%E5%BA%94%E6%8F%B4%E6%B3%95"
+        },
+        {
+          "label": "YouTube · 搜索应援教学",
+          "url": "https://www.youtube.com/results?search_query=LE%20SSERAFIM%20UNFORGIVEN%20fanchant%20guide"
+        }
+      ],
+      "cues": []
+    }
+  },
+  {
+    "order": 19,
+    "official": true,
+    "priority": 1,
+    "tourVariant": true,
+    "song": {
+      "id": "fire-in-the-belly",
+      "artistId": "le-sserafim",
+      "artist": "LE SSERAFIM",
+      "title": "Fire in the belly",
+      "timingStatus": "unverified",
+      "versionNote": "已提供学习资料入口，尚未录入逐句时间。 总表注明巡演 Remix / 特别编曲，标准音源的时点不能直接套用；请另行校准。",
+      "sources": [
+        {
+          "label": "Weverse · 官方应援资料",
+          "url": "https://weverse.io/lesserafim/notice/14822"
+        },
+        {
+          "label": "Bilibili · 搜索应援教学",
+          "url": "https://search.bilibili.com/all?keyword=LE%20SSERAFIM%20Fire%20in%20the%20belly%20%E5%BA%94%E6%8F%B4%E6%B3%95"
+        },
+        {
+          "label": "YouTube · 搜索应援教学",
+          "url": "https://www.youtube.com/results?search_query=LE%20SSERAFIM%20Fire%20in%20the%20belly%20fanchant%20guide"
+        }
+      ],
+      "cues": []
+    }
+  },
+  {
+    "order": 20,
+    "official": true,
+    "priority": 1,
+    "tourVariant": false,
+    "song": {
+      "id": "made-my-night",
+      "artistId": "le-sserafim",
+      "artist": "LE SSERAFIM",
+      "title": "Made My Night",
+      "timingStatus": "anchors",
+      "versionNote": "官方资料只标注部分起点；其余逐句时间和持续时间需按自己的音源录入。",
+      "sources": [
+        {
+          "label": "日本官网 · 官方应援谱",
+          "url": "https://www.le-sserafim.jp/fanchant/537793b2843f"
+        },
+        {
+          "label": "Bilibili · 搜索应援教学",
+          "url": "https://search.bilibili.com/all?keyword=LE%20SSERAFIM%20Made%20My%20Night%20%E5%BA%94%E6%8F%B4%E6%B3%95"
+        },
+        {
+          "label": "YouTube · 搜索应援教学",
+          "url": "https://www.youtube.com/results?search_query=LE%20SSERAFIM%20Made%20My%20Night%20fanchant%20guide"
+        }
+      ],
+      "cues": [
+        {
+          "id": "made-my-night-official-anchor-1",
+          "time": 3,
+          "type": "chant",
+          "text": "开场回应：跟随官方蓝色应援标记",
+          "note": "官方谱明确标注的起点；这里只提供学习提示，并非完整逐句应援谱。持续时间请按音源校准。"
+        },
+        {
+          "id": "made-my-night-official-anchor-2",
+          "time": 46,
+          "type": "member_name",
+          "text": "김채원 사쿠라 허윤진 카즈하 홍은채",
+          "note": "官方谱明确标注的起点；这里只提供学习提示，并非完整逐句应援谱。持续时间请按音源校准。"
+        }
+      ]
+    }
+  },
+  {
+    "order": 21,
+    "official": false,
+    "priority": 3,
+    "tourVariant": false,
+    "song": {
+      "id": "iconic-by-mistake",
+      "artistId": "le-sserafim",
+      "artist": "LE SSERAFIM",
+      "title": "ICONIC BY MISTAKE",
+      "timingStatus": "unverified",
+      "versionNote": "截至 2026-10-11，用户的 24 首总表未收录独立官方应援法；可跟唱或自行添加 Cue。",
+      "sources": [
+        {
+          "label": "Bilibili · 搜索应援教学",
+          "url": "https://search.bilibili.com/all?keyword=LE%20SSERAFIM%20ICONIC%20BY%20MISTAKE%20%E5%BA%94%E6%8F%B4%E6%B3%95"
+        },
+        {
+          "label": "YouTube · 搜索应援教学",
+          "url": "https://www.youtube.com/results?search_query=LE%20SSERAFIM%20ICONIC%20BY%20MISTAKE%20fanchant%20guide"
+        }
+      ],
+      "cues": []
+    }
+  },
+  {
+    "order": 22,
+    "official": false,
+    "priority": 3,
+    "tourVariant": false,
+    "song": {
+      "id": "iffy-iffy",
+      "artistId": "le-sserafim",
+      "artist": "LE SSERAFIM",
+      "title": "iffy iffy",
+      "timingStatus": "unverified",
+      "versionNote": "截至 2026-10-11，用户的 24 首总表未收录独立官方应援法；可跟唱或自行添加 Cue。",
+      "sources": [
+        {
+          "label": "Bilibili · 搜索应援教学",
+          "url": "https://search.bilibili.com/all?keyword=LE%20SSERAFIM%20iffy%20iffy%20%E5%BA%94%E6%8F%B4%E6%B3%95"
+        },
+        {
+          "label": "YouTube · 搜索应援教学",
+          "url": "https://www.youtube.com/results?search_query=LE%20SSERAFIM%20iffy%20iffy%20fanchant%20guide"
+        }
+      ],
+      "cues": []
+    }
+  },
+  {
+    "order": 23,
+    "official": true,
+    "priority": 2,
+    "tourVariant": false,
+    "song": {
+      "id": "no-celestial",
+      "artistId": "le-sserafim",
+      "artist": "LE SSERAFIM",
+      "title": "No Celestial",
+      "timingStatus": "unverified",
+      "versionNote": "已提供学习资料入口，尚未录入逐句时间。",
+      "sources": [
+        {
+          "label": "Weverse · 官方应援资料汇总",
+          "url": "https://weverse.io/lesserafim/notice/37414"
+        },
+        {
+          "label": "Bilibili · 搜索应援教学",
+          "url": "https://search.bilibili.com/all?keyword=LE%20SSERAFIM%20No%20Celestial%20%E5%BA%94%E6%8F%B4%E6%B3%95"
+        },
+        {
+          "label": "YouTube · 搜索应援教学",
+          "url": "https://www.youtube.com/results?search_query=LE%20SSERAFIM%20No%20Celestial%20fanchant%20guide"
+        }
+      ],
+      "cues": []
+    }
+  },
+  {
+    "order": 24,
+    "official": true,
+    "priority": 2,
+    "tourVariant": true,
+    "song": {
+      "id": "smart",
+      "artistId": "le-sserafim",
+      "artist": "LE SSERAFIM",
+      "title": "Smart",
+      "timingStatus": "unverified",
+      "versionNote": "已提供学习资料入口，尚未录入逐句时间。 总表注明巡演 Remix / 特别编曲，标准音源的时点不能直接套用；请另行校准。",
+      "sources": [
+        {
+          "label": "Weverse · 官方应援资料",
+          "url": "https://weverse.io/lesserafim/notice/17718"
+        },
+        {
+          "label": "Bilibili · 搜索应援教学",
+          "url": "https://search.bilibili.com/all?keyword=LE%20SSERAFIM%20Smart%20%E5%BA%94%E6%8F%B4%E6%B3%95"
+        },
+        {
+          "label": "YouTube · 搜索应援教学",
+          "url": "https://www.youtube.com/results?search_query=LE%20SSERAFIM%20Smart%20fanchant%20guide"
+        }
+      ],
+      "cues": []
+    }
+  }
+]
