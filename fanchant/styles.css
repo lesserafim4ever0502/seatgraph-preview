@@ -18,8 +18,14 @@
 .trainer-back::before { content: '←'; margin-inline-end: 8px; }
 .trainer-setup { display: grid; grid-template-columns: minmax(220px, .85fr) minmax(0, 1.6fr); align-items: center; gap: 24px; padding-block: 16px; border-block: 1px solid var(--sg-line); }
 .song-header { min-width: 0; }
-.song-title select { width: min(100%, 310px); padding: 4px 28px 4px 0; border: 0; background-color: transparent; font-size: 22px; font-weight: var(--sg-weight-heading); }
-.song-title p { color: var(--sg-muted); font-size: 12px; letter-spacing: .03em; }
+.song-title { display: grid; gap: 8px; }
+.song-picker-label { color: var(--sg-muted); font-size: 12px; }
+.song-title select { width: 100%; min-height: 48px; padding: 10px 40px 10px 12px; border: 1px solid var(--sg-line); border-radius: var(--sg-radius); background-color: var(--sg-surface); color: var(--sg-ink); font-size: 16px; font-weight: var(--sg-weight-control); line-height: 1.5; text-overflow: ellipsis; cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='m4 6 4 4 4-4' fill='none' stroke='%235f6f7c' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-size: 16px; background-position: right 14px center; }
+.song-title select option { font-size: 16px; font-weight: 400; }
+.song-title select:focus { border-color: var(--sg-accent); }
+.trainer .song-title select:focus-visible { outline: 2px solid var(--sg-accent); outline-offset: 2px; }
+.song-title p { color: var(--sg-muted); font-size: 12px; line-height: 1.5; letter-spacing: .03em; overflow-wrap: anywhere; }
+@media (forced-colors: active) { .song-title select { appearance: auto; background-image: none; } }
 .audio-source { min-width: 0; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 16px; padding-inline-start: 24px; border-inline-start: 1px solid var(--sg-line); }
 .audio-description { min-width: 0; }
 .audio-source .audio-status { font-size: 12px; color: var(--sg-muted); overflow-wrap: anywhere; }

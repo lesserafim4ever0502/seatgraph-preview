@@ -1,4 +1,4 @@
-import { DataError, MAX_JSON_BYTES, parseSong, parseSongJSON, STORAGE_KEY } from './model.js?v=b7c74cf7dc6c';
+import { DataError, MAX_JSON_BYTES, parseSong, parseSongJSON, STORAGE_KEY } from './model.js?v=853c406c5363';
 export const LIBRARY_KEY = 'seatgraph.fanchant.library.v2';
 export const MAX_LIBRARY_BYTES = 8 * MAX_JSON_BYTES;
 export const PROGRESS = ['new', 'learning', 'mastered'];
