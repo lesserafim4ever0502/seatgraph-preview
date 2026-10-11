@@ -1,8 +1,8 @@
-import { TrainingMediaPlayer } from './media.js?v=0a5e64bba347';
-import { youtubeId } from './youtube.js?v=0a5e64bba347';
-import { answerVisible, cueEnd, cueSeekTime, formatTime, getCueState, getLoopRange, toAudioTime, toSongTime } from './engine.js?v=0a5e64bba347';
-import { CUE_TYPES, DataError, parseSong } from './model.js?v=0a5e64bba347';
-import { LIBRARY_KEY, MAX_LIBRARY_BYTES, PROGRESS, loadLibrary, parseBackup, parseCueLines, parseLibrary, saveLibrary, shiftSong } from './library.js?v=0a5e64bba347';
+import { TrainingMediaPlayer } from './media.js?v=6185db8b9d44';
+import { youtubeId } from './youtube.js?v=6185db8b9d44';
+import { answerVisible, cueEnd, cueSeekTime, formatTime, getCueState, getLoopRange, toAudioTime, toSongTime } from './engine.js?v=6185db8b9d44';
+import { CUE_TYPES, DataError, parseSong } from './model.js?v=6185db8b9d44';
+import { LIBRARY_KEY, MAX_LIBRARY_BYTES, PROGRESS, loadLibrary, parseBackup, parseCueLines, parseLibrary, saveLibrary, shiftSong } from './library.js?v=6185db8b9d44';
 const storage = {
     getItem: (key) => window.localStorage.getItem(key),
     setItem: (key, value) => window.localStorage.setItem(key, value),
@@ -541,6 +541,10 @@ export class FanchantTrainer {
         const original = this.el('youtube-original');
         original.href = snapshot.videoId ? `https://www.youtube.com/watch?v=${snapshot.videoId}` : 'https://www.youtube.com/';
         write(this.el('audio-status'), online ? this.t(snapshot.loading ? 'youtubeLoading' : snapshot.ready ? 'youtubeLoaded' : 'noVideo') : snapshot.loading ? this.t('audioLoading', { name: snapshot.fileName }) : snapshot.fileName ? this.t('audioReady', { name: snapshot.fileName }) : this.t('noAudio'));
+        const reference = this.catalog.find(entry => entry.song.id === this.song.id)?.video ?? this.song.sources?.find(source => youtubeId(source.url));
+        setHidden(this.el('audio-status'), online && !snapshot.loading && !snapshot.ready && !!reference);
+        setHidden(this.el('youtube-reference'), !reference || snapshot.ready && !snapshot.error && snapshot.videoId === youtubeId(reference.url));
+        this.el('youtube-reference').disabled = snapshot.loading;
         const rates = snapshot.rates?.length ? snapshot.rates : online ? [1] : [0.5, 0.75, 0.85, 1, 1.25];
         const rate = this.el('rate');
         if (Array.from(rate.options ?? rate.children).map(option => option.value).join('|') !== rates.join('|'))

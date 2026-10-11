@@ -6,12 +6,12 @@
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="description" content="SeatGraph Fanchant Trainer：使用 YouTube 在线视频或本地音频学习、循环练习和编辑应援 Cue。">
   <title>Fanchant Trainer · SeatGraph</title>
-  <link rel="stylesheet" href="site.css?v=0a5e64bba347">
-  <link rel="stylesheet" href="i18n/styles.css?v=0a5e64bba347">
-  <link rel="stylesheet" href="styles.css?v=0a5e64bba347">
-  <script src="i18n/catalog.js?v=0a5e64bba347"></script>
-  <script src="i18n/runtime.js?v=0a5e64bba347"></script>
-  <script type="module" src="lib/app.js?v=0a5e64bba347"></script>
+  <link rel="stylesheet" href="site.css?v=6185db8b9d44">
+  <link rel="stylesheet" href="i18n/styles.css?v=6185db8b9d44">
+  <link rel="stylesheet" href="styles.css?v=6185db8b9d44">
+  <script src="i18n/catalog.js?v=6185db8b9d44"></script>
+  <script src="i18n/runtime.js?v=6185db8b9d44"></script>
+  <script type="module" src="lib/app.js?v=6185db8b9d44"></script>
 </head>
 <body class="sg-site fanchant-page">
   <a class="skip-link" href="#trainer" data-i18n="fanchant.skip">跳至训练器</a>
@@ -27,56 +27,41 @@
   </header>
   <main id="trainer" class="trainer" data-i18n-ignore>
     <div class="trainer-heading">
-      <div><p class="trainer-eyebrow">FANCHANT TRAINER</p><h1 data-i18n="fanchant.heading">应援训练器</h1></div>
-      <a class="trainer-back" href="../#guide-main" data-site-route="/#guide-main" data-i18n="fanchant.backHome">返回选区首页</a>
+      <div><h1 data-i18n="fanchant.heading">应援训练器</h1><p class="trainer-help" data-i18n="fanchant.intro">戴上耳机，一句一句练到熟悉。</p></div>
     </div>
     <p id="boot-status" role="status" data-i18n="fanchant.loading">正在载入示例…</p>
     <noscript>此训练器需要启用 JavaScript / JavaScript is required.</noscript>
     <div id="trainer-content" hidden>
       <div class="trainer-setup">
         <section class="song-header" aria-labelledby="song-title">
-          <div class="song-title"><h2 id="song-title" class="sr-only">BOOMPALA</h2><label class="song-picker-label" for="song-select" data-i18n="fanchant.song">歌曲</label><select id="song-select"><option value="current">BOOMPALA</option></select><p id="song-artist">LE SSERAFIM</p></div>
+          <div class="song-title"><h2 id="song-title" class="sr-only">BOOMPALA</h2><label class="song-picker-label" for="song-select" data-i18n="fanchant.song">歌曲</label><select id="song-select"><option value="current">BOOMPALA</option></select><button id="next-song" type="button" data-i18n="fanchant.nextSongLabel" data-i18n-aria="fanchant.nextSong">下一首</button><p id="song-artist">LE SSERAFIM</p></div>
           <span id="mode-label" class="sr-only"></span>
         </section>
+      </div>
+      <div class="training-workspace">
+        <section class="practice-workspace" aria-labelledby="current-heading">
         <section class="audio-source" aria-labelledby="audio-heading">
-          <div class="audio-description"><h2 id="audio-heading" data-i18n="fanchant.playbackSource">播放来源</h2><p id="audio-status" class="audio-status" role="status"></p></div>
+          <div class="audio-description"><h2 id="audio-heading" class="sr-only" data-i18n="fanchant.playbackSource">播放来源</h2><p id="audio-status" class="audio-status" role="status"></p></div>
           <label class="media-source-label"><span class="sr-only" data-i18n="fanchant.playbackSource">播放来源</span><select id="media-source"><option value="youtube" data-i18n="fanchant.youtubeOnline">YouTube 在线视频</option><option value="local" data-i18n="fanchant.localAudio">本地音频</option></select></label>
           <div id="youtube-source" class="youtube-source">
-            <p id="youtube-reference-info" class="trainer-help" hidden></p>
-            <div class="youtube-reference-actions"><button id="youtube-reference" type="button" class="primary" hidden></button><a id="youtube-reference-original" target="_blank" rel="noopener noreferrer" data-i18n="fanchant.youtubeOriginal" hidden>在 YouTube 打开</a></div>
-            <p id="youtube-version-note" class="trainer-help" hidden></p>
-            <details class="youtube-custom"><summary data-i18n="fanchant.changeVideo">使用其他视频版本</summary><form id="youtube-form"><label for="youtube-url" data-i18n="fanchant.youtubeURL">YouTube 视频链接</label><div class="youtube-input-row"><input id="youtube-url" type="text" inputmode="url" maxlength="2048" placeholder="https://youtu.be/…" autocomplete="off"><button type="submit" data-i18n="fanchant.youtubeLoad">同意并载入视频</button></div></form></details>
-            <p class="trainer-help" data-i18n="fanchant.youtubeConsent">载入即同意下方条款与隐私说明；不会自动播放。请使用允许嵌入的官方或获授权视频。</p>
-            <details class="youtube-privacy"><summary data-i18n="fanchant.youtubePrivacyTitle">在线播放条款与隐私说明</summary><p class="trainer-help" data-i18n="fanchant.youtubePrivacy">本站使用 YouTube API Services。点击载入后会连接 YouTube/Google，向其发送视频 ID、IP、浏览器信息和本站来源；播放器可能使用 Cookie 并显示广告。本站不下载视频、不提取音频、不读取 YouTube 账号，链接和播放数据仅用于当前会话，不进入应援备份。使用在线播放须同意 YouTube 服务条款及本说明；可清除视频停止播放器。</p><p class="youtube-policy-links"><a href="https://www.youtube.com/t/terms" target="_blank" rel="noopener noreferrer" data-i18n="fanchant.youtubeTerms">YouTube 服务条款</a><a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" data-i18n="fanchant.googlePrivacy">Google 隐私政策</a></p></details>
+            <div class="youtube-reference-actions"><button id="youtube-reference" type="button" class="primary" hidden></button></div>
+            <p class="trainer-help youtube-consent" data-i18n="fanchant.youtubeConsent">载入将连接 YouTube/Google；使用须同意 YouTube 条款及本页隐私说明。不会自动播放。</p>
+            <div class="source-options">
+              <details class="youtube-options"><summary data-i18n="fanchant.videoOptions">视频详情与替换</summary>
+                <p id="youtube-reference-info" class="trainer-help" hidden></p><p id="youtube-version-note" class="trainer-help" hidden></p>
+                <a id="youtube-reference-original" class="source-original" target="_blank" rel="noopener noreferrer" data-i18n="fanchant.youtubeOriginal" hidden>在 YouTube 打开</a>
+                <form id="youtube-form"><label for="youtube-url" data-i18n="fanchant.youtubeURL">YouTube 视频链接</label><div class="youtube-input-row"><input id="youtube-url" type="text" inputmode="url" maxlength="2048" placeholder="https://youtu.be/…" autocomplete="off"><button type="submit" data-i18n="fanchant.youtubeLoad">同意并载入视频</button></div></form>
+              </details>
+              <details class="youtube-privacy"><summary data-i18n="fanchant.youtubePrivacyTitle">条款与隐私说明</summary><p class="trainer-help" data-i18n="fanchant.youtubePrivacy">本站使用 YouTube API Services。点击载入后会连接 YouTube/Google，向其发送视频 ID、IP、浏览器信息和本站来源；播放器可能使用 Cookie 并显示广告。本站不下载视频、不提取音频、不读取 YouTube 账号，链接和播放数据仅用于当前会话，不进入应援备份。使用在线播放须同意 YouTube 服务条款及本说明；可清除视频停止播放器。</p><p class="youtube-policy-links"><a href="https://www.youtube.com/t/terms" target="_blank" rel="noopener noreferrer" data-i18n="fanchant.youtubeTerms">YouTube 服务条款</a><a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" data-i18n="fanchant.googlePrivacy">Google 隐私政策</a></p></details>
+            </div>
           </div>
           <div id="local-source" class="local-source" hidden><label class="file-button"><span data-i18n="fanchant.chooseAudio">选择音频文件</span><input id="audio-file" type="file" accept=".mp3,.m4a,.wav,audio/mpeg,audio/mp4,audio/wav" data-i18n-aria="fanchant.chooseAudio"></label><p class="audio-privacy" data-i18n="fanchant.audioPrivacy">MP3 / M4A / WAV · 本机播放，不上传；刷新后需重选。</p></div>
           <p id="audio-error" class="trainer-error" role="alert" hidden></p>
           <audio id="local-audio" preload="metadata"></audio>
         </section>
-      </div>
-      <p id="sample-note" class="sample-note" data-i18n="fanchant.sampleNote">示例应援与时间，非官方应援谱；请按音源校准。</p>
-      <div class="study-toolbar">
-        <label for="study-progress" data-i18n="fanchant.studyProgress">这首歌的学习进度</label>
-        <select id="study-progress"><option value="new" data-i18n="fanchant.progress_new">未开始</option><option value="learning" data-i18n="fanchant.progress_learning">练习中</option><option value="mastered" data-i18n="fanchant.progress_mastered">已熟悉</option></select>
-        <button id="next-song" type="button" data-i18n="fanchant.nextSong">下一首未熟悉的歌</button>
-        <span class="trainer-help" data-i18n="fanchant.progressHelp">自己标记熟悉程度；不是自动评分。</span>
-      </div>
-      <p id="timing-status" class="timing-status" role="status"></p>
-      <details class="learning-sources"><summary data-i18n="fanchant.learningSources">应援资料与版本说明</summary>
-        <p id="official-status" class="trainer-help"></p><p id="version-note" class="trainer-help"></p>
-        <div id="source-links" class="source-links"></div>
-        <p class="trainer-help" data-i18n="fanchant.sourceHelp">官方谱在新页面打开。搜索入口不是已核验的视频；本站不下载外部音频。</p>
-      </details>
-      <details class="setlist-panel"><summary id="setlist-summary"></summary>
-        <p class="trainer-help" data-i18n="fanchant.setlistHelp">按你的 24 首澳门场学习总表整理，参考 Newark 歌单，非澳门场已确认演出顺序。17 首有官方资料；7 首暂无独立官方应援法记录。</p>
-        <div class="setlist-controls"><label><span data-i18n="fanchant.searchSongs">搜索歌曲</span><input id="song-search" type="search" maxlength="200"></label>
-          <label><span data-i18n="fanchant.filterSongs">筛选</span><select id="song-filter"><option value="all" data-i18n="fanchant.allSongs">全部歌曲</option><option value="unfinished" data-i18n="fanchant.unfinishedSongs">尚未熟悉</option><option value="official" data-i18n="fanchant.officialSongs">有官方资料</option><option value="priority" data-i18n="fanchant.prioritySongs">优先学习</option></select></label></div>
-        <ol id="setlist-list" class="setlist-list"></ol><p id="no-song-results" data-i18n="fanchant.noSongResults" hidden>没有匹配的歌曲。</p>
-      </details>
-      <div class="training-workspace">
-        <section class="practice-workspace" aria-labelledby="current-heading">
+          <section id="youtube-panel" class="youtube-panel" hidden aria-label="YouTube"><div class="youtube-player-shell"><div id="youtube-player" class="youtube-player"></div></div><div class="youtube-player-actions"><a id="youtube-original" href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" data-i18n="fanchant.youtubeOriginal">在 YouTube 打开</a><button id="youtube-clear" type="button" disabled data-i18n="fanchant.youtubeClear">清除视频</button></div></section>
           <div class="practice-toolbar"><div class="training-modes" role="group" data-i18n-aria="fanchant.trainingMode"><button type="button" data-mode="learn" aria-pressed="true" data-i18n="fanchant.learn">学习</button><button type="button" data-mode="practice" aria-pressed="false" data-i18n="fanchant.practice">练习</button><button type="button" data-mode="test" aria-pressed="false" data-i18n="fanchant.test">考试</button></div></div>
-          <section id="youtube-panel" class="youtube-panel" hidden aria-label="YouTube"><div class="youtube-player-shell"><div id="youtube-player" class="youtube-player"></div></div><div class="youtube-player-actions"><a id="youtube-original" href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" data-i18n="fanchant.youtubeOriginal">在 YouTube 打开</a><button id="youtube-clear" type="button" disabled data-i18n="fanchant.youtubeClear">清除视频</button></div><p class="trainer-help" data-i18n="fanchant.youtubePracticeHelp">按视频实际时间校准 Cue。广告、前奏和版本差异可能影响提示；播放器离开屏幕或切到后台时暂停。禁止嵌入的视频请打开原页或改用本地音频。</p></section>
+      <p id="timing-status" class="timing-status" role="status"></p>
           <div id="cue-stage" class="cue-stage" data-phase="waiting">
             <div class="cue-stage-heading"><h2 id="current-heading" data-i18n="fanchant.currentCue">当前应援</h2><span id="cue-phase" role="status" aria-live="polite"></span></div>
             <p id="cue-countdown" class="cue-countdown" aria-live="off"></p>
@@ -90,10 +75,6 @@
 
         <div class="transport-buttons"><button id="play" type="button" class="primary" disabled data-i18n="fanchant.play">播放</button><button id="loop" type="button" disabled aria-pressed="false" data-i18n="fanchant.startLoop">循环此句</button><label class="rate-control"><span data-i18n="fanchant.speed">速度</span><select id="rate"><option value="0.5">0.5×</option><option value="0.75">0.75×</option><option value="0.85">0.85×</option><option value="1" selected>1.0×</option><option value="1.25">1.25×</option></select></label></div>
         <p id="loop-status" class="trainer-help"></p>
-        <details class="loop-settings"><summary data-i18n="fanchant.loopSettings">循环设置</summary><div class="editor-grid">
-          <label><span data-i18n="fanchant.preRoll">提前（秒）</span><input id="loop-pre" type="number" min="0" max="15" step="0.5" value="3"></label>
-          <label><span data-i18n="fanchant.postRoll">结束后（秒）</span><input id="loop-post" type="number" min="2" max="15" step="0.5" value="2"></label>
-        </div><p class="trainer-help" data-i18n="fanchant.loopSettingsHelp">本次会话生效；修改后停止原循环。结束后至少留 2 秒，覆盖完整应援提示。</p></details>
       </div>
           <section class="timeline-section" aria-labelledby="timeline-heading">
             <div class="section-heading"><h2 id="timeline-heading" data-i18n="fanchant.timeline">时间轴</h2><output id="audio-time" for="seek">00:00 / 00:00</output></div>
@@ -102,7 +83,13 @@
             <div class="marker-viewport"><div id="cue-markers" class="cue-markers" role="group" data-i18n-aria="fanchant.cueMarkers"></div></div>
             <p id="jump-help" class="trainer-help" data-i18n="fanchant.jumpHelp">点选 Cue，从提前 {seconds} 秒处开始播放。时间轴使用本地音频时间。</p>
           </section>
+          <details class="practice-settings"><summary data-i18n="fanchant.practiceSettings">练习设置</summary>
+        <details class="loop-settings"><summary data-i18n="fanchant.loopSettings">循环设置</summary><div class="editor-grid">
+          <label><span data-i18n="fanchant.preRoll">提前（秒）</span><input id="loop-pre" type="number" min="0" max="15" step="0.5" value="3"></label>
+          <label><span data-i18n="fanchant.postRoll">结束后（秒）</span><input id="loop-post" type="number" min="2" max="15" step="0.5" value="2"></label>
+        </div><p class="trainer-help" data-i18n="fanchant.loopSettingsHelp">本次会话生效；修改后停止原循环。结束后至少留 2 秒，覆盖完整应援提示。</p></details>
           <details class="calibration"><summary data-i18n="fanchant.calibration">音源校准</summary><div class="calibration-body"><label for="audio-offset" data-i18n="fanchant.offset">音频偏移（秒）</label><input id="audio-offset" type="number" min="-3600" max="3600" step="0.01" value="0"><p class="trainer-help" data-i18n="fanchant.offsetHelp">正值表示音频开头多了一段时间。例如 +2，会让所有 Cue 在音频中晚 2 秒出现。</p><button id="align-cue" type="button" disabled data-i18n="fanchant.alignCue">将选中 Cue 对齐当前音频时间</button><p class="trainer-help" data-i18n="fanchant.alignHelp">先选一句，再暂停在它应开始的位置。此操作只改变整首歌的音频偏移；Remix 结构变化需逐句调整。</p></div></details>
+          </details>
         </section>
         <section class="cue-library" aria-labelledby="list-heading">
           <div class="section-heading"><h2 id="list-heading" data-i18n="fanchant.cueList">全部 Cue</h2><button id="edit-toggle" type="button" aria-pressed="false" data-i18n="fanchant.editCues">编辑 Cue</button></div>
@@ -114,10 +101,6 @@
               <label for="shift-seconds" data-i18n="fanchant.shiftSeconds">整体移动 Cue（秒）</label><input id="shift-seconds" type="number" min="-86400" max="86400" step="0.01" value="0"><button id="shift-cues" type="button" data-i18n="fanchant.shiftCues">移动时间点</button><p class="trainer-help" data-i18n="fanchant.shiftHelp">修改歌曲中的时间、提醒和结束时间；可撤销。仅音频有前奏差异时，请使用音频偏移。</p>
             </details>
           </div>
-          <ol id="cue-list" class="cue-list"></ol>
-          <p id="empty-cues" data-i18n="fanchant.noCues" hidden>还没有 Cue。进入编辑模式，添加第一句。</p>
-        </section>
-      </div>
       <section id="cue-editor" class="cue-editor" hidden aria-labelledby="editor-heading">
         <div class="section-heading"><h2 id="editor-heading" data-i18n="fanchant.editCue">编辑 Cue</h2><button id="editor-cancel" type="button" data-i18n="fanchant.cancel">取消</button></div>
         <form id="cue-form">
@@ -136,6 +119,29 @@
           <button type="submit" class="primary" data-i18n="fanchant.saveCue">保存 Cue</button>
         </form>
       </section>
+          <ol id="cue-list" class="cue-list"></ol>
+          <p id="empty-cues" data-i18n="fanchant.noCues" hidden>还没有 Cue。进入编辑模式，添加第一句。</p>
+        </section>
+      </div>
+      <div class="study-toolbar">
+        <label for="study-progress" data-i18n="fanchant.studyProgress">这首歌的学习进度</label>
+        <select id="study-progress"><option value="new" data-i18n="fanchant.progress_new">未开始</option><option value="learning" data-i18n="fanchant.progress_learning">练习中</option><option value="mastered" data-i18n="fanchant.progress_mastered">已熟悉</option></select>
+        <span class="trainer-help" data-i18n="fanchant.progressHelp">自己标记熟悉程度；不是自动评分。</span>
+      </div>
+      <div class="trainer-secondary">
+      <details class="learning-sources"><summary data-i18n="fanchant.learningSources">应援资料与版本说明</summary>
+      <p id="sample-note" class="sample-note" data-i18n="fanchant.sampleNote">示例应援与时间，非官方应援谱；请按音源校准。</p>
+        <p class="trainer-help" data-i18n="fanchant.youtubePracticeHelp">按视频实际时间校准 Cue。广告、前奏和版本差异可能影响提示；播放器离开屏幕或切到后台时暂停。禁止嵌入的视频请打开原页或改用本地音频。</p>
+        <p id="official-status" class="trainer-help"></p><p id="version-note" class="trainer-help"></p>
+        <div id="source-links" class="source-links"></div>
+        <p class="trainer-help" data-i18n="fanchant.sourceHelp">官方谱在新页面打开。搜索入口不是已核验的视频；本站不下载外部音频。</p>
+      </details>
+      <details class="setlist-panel"><summary id="setlist-summary"></summary>
+        <p class="trainer-help" data-i18n="fanchant.setlistHelp">按你的 24 首澳门场学习总表整理，参考 Newark 歌单，非澳门场已确认演出顺序。17 首有官方资料；7 首暂无独立官方应援法记录。</p>
+        <div class="setlist-controls"><label><span data-i18n="fanchant.searchSongs">搜索歌曲</span><input id="song-search" type="search" maxlength="200"></label>
+          <label><span data-i18n="fanchant.filterSongs">筛选</span><select id="song-filter"><option value="all" data-i18n="fanchant.allSongs">全部歌曲</option><option value="unfinished" data-i18n="fanchant.unfinishedSongs">尚未熟悉</option><option value="official" data-i18n="fanchant.officialSongs">有官方资料</option><option value="priority" data-i18n="fanchant.prioritySongs">优先学习</option></select></label></div>
+        <ol id="setlist-list" class="setlist-list"></ol><p id="no-song-results" data-i18n="fanchant.noSongResults" hidden>没有匹配的歌曲。</p>
+      </details>
       <section class="data-tools" aria-labelledby="data-heading">
         <details class="data-backup"><summary id="data-heading" data-i18n="fanchant.myCues">我的应援数据</summary>
         <div class="data-actions"><label class="file-button"><span data-i18n="fanchant.import">导入 JSON</span><input id="import-json" type="file" accept=".json,application/json" data-i18n-aria="fanchant.import"></label><button id="export-json" type="button" data-i18n="fanchant.export">导出当前歌曲</button><button id="export-library" type="button" data-i18n="fanchant.exportLibrary">导出全部歌曲与进度</button></div>
@@ -144,7 +150,7 @@
         </details><p id="storage-status" class="trainer-help" role="status"></p><p id="notice" class="trainer-notice" role="status" hidden></p>
         <div id="storage-conflict" class="trainer-notice" role="alert" hidden><p data-i18n="fanchant.storageConflict">另一个标签页已修改曲库，本页更改尚未写入。先导出备份，再选择载入最新数据或用本页覆盖。</p><div class="data-actions"><button id="reload-library" type="button" data-i18n="fanchant.reloadLibrary">载入最新曲库</button><button id="overwrite-library" type="button" data-i18n="fanchant.overwriteLibrary">使用本页数据覆盖</button></div></div>
       </section>
-
+      </div>
     </div>
   </main>
 </body>
