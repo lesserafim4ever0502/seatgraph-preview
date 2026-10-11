@@ -3162,6 +3162,7 @@ h1, h2, h3 { font-family: var(--font-ui); font-weight: var(--sg-weight-heading);
 .sg-site .arena-map-number, .sg-site .arena-map-vip-label, .sg-site .arena-map-stage-label { fill: #23384a; stroke: #eaf0f3; }
 .sg-site .arena-map-stage-label { paint-order: stroke fill; stroke-width: .3px; }
 /* Current-event diagram colours; model locators and historic layouts keep their own styles. */
+.sg-site .has-ticket-colors :is(.arena-map-section,.arena-map-standing,.arena-map-section-border) { stroke-width: .4px; stroke-linejoin: round; }
 .sg-site .has-ticket-colors .arena-map-vip-label { fill: var(--ticket-ink); stroke: none; }
 .sg-site .has-ticket-colors .arena-map-number { fill: var(--ticket-ink); stroke: var(--ticket-label-halo); stroke-width: .14px; paint-order: stroke fill; stroke-linejoin: round; dominant-baseline: central; font-variant-numeric: tabular-nums; }
 .sg-site .has-ticket-colors .arena-map-stage-label { fill: #fff; stroke: var(--ticket-structure); }
