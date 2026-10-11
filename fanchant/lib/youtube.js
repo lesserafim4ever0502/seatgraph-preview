@@ -1,4 +1,4 @@
-import { loopBoundary } from './engine.js?v=2fcaa9cf1e18';
+import { loopBoundary } from './engine.js?v=9c508cbacb94';
 const validId = (value) => /^[A-Za-z0-9_-]{11}$/.test(value);
 /** Only documented YouTube URLs; discard tracking/playlist/time parameters. */
 export function youtubeId(input) {
@@ -215,7 +215,9 @@ export class YouTubePlayer {
             if (!this.ready || !this.snapshot.playing)
                 return;
             const snapshot = this.snapshot;
-            if (this.loopSeek !== null && Math.abs(snapshot.time - this.loopSeek) < .5)
+            // YouTube may seek to an earlier keyframe. Wait until playback reaches
+            // the requested start, rather than seeking again while still just before it.
+            if (this.loopSeek !== null && snapshot.time >= this.loopSeek && (!this.loop || snapshot.time < this.loop.end))
                 this.loopSeek = null;
             const start = this.loop && this.loopSeek === null ? loopBoundary(snapshot.time, this.loop) : null;
             if (start !== null) {

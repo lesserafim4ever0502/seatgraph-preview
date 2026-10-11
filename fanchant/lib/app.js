@@ -1,6 +1,6 @@
-import { parseSong } from './model.js?v=2fcaa9cf1e18';
-import { FanchantTrainer } from './trainer.js?v=2fcaa9cf1e18';
-import { parseCatalog } from './library.js?v=2fcaa9cf1e18';
+import { parseSong } from './model.js?v=9c508cbacb94';
+import { FanchantTrainer } from './trainer.js?v=9c508cbacb94';
+import { parseCatalog } from './library.js?v=9c508cbacb94';
 function asset(path) {
     const url = new URL(path, import.meta.url);
     url.search = new URL(import.meta.url).search;
