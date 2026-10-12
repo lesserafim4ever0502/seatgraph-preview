@@ -176,3 +176,44 @@
 #storage-conflict { padding: 12px; background: #fbf0d7; line-height: 1.7; }
 @media (max-width: 859px) { .trainer-secondary { grid-template-columns: minmax(0, 1fr); } }
 @media (max-width: 480px) { .setlist-list { grid-template-columns: minmax(0, 1fr); } .study-toolbar { grid-template-columns: minmax(0, 1fr) minmax(130px, 1fr); } .study-toolbar .trainer-help { grid-column: 1 / -1; } }
+
+/* Phone practice controls stay aligned as labels grow in each language. */
+@media (max-width: 640px) {
+  .fanchant-page .sg-header { row-gap: 8px; }
+  .fanchant-page .sg-header .language-control { min-height: 44px; }
+  .fanchant-page .sg-header .language-control > select { min-height: 42px; }
+  .trainer .training-modes { width: 100%; }
+  .trainer .training-modes button { min-height: 48px; padding-inline: 8px; }
+  .trainer .source-options { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .source-options summary { min-height: 48px; border-bottom: 1px solid var(--sg-line); }
+  .source-options > details[open] { grid-column: auto; }
+  .youtube-input-row { grid-template-columns: minmax(0, 1fr); }
+  .youtube-input-row button { width: 100%; justify-self: stretch; }
+  .trainer .transport-buttons { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 76px; align-items: stretch; }
+  .trainer .transport-buttons button, .trainer .rate-control select { min-height: 48px; height: 100%; }
+  .trainer .transport-buttons button { padding: 10px 6px; line-height: 1.4; }
+  .rate-control { align-items: stretch; }
+  .rate-control > span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .trainer .rate-control select { width: 76px; padding-inline: 6px; }
+  .trainer .data-actions, .trainer .cue-row-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .trainer .data-actions > :is(button,.file-button), .trainer .cue-row-actions > button { width: 100%; min-height: 48px; margin: 0; padding: 10px 8px; }
+  .trainer .data-actions > :last-child:nth-child(odd) { grid-column: 1 / -1; }
+  .trainer .editor-actions > .data-actions { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .trainer .editor-actions > .data-actions > *, .trainer .editor-actions > .data-actions > :last-child:nth-child(odd) { grid-column: auto; }
+  .trainer .source-links { display: grid; grid-template-columns: minmax(0, 1fr); }
+  .trainer .source-link { justify-content: center; min-height: 48px; text-align: center; }
+  .trainer .batch-tools > button, .trainer .calibration-body > button, .trainer .cue-editor form > button { width: 100%; justify-self: stretch; min-height: 48px; }
+  .trainer .batch-tools > input { width: 100%; }
+  .trainer .setlist-controls { display: grid; grid-template-columns: minmax(0, 1fr); }
+  .trainer .setlist-controls label { min-width: 0; }
+  .trainer .section-heading > h2 { min-width: 0; overflow-wrap: anywhere; }
+  .trainer .section-heading > button { flex: 0 0 auto; max-width: 50%; }
+  .trainer input[type='range'] { min-height: 44px; }
+}
+@media (max-width: 360px) {
+  .trainer .song-title { grid-template-columns: minmax(0, 1fr); }
+  .trainer #next-song { width: 100%; max-width: none; }
+  .trainer .transport-buttons { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .trainer .rate-control { grid-column: 1 / -1; justify-content: space-between; align-items: center; }
+  .trainer .rate-control > span { position: static; width: auto; height: auto; clip-path: none; }
+}

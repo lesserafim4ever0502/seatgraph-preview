@@ -3314,3 +3314,93 @@ html:lang(en) .sg-header nav { flex-wrap: wrap; }
   html:lang(en) .home-map-workspace { grid-template-columns: minmax(0, 1fr) 300px; }
   html:lang(en) .home-view { grid-template-columns: minmax(0, 1fr) 300px; }
 }
+
+/* Phone actions: stable targets, wrapped labels, and one surface per task. */
+.arena-scene-tools { display: contents; }
+@media (max-width: 859px) {
+  .sg-header { row-gap: 8px; }
+  .sg-header nav { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px; }
+  .sg-header nav a { justify-content: center; padding: 8px 4px; text-align: center; white-space: normal; overflow-wrap: anywhere; line-height: 1.4; }
+}
+@media (max-width: 640px) {
+  .sg-site :is(button,.sg-primary), :is(.arena-settings-dialog,.arena-records-dialog,.arena-share-dialog) button { min-height: 48px; min-width: 0; white-space: normal; overflow-wrap: anywhere; line-height: 1.5; }
+  .sg-site :is(button,a,summary), :is(.arena-settings-dialog,.arena-records-dialog,.arena-share-dialog) :is(button,summary) { -webkit-tap-highlight-color: transparent; }
+  .sg-site :is(button,a,summary):focus-visible, :is(.arena-settings-dialog,.arena-records-dialog,.arena-share-dialog) :is(button,summary):focus-visible { outline-offset: -3px; }
+  .sg-header .language-control { min-height: 44px; }
+  .sg-header .language-control > select { min-height: 42px; }
+  .sg-header .language-control:focus-within { outline-offset: -3px; }
+  .sg-site .arena-user-tools { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: 8px; }
+  .sg-site .arena-user-tools > button { width: 100%; }
+  .sg-site .arena-user-tools details { min-width: 0; }
+  .sg-site .arena-user-tools summary { display: flex; align-items: center; justify-content: center; width: 100%; min-height: 48px; border: 1px solid var(--sg-line); border-radius: var(--sg-radius); padding: 10px 8px; text-align: center; color: var(--sg-accent); background: #fff; }
+  .sg-site .arena-user-tools details[open] { grid-column: 1 / -1; }
+  .sg-site .arena-user-tools details > div { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sg-site .arena-user-tools details > div > a { grid-column: 1 / -1; }
+  .sg-site .arena-evidence-body > button { justify-self: stretch; }
+  .sg-site .arena-evidence-links { display: grid; gap: 8px; }
+  .arena-record-form { display: grid; grid-template-columns: minmax(0, 1fr); }
+  .arena-record-form :is(input,button) { width: 100%; }
+  .arena-record-list li > div, .arena-record-confirm { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .arena-record-list li > div > button:first-child, .arena-record-confirm p { grid-column: 1 / -1; }
+  .arena-record-list > header { align-items: start; }
+  .arena-record-list > header > button { flex: 0 0 auto; }
+}
+@media (max-width: 960px) {
+  .sg-site .arena-mobile-position { grid-template-columns: minmax(0, 1fr) auto; min-height: 0; align-items: center; }
+  .sg-site .arena-mobile-position > .venue-select { min-width: 0; }
+  .sg-site .arena-mobile-position > span { font-size: 14px; overflow-wrap: anywhere; }
+  .sg-site .arena-mobile-position > button { display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding-inline: 12px; }
+  .sg-site .arena-scene-tools { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; padding: 8px 12px; background: var(--sg-surface); color: var(--sg-muted); }
+  .sg-site .arena-scene-tools.is-seat { grid-template-columns: minmax(0, 1fr) auto; align-items: center; }
+  .sg-site .arena-scene-tools .arena-canvas-actions { position: static; display: flex; flex-wrap: wrap; padding: 0; gap: 8px; background: transparent; }
+  .sg-site .arena-scene-tools .arena-canvas-actions button { min-height: 48px; padding: 8px; background: #fff; color: var(--sg-accent); border-color: var(--sg-line); }
+  .sg-site .arena-scene-tools .arena-canvas-actions button[aria-label] { flex: 0 0 48px; width: 48px; font-size: 22px; }
+  .sg-site .arena-scene-tools.is-seat .arena-canvas-actions { grid-column: 2; grid-row: 1; }
+  .sg-site .arena-scene-tools .arena-gesture-hint { position: static; padding: 0; background: transparent; color: var(--sg-muted); font-size: 12px; text-align: left; }
+  .sg-site .arena-scene-tools.is-seat .arena-gesture-hint { grid-column: 1; grid-row: 1; }
+  .sg-site .arena-view-frame > .arena-navigation-row { display: flex; flex-direction: column; gap: 8px; padding: 8px 12px; }
+  .sg-site .arena-view-frame .arena-watch-actions { order: 0; flex: 0 0 auto; width: 100%; }
+  .sg-site .arena-view-frame .arena-locator { order: 1; flex: 0 0 auto; width: 100%; }
+  .sg-site .arena-watch-actions button { padding-inline: 8px; line-height: 1.4; }
+  .sg-site .arena-under-scene .primary { display: none; }
+  .sg-site .arena-view-actions > div { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); width: 100%; gap: 8px; }
+  .sg-site .arena-view-actions > div > button:only-child { grid-column: 1 / -1; }
+  .sg-site .arena-view-actions button { width: 100%; }
+  .sg-site .arena-mobile-basics { padding: 0 12px; }
+  .sg-site .arena-mobile-basics > summary { min-height: 48px; padding-block: 12px; cursor: pointer; }
+  .sg-site .arena-mobile-basics .arena-basic-controls { grid-template-columns: minmax(0, 1fr); padding-bottom: 12px; }
+  .sg-site .arena-mobile-basics .arena-basic-controls > * { grid-column: auto; grid-row: auto; }
+  .arena-settings-dialog { height: auto; max-height: min(90dvh, 800px); }
+  .arena-settings-dialog .drawer-content { height: auto; max-height: min(90dvh, 800px); }
+  .arena-settings-dialog .panel-heading { padding: 12px 16px; }
+  .arena-settings-dialog .panel-heading h2 { font-size: 18px; }
+  .arena-settings-dialog .arena-controls { flex: 0 1 auto; padding: 16px; gap: 16px; overscroll-behavior: contain; }
+  .arena-settings-dialog .arena-controls > .arena-advanced-controls { order: 0; }
+  .arena-settings-dialog .arena-basic-controls { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .arena-settings-dialog .arena-basic-controls > * { grid-column: auto; grid-row: auto; }
+  .arena-settings-dialog .arena-selection-title { margin: 0; font-size: 13px; }
+  .arena-settings-dialog .arena-position-presets, .arena-settings-dialog .arena-posture-presets { gap: 8px; }
+  .arena-settings-dialog .arena-position-presets button, .arena-settings-dialog .arena-posture-presets button { min-height: 48px; }
+  .arena-settings-footer { padding: 12px 16px calc(12px + env(safe-area-inset-bottom)); }
+  .arena-map-dialog .drawer-content { overflow-y: auto; }
+}
+
+@media (max-width: 960px) {
+  .sg-site .arena-scene-tools .arena-mobile-compare { grid-column: 1 / -1; width: 100%; color: var(--sg-accent); background: var(--sg-soft); border-color: var(--sg-line); }
+  .sg-site .arena-stage-wrap > .arena-evidence { order: 4; }
+  .arena-settings-dialog .panel-heading > button { min-width: 48px; min-height: 48px; }
+}
+
+@media (max-width: 960px) {
+  /* The main phone map already has a searchable section picker above it. */
+  .sg-site .arena-recovery :is(.arena-floor-tabs,.arena-map-quick-select) { display: none; }
+  .sg-site .arena-map-tools > div { display: grid; grid-template-columns: 48px 48px minmax(0, 1fr); gap: 8px; }
+  .sg-site .arena-map-tools button { min-height: 48px; color: var(--sg-accent); background: var(--sg-surface); border-color: var(--sg-line); }
+  .sg-site .arena-risk-legend input[type="checkbox"] { accent-color: var(--sg-accent); }
+  .arena-map-dialog .arena-floor-tabs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .arena-map-dialog .arena-floor-tabs > button:last-child { grid-column: 1 / -1; }
+}
+
+@media (max-width: 640px) {
+  .venue-select-popup { left: 16px!important; right: 16px!important; width: auto!important; }
+}
