@@ -1,5 +1,5 @@
-import { LocalAudioPlayer } from './audio.js?v=450db2382d89';
-import { YouTubePlayer } from './youtube.js?v=450db2382d89';
+import { LocalAudioPlayer } from './audio.js?v=8cb592a7132c';
+import { YouTubePlayer } from './youtube.js?v=8cb592a7132c';
 /** One active source and one real playback clock for the trainer. */
 export class TrainingMediaPlayer {
     source = 'youtube';

@@ -3,4 +3,4 @@
 :HL["/seatgraph-preview/_next/static/css/d3901fe8cd229740.css","style"]
 :HL["/seatgraph-preview/_next/static/css/2e9e3dddca811a28.css","style"]
 :HL["/seatgraph-preview/fonts/seatgraph-ui.woff2","font",{"crossOrigin":"anonymous","type":"font/woff2"}]
-0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}},"staleTime":300,"buildId":"EpZ2KIZY0Z82ke7W2sLMF"}
+0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}},"staleTime":300,"buildId":"6w02uB9xICRxgN4TMRmUz"}
