@@ -1,9 +1,9 @@
 :HL["/seatgraph-preview/_next/static/css/a47d7461d4a63c57.css","style"]
 :HL["/seatgraph-preview/_next/static/css/021d14dfa764e9c9.css","style"]
 :HL["/seatgraph-preview/_next/static/css/255f8226d24789d9.css","style"]
-:HL["/seatgraph-preview/_next/static/css/83be671cb975ab7d.css","style"]
+:HL["/seatgraph-preview/_next/static/css/2f3a7b0277e622c0.css","style"]
 :HL["/seatgraph-preview/fonts/seatgraph-ui.woff2","font",{"crossOrigin":"anonymous","type":"font/woff2"}]
 :HL["/seatgraph-preview/vendor/leaflet/leaflet.js","script",{"integrity":"sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=","fetchPriority":"high"}]
 :HC"https://tile.openstreetmap.org"
 :HC"https://tile.openstreetmap.de"
-0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"support","param":null,"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}},"staleTime":300,"buildId":"-AOI2OxJAwpL8rWvx28P0"}
+0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"support","param":null,"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}},"staleTime":300,"buildId":"UHu2HWgGq_ytgGOTT-dkW"}
