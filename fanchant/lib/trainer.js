@@ -1,15 +1,31 @@
-import { cueRomanization } from './romanization.js?v=831c72817104';
-import { TrainingMediaPlayer } from './media.js?v=831c72817104';
-import { youtubeId } from './youtube.js?v=831c72817104';
-import { answerVisible, cueEnd, cueSeekTime, formatTime, getCueState, getLoopRange, toAudioTime, toSongTime } from './engine.js?v=831c72817104';
-import { CUE_TYPES, DataError, parseSong } from './model.js?v=831c72817104';
-import { LIBRARY_KEY, MAX_LIBRARY_BYTES, PROGRESS, loadLibrary, parseBackup, parseCueLines, parseLibrary, saveLibrary, shiftSong } from './library.js?v=831c72817104';
+import { cueRomanization } from './romanization.js?v=a06e93f955f1';
+import { TrainingMediaPlayer } from './media.js?v=a06e93f955f1';
+import { youtubeId } from './youtube.js?v=a06e93f955f1';
+import { answerVisible, cueEnd, cueSeekTime, formatTime, getCueState, getLoopRange, toAudioTime, toSongTime } from './engine.js?v=a06e93f955f1';
+import { CUE_TYPES, DataError, parseSong } from './model.js?v=a06e93f955f1';
+import { LIBRARY_KEY, MAX_LIBRARY_BYTES, PROGRESS, loadLibrary, parseBackup, parseCueLines, parseLibrary, saveLibrary, shiftSong } from './library.js?v=a06e93f955f1';
 const storage = {
     getItem: (key) => window.localStorage.getItem(key),
     setItem: (key, value) => window.localStorage.setItem(key, value),
 };
 const write = (element, text) => { if (element.textContent !== text)
     element.textContent = text; };
+// Wrap separated name readings as units without changing their text or stored data.
+const writeReading = (element, text) => {
+    if (element.textContent === text)
+        return;
+    if (!text.includes(' · ')) {
+        write(element, text);
+        return;
+    }
+    const names = text.split(' · ');
+    element.replaceChildren(...names.map((name, index) => {
+        const unit = document.createElement('span');
+        unit.className = 'cue-reading-unit';
+        unit.textContent = name + (index < names.length - 1 ? ' · ' : '');
+        return unit;
+    }));
+};
 const setHidden = (element, hidden) => { if (element.hidden !== hidden)
     element.hidden = hidden; };
 const hundredth = (value) => Math.round(value * 100) / 100;
@@ -592,13 +608,13 @@ export class FanchantTrainer {
         write(this.el('cue-text'), !shown ? this.t(this.song.cues.length ? 'complete' : 'noCues') : visible ? shown.text : this.t(state.current ? 'recall' : 'concealed'));
         write(this.el('cue-note'), shown && visible ? shown.note ?? '' : '');
         const reading = shown && visible ? cueRomanization(shown) : '';
-        write(this.el('cue-romanization'), reading);
+        writeReading(this.el('cue-romanization'), reading);
         setHidden(this.el('cue-reading'), !reading);
         write(this.el('cue-translation'), shown && visible ? shown.translation ?? '' : '');
         const previousIndex = state.previous ? this.song.cues.indexOf(state.previous) : -1;
         const revealed = previousIndex >= 0 && state.time >= cueEnd(this.song.cues, previousIndex) ? state.previous : this.song.cues[previousIndex - 1];
         write(this.el('cue-reveal'), this.mode === 'test' && revealed ? this.t('reveal', { text: revealed.text }) : '');
-        write(this.el('cue-reveal-romanization'), this.mode === 'test' && revealed ? cueRomanization(revealed) : '');
+        writeReading(this.el('cue-reveal-romanization'), this.mode === 'test' && revealed ? cueRomanization(revealed) : '');
         const selected = this.song.cues.find(cue => cue.id === this.selectedId);
         const range = selected && snapshot.ready ? getLoopRange(selected, this.song.audioOffset ?? 0, snapshot.duration, this.preRoll, this.postRoll) : null;
         const loop = this.el('loop');
@@ -624,7 +640,7 @@ export class FanchantTrainer {
             const visible = this.editing || answerVisible(this.mode, this.song.cues, index, state.time);
             write(text, visible ? cue.text : this.t('hiddenAnswer'));
             const reading = visible ? cueRomanization(cue) : '';
-            write(romanization, reading);
+            writeReading(romanization, reading);
             setHidden(romanization, !reading);
             write(type, visible ? this.t(cue.type) : this.t('cueLabel', { index: index + 1, time: formatTime(cue.time, true) }));
             row.dataset.selected = String(cue.id === this.selectedId);

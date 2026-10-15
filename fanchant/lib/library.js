@@ -1,5 +1,5 @@
-import { DataError, MAX_JSON_BYTES, parseSong, parseSongJSON, STORAGE_KEY } from './model.js?v=831c72817104';
-import { youtubeId } from './youtube.js?v=831c72817104';
+import { DataError, MAX_JSON_BYTES, parseSong, parseSongJSON, STORAGE_KEY } from './model.js?v=a06e93f955f1';
+import { youtubeId } from './youtube.js?v=a06e93f955f1';
 export const LIBRARY_KEY = 'seatgraph.fanchant.library.v2';
 export const MAX_LIBRARY_BYTES = 8 * MAX_JSON_BYTES;
 export const PROGRESS = ['new', 'learning', 'mastered'];
