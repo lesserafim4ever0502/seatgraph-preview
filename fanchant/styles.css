@@ -1,9 +1,6 @@
 /* A single practice surface; preparation and infrequent tools stay secondary. */
 .sg-site.fanchant-page { --canvas: var(--sg-canvas); --ink: var(--sg-ink); --line: var(--sg-line); --accent: var(--sg-accent); --gutter: var(--sg-gutter); }
 .fanchant-page .sg-header { max-width: 1280px; row-gap: 12px; }
-.fanchant-page .sg-header .language-control { min-height: 36px; }
-.fanchant-page .sg-header .language-control > select { min-height: 34px; padding-block: 3px; }
-.fanchant-page .sg-header .language-control:focus-within { outline-offset: -3px; }
 .trainer { max-width: 1120px; margin: auto; padding: 20px var(--gutter) 40px; }
 .trainer * { box-sizing: border-box; }
 .trainer [hidden] { display: none !important; }
@@ -22,12 +19,8 @@
 .song-title { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 10px; }
 .song-picker-label { grid-column: 1 / -1; color: var(--sg-muted); font-size: 12px; }
 .trainer #next-song { min-height: 48px; max-width: 144px; padding-inline: 14px; }
-.song-title select { width: 100%; min-height: 48px; padding: 10px 40px 10px 12px; border: 1px solid var(--sg-line); border-radius: var(--sg-radius); background-color: var(--sg-surface); color: var(--sg-ink); font-size: 16px; font-weight: var(--sg-weight-control); line-height: 1.5; text-overflow: ellipsis; cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='m4 6 4 4 4-4' fill='none' stroke='%235f6f7c' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-size: 16px; background-position: right 14px center; }
-.song-title select option { font-size: 16px; font-weight: 400; }
-.song-title select:focus { border-color: var(--sg-accent); }
-.trainer .song-title select:focus-visible { outline: 2px solid var(--sg-accent); outline-offset: 2px; }
+.song-title select { width: 100%; text-overflow: ellipsis; }
 .song-title p { grid-column: 1 / -1; color: var(--sg-muted); font-size: 12px; line-height: 1.5; letter-spacing: .03em; overflow-wrap: anywhere; }
-@media (forced-colors: active) { .song-title select { appearance: auto; background-image: none; } }
 .audio-source { min-width: 0; display: grid; grid-template-columns: minmax(200px, 240px) minmax(0, 1fr); gap: 8px 12px; margin-bottom: 12px; }
 .audio-description { min-width: 0; grid-column: 2; grid-row: 1; align-self: center; }
 .audio-source .audio-status { font-size: 12px; color: var(--sg-muted); overflow-wrap: anywhere; }
@@ -36,7 +29,7 @@
 .file-button input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
 .audio-source .trainer-error { grid-column: 1 / -1; }
 .media-source-label { grid-column: 1; grid-row: 1; }
-.media-source-label select { width: 100%; padding: 8px 12px; }
+.media-source-label select { width: 100%; }
 .youtube-source, .local-source { grid-column: 1 / -1; min-width: 0; }
 .youtube-source form { display: grid; gap: 6px; font-size: 12px; }
 .youtube-input-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; }
@@ -72,14 +65,17 @@
 .trainer .cue-countdown { color: var(--sg-muted); font-size: 12px; font-variant-numeric: tabular-nums; min-height: 22px; margin-top: 10px; }
 .cue-stage .cue-text { font-size: clamp(24px, 3vw, 34px); font-weight: var(--sg-weight-heading); line-height: 1.4; margin: auto 0; padding: 12px 0; white-space: pre-wrap; word-break: keep-all; overflow-wrap: anywhere; }
 .cue-note, .cue-reveal { font-size: 12px; color: var(--sg-muted); overflow-wrap: anywhere; white-space: pre-wrap; }
-.cue-note:empty, .cue-reveal:empty { display: none; }
+.cue-note:empty, .cue-reveal:empty, .cue-row-romanization:empty { display: none; }
+.cue-reading { display: grid; gap: 4px; margin-bottom: 10px; }
+.cue-reading > span { color: var(--sg-muted); font-size: 11px; }
+#cue-romanization { color: var(--sg-ink); font-size: clamp(14px, 1.5vw, 17px); font-weight: var(--sg-weight-body); line-height: 1.7; white-space: pre-wrap; overflow-wrap: anywhere; }
 .cue-stage[data-phase='ready'] { background: #fbf0d7; border-color: #d7ba75; }
 .cue-stage[data-phase='active'] { background: #d3e9f3; border-color: var(--sg-accent); }
 .transport { margin: 16px 0; position: static; }
 .transport-buttons { display: grid; grid-template-columns: minmax(100px, 1fr) minmax(120px, 1.1fr) auto; gap: 8px; align-items: center; }
 .trainer .transport-buttons button { min-height: 48px; padding: 10px 12px; }
 .rate-control { display: inline-flex; flex-wrap: nowrap; align-items: center; gap: 8px; font-size: 12px; color: var(--sg-muted); }
-.rate-control select { flex: 0 0 auto; width: 84px; padding: 8px; min-height: 48px; }
+.rate-control select { flex: 0 0 auto; width: 104px; }
 .transport .trainer-help { margin-top: 6px; }
 .timeline-section .section-heading { margin-bottom: 8px; }
 .timeline-section h2 { font-size: 12px; color: var(--sg-muted); font-weight: var(--sg-weight-control); }
@@ -110,6 +106,8 @@
 .cue-row[data-active='true'] { background: #d3e9f3; }
 .trainer .cue-go { display: grid; grid-template-columns: 60px minmax(0, 1fr); gap: 3px 12px; align-items: start; width: 100%; border: 0; background: transparent; text-align: left; padding: 16px 10px; border-radius: 0; font-weight: var(--sg-weight-body); }
 .cue-go time { grid-row: span 2; color: var(--sg-muted); font-variant-numeric: tabular-nums; font-size: 12px; line-height: 1.8; }
+.cue-row-copy { min-width: 0; display: grid; gap: 4px; }
+.cue-row-romanization { font-size: 13px; color: var(--sg-muted); line-height: 1.7; white-space: pre-wrap; overflow-wrap: anywhere; }
 .cue-row-text { font-size: 14px; font-weight: var(--sg-weight-heading); white-space: pre-wrap; word-break: keep-all; overflow-wrap: anywhere; }
 .cue-row-type { font-size: 11px; color: var(--sg-muted); }
 .cue-row-actions { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 10px 12px; }
@@ -144,9 +142,9 @@
   .cue-stage { min-height: 160px; padding: 14px; }
   .training-modes { width: 100%; }
   .trainer .training-modes button { padding-inline: 8px; }
-  .transport-buttons { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr) 76px; }
+  .transport-buttons { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr) 104px; }
   .rate-control > span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
-  .rate-control select { width: 76px; padding: 6px; }
+  .rate-control select { width: 104px; }
   .trainer .transport-buttons button { padding: 8px 4px; font-size: 13px; }
   .editor-grid { grid-template-columns: minmax(0, 1fr); }
 }
@@ -180,8 +178,6 @@
 /* Phone practice controls stay aligned as labels grow in each language. */
 @media (max-width: 640px) {
   .fanchant-page .sg-header { row-gap: 8px; }
-  .fanchant-page .sg-header .language-control { min-height: 44px; }
-  .fanchant-page .sg-header .language-control > select { min-height: 42px; }
   .trainer .training-modes { width: 100%; }
   .trainer .training-modes button { min-height: 48px; padding-inline: 8px; }
   .trainer .source-options { grid-template-columns: minmax(0, 1fr); gap: 0; }
@@ -189,12 +185,12 @@
   .source-options > details[open] { grid-column: auto; }
   .youtube-input-row { grid-template-columns: minmax(0, 1fr); }
   .youtube-input-row button { width: 100%; justify-self: stretch; }
-  .trainer .transport-buttons { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 76px; align-items: stretch; }
+  .trainer .transport-buttons { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 104px; align-items: stretch; }
   .trainer .transport-buttons button, .trainer .rate-control select { min-height: 48px; height: 100%; }
   .trainer .transport-buttons button { padding: 10px 6px; line-height: 1.4; }
   .rate-control { align-items: stretch; }
   .rate-control > span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
-  .trainer .rate-control select { width: 76px; padding-inline: 6px; }
+  .trainer .rate-control select { width: 104px; }
   .trainer .data-actions, .trainer .cue-row-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
   .trainer .data-actions > :is(button,.file-button), .trainer .cue-row-actions > button { width: 100%; min-height: 48px; margin: 0; padding: 10px 8px; }
   .trainer .data-actions > :last-child:nth-child(odd) { grid-column: 1 / -1; }

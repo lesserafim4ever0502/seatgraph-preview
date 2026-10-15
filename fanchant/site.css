@@ -3275,11 +3275,10 @@ body:has(.sg-site) .inspector-dialog button { min-height: 44px; font-size: 14px;
 .sg-header nav a { padding: 8px 12px; border-radius: var(--sg-radius); white-space: nowrap; }
 .sg-header nav a[aria-current='page'] { color: var(--sg-accent); background: var(--sg-soft); }
 .sg-header .account { display: flex; align-items: center; }
-.sg-header .language-control { display: inline-flex; flex-wrap: nowrap; align-items: center; min-height: 44px; padding: 0 4px; gap: 0; border: 1px solid var(--sg-line); border-radius: var(--sg-radius); background: var(--sg-surface); }
+.sg-header .language-control { display: inline-flex; flex-wrap: nowrap; align-items: center; min-height: 48px; padding: 0; gap: 0; border: 0; background: transparent; }
 .sg-header .language-control > span[aria-hidden] { display: none; }
-.sg-header .language-control > select { flex: 0 1 auto; width: auto; max-width: 126px; min-height: 42px; border: 0; padding: 6px 10px; font-size: 13px; line-height: 1.5; background: transparent; }
-.sg-header .language-control:focus-within { outline: 3px solid #28799f; outline-offset: 3px; }
-.sg-header .language-control > select:focus-visible { outline: none; box-shadow: none; }
+.sg-header .language-control > select { flex: 0 1 auto; width: 124px; max-width: 124px; }
+.sg-header .language-control:focus-within { outline: none; }
 .sg-site .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
 .guide-footer-links { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 16px; font-size: 13px; }
 @media (max-width: 859px) {
@@ -3292,7 +3291,7 @@ body:has(.sg-site) .inspector-dialog button { min-height: 44px; font-size: 14px;
   .sg-header .sg-brand strong { font-size: 21px; }
   .sg-header nav { justify-content: space-between; }
   .sg-header nav a { padding-inline: 6px; font-size: 13px; }
-  .sg-header .language-control > select { max-width: 116px; padding-inline: 6px; font-size: 16px; }
+  .sg-header .language-control > select { max-width: 124px; }
 }
 
 /* English controls use complete wrapped labels and content-driven height. */
@@ -3327,7 +3326,7 @@ html:lang(en) .sg-header nav { flex-wrap: wrap; }
   .sg-site :is(button,a,summary), :is(.arena-settings-dialog,.arena-records-dialog,.arena-share-dialog) :is(button,summary) { -webkit-tap-highlight-color: transparent; }
   .sg-site :is(button,a,summary):focus-visible, :is(.arena-settings-dialog,.arena-records-dialog,.arena-share-dialog) :is(button,summary):focus-visible { outline-offset: -3px; }
   .sg-header .language-control { min-height: 44px; }
-  .sg-header .language-control > select { min-height: 42px; }
+  .sg-header .language-control > select { min-height: 48px; }
   .sg-header .language-control:focus-within { outline-offset: -3px; }
   .sg-site .arena-user-tools { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: 8px; }
   .sg-site .arena-user-tools > button { width: 100%; }
@@ -3403,4 +3402,78 @@ html:lang(en) .sg-header nav { flex-wrap: wrap; }
 
 @media (max-width: 640px) {
   .venue-select-popup { left: 16px!important; right: 16px!important; width: auto!important; }
+}
+
+
+/* One select surface for every route, including the standalone trainer. */
+:root select:not([multiple]):not([size]),
+:root .venue-select-trigger {
+  box-sizing: border-box; min-width: 0; max-width: 100%; min-height: 48px; height: auto;
+  padding: 10px 12px; border: 1px solid var(--sg-line); border-radius: var(--sg-radius);
+  color: var(--sg-ink); background-color: var(--sg-surface);
+  font: var(--sg-weight-control) 16px/1.5 var(--font-ui), sans-serif;
+  text-align: start; cursor: pointer;
+}
+:root select:not([multiple]):not([size]) {
+  appearance: none; -webkit-appearance: none; padding-inline-end: 40px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='m6 9 6 6 6-6' fill='none' stroke='%235c6e7e' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 12px center; background-size: 16px 16px;
+}
+:root select:not([multiple]):not([size]):hover:not(:disabled),
+:root .venue-select-trigger:hover:not(:disabled) { border-color: #8caabd; background-color: var(--sg-surface); }
+:root select:not([multiple]):not([size]):focus,
+:root .venue-select-trigger[aria-expanded="true"] { border-color: var(--sg-accent); box-shadow: none; }
+:root select:not([multiple]):not([size]):focus-visible,
+:root .venue-select-trigger:focus-visible { outline: 2px solid #28799f; outline-offset: 2px; box-shadow: none; }
+:root select:not([multiple]):not([size]):disabled,
+:root .venue-select-trigger:disabled { color: var(--sg-muted); background-color: var(--sg-canvas); border-color: var(--sg-line); opacity: .65; cursor: not-allowed; }
+:root select:not([multiple]):not([size]) option {
+  color: var(--sg-ink); background: var(--sg-surface); font-size: 16px; font-weight: var(--sg-weight-control); line-height: 1.5;
+}
+:root .venue-select-value { font-size: 16px; font-weight: var(--sg-weight-control); }
+:root .venue-select-meta, :root .venue-select-chevron { color: var(--sg-muted); }
+:root .venue-select-chevron { stroke-linecap: round; stroke-linejoin: round; }
+:root .venue-select-popup { border-radius: var(--sg-radius); border-color: var(--sg-line); background: var(--sg-surface); box-shadow: 0 6px 24px #21344718; }
+:root .venue-select-options { padding: 6px; scrollbar-color: #b8cbd5 transparent; }
+:root .venue-select-option { min-height: 48px; padding: 10px 12px; border-radius: 6px; }
+:root .venue-select-option-label { font-size: 16px; font-weight: var(--sg-weight-control); }
+:root .venue-select-description { color: var(--sg-muted); font-size: 12px; line-height: 1.6; font-weight: var(--sg-weight-body); }
+:root .venue-select-option.is-active { background: #f0f5f8; }
+:root .venue-select-option[aria-selected="true"] { color: var(--sg-accent); background: var(--sg-soft); }
+
+/* Desktop enhancement; touch devices retain their operating-system picker. */
+@supports (appearance: base-select) and selector(select::picker(select)) {
+  @media (hover: hover) and (pointer: fine) {
+    :root select:not([multiple]):not([size]),
+    :root select:not([multiple]):not([size])::picker(select) { appearance: base-select; }
+    :root select:not([multiple]):not([size]) {
+      -webkit-appearance: base-select; display: inline-flex; align-items: center; justify-content: space-between; gap: 12px;
+      padding-inline-end: 12px; background-image: none; white-space: normal; overflow-wrap: anywhere;
+    }
+    :root select:not([multiple]):not([size])::picker-icon {
+      flex: 0 0 16px; width: 16px; height: 16px; margin-inline-start: auto; color: var(--sg-muted);
+      content: ""; background: currentColor;
+      mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='m6 9 6 6 6-6' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+    }
+    :root select:not([multiple]):not([size]):open::picker-icon { transform: rotate(180deg); }
+    :root select:not([multiple]):not([size])::picker(select) {
+      min-inline-size: anchor-size(self-inline); max-inline-size: calc(100vw - 24px); max-block-size: min(22rem, 60svh);
+      margin-block: 6px; padding: 6px; overflow: auto; overscroll-behavior: contain;
+      border: 1px solid var(--sg-line); border-radius: var(--sg-radius);
+      color: var(--sg-ink); background: var(--sg-surface); box-shadow: 0 6px 24px #21344718;
+      font: var(--sg-weight-control) 16px/1.5 var(--font-ui), sans-serif;
+    }
+    :root select:not([multiple]):not([size]) option {
+      display: flex; align-items: center; gap: 12px; min-height: 48px; padding: 10px 12px; border-radius: 6px;
+      white-space: normal; overflow-wrap: anywhere;
+    }
+    :root select:not([multiple]):not([size]) option:is(:hover,:focus) { background: #f0f5f8; outline: none; }
+    :root select:not([multiple]):not([size]) option:checked { color: var(--sg-accent); background: var(--sg-soft); }
+    :root select:not([multiple]):not([size]) option::checkmark { order: 1; margin-inline-start: auto; color: var(--sg-accent); }
+    :root select:not([multiple]):not([size]) optgroup { padding-block: 6px; color: var(--sg-muted); font-size: 12px; font-weight: var(--sg-weight-heading); }
+    :root select:not([multiple]):not([size]) option:disabled { color: var(--sg-muted); background: var(--sg-surface); opacity: .65; }
+  }
+}
+@media (forced-colors: active) {
+  :root select:not([multiple]):not([size]) { appearance: auto; -webkit-appearance: auto; background-image: none; padding-inline-end: 12px; }
 }

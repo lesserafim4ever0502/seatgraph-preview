@@ -1,8 +1,9 @@
-import { TrainingMediaPlayer } from './media.js?v=d711abd3120e';
-import { youtubeId } from './youtube.js?v=d711abd3120e';
-import { answerVisible, cueEnd, cueSeekTime, formatTime, getCueState, getLoopRange, toAudioTime, toSongTime } from './engine.js?v=d711abd3120e';
-import { CUE_TYPES, DataError, parseSong } from './model.js?v=d711abd3120e';
-import { LIBRARY_KEY, MAX_LIBRARY_BYTES, PROGRESS, loadLibrary, parseBackup, parseCueLines, parseLibrary, saveLibrary, shiftSong } from './library.js?v=d711abd3120e';
+import { cueRomanization } from './romanization.js?v=831c72817104';
+import { TrainingMediaPlayer } from './media.js?v=831c72817104';
+import { youtubeId } from './youtube.js?v=831c72817104';
+import { answerVisible, cueEnd, cueSeekTime, formatTime, getCueState, getLoopRange, toAudioTime, toSongTime } from './engine.js?v=831c72817104';
+import { CUE_TYPES, DataError, parseSong } from './model.js?v=831c72817104';
+import { LIBRARY_KEY, MAX_LIBRARY_BYTES, PROGRESS, loadLibrary, parseBackup, parseCueLines, parseLibrary, saveLibrary, shiftSong } from './library.js?v=831c72817104';
 const storage = {
     getItem: (key) => window.localStorage.getItem(key),
     setItem: (key, value) => window.localStorage.setItem(key, value),
@@ -423,9 +424,15 @@ export class FanchantTrainer {
             timestamp.textContent = formatTime(cue.time, true);
             const text = document.createElement('span');
             text.className = 'cue-row-text';
+            const romanization = document.createElement('span');
+            romanization.className = 'cue-row-romanization';
+            romanization.lang = 'ko-Latn';
+            const copy = document.createElement('span');
+            copy.className = 'cue-row-copy';
+            copy.append(text, romanization);
             const type = document.createElement('span');
             type.className = 'cue-row-type';
-            button.append(timestamp, text, type);
+            button.append(timestamp, copy, type);
             button.addEventListener('click', () => this.jump(cue));
             const actions = document.createElement('div');
             actions.className = 'cue-row-actions';
@@ -459,7 +466,7 @@ export class FanchantTrainer {
             marker.setAttribute('aria-label', this.t('cueLabel', { index: index + 1, time: formatTime(toAudioTime(cue.time, this.song.audioOffset), true) }));
             marker.addEventListener('click', () => this.jump(cue));
             markers.append(marker);
-            return { cue, row, button, text, type, actions, marker };
+            return { cue, row, button, text, romanization, type, actions, marker };
         });
         this.el('empty-cues').hidden = !!this.rows.length;
         this.markerDuration = -1;
@@ -584,11 +591,14 @@ export class FanchantTrainer {
         const visible = shown && answerVisible(this.mode, this.song.cues, this.song.cues.indexOf(shown), state.time);
         write(this.el('cue-text'), !shown ? this.t(this.song.cues.length ? 'complete' : 'noCues') : visible ? shown.text : this.t(state.current ? 'recall' : 'concealed'));
         write(this.el('cue-note'), shown && visible ? shown.note ?? '' : '');
-        write(this.el('cue-romanization'), shown && visible ? shown.romanization ?? '' : '');
+        const reading = shown && visible ? cueRomanization(shown) : '';
+        write(this.el('cue-romanization'), reading);
+        setHidden(this.el('cue-reading'), !reading);
         write(this.el('cue-translation'), shown && visible ? shown.translation ?? '' : '');
         const previousIndex = state.previous ? this.song.cues.indexOf(state.previous) : -1;
         const revealed = previousIndex >= 0 && state.time >= cueEnd(this.song.cues, previousIndex) ? state.previous : this.song.cues[previousIndex - 1];
         write(this.el('cue-reveal'), this.mode === 'test' && revealed ? this.t('reveal', { text: revealed.text }) : '');
+        write(this.el('cue-reveal-romanization'), this.mode === 'test' && revealed ? cueRomanization(revealed) : '');
         const selected = this.song.cues.find(cue => cue.id === this.selectedId);
         const range = selected && snapshot.ready ? getLoopRange(selected, this.song.audioOffset ?? 0, snapshot.duration, this.preRoll, this.postRoll) : null;
         const loop = this.el('loop');
@@ -610,9 +620,12 @@ export class FanchantTrainer {
         write(edit, this.t(this.editing ? 'finishEditing' : 'editCues'));
         setHidden(this.el('editor-actions'), !this.editing);
         write(this.el('list-help'), this.t(this.editing ? 'editHelp' : `${this.mode}Help`));
-        this.rows.forEach(({ cue, row, button, text, type, actions, marker }, index) => {
+        this.rows.forEach(({ cue, row, button, text, romanization, type, actions, marker }, index) => {
             const visible = this.editing || answerVisible(this.mode, this.song.cues, index, state.time);
             write(text, visible ? cue.text : this.t('hiddenAnswer'));
+            const reading = visible ? cueRomanization(cue) : '';
+            write(romanization, reading);
+            setHidden(romanization, !reading);
             write(type, visible ? this.t(cue.type) : this.t('cueLabel', { index: index + 1, time: formatTime(cue.time, true) }));
             row.dataset.selected = String(cue.id === this.selectedId);
             row.dataset.active = String(cue.id === state.current?.id);
@@ -669,7 +682,7 @@ export class FanchantTrainer {
         this.el('edit-type').value = cue?.type ?? 'chant';
         this.el('edit-text').value = cue?.text ?? '';
         this.el('edit-note').value = cue?.note ?? '';
-        this.el('edit-romanization').value = cue?.romanization ?? '';
+        this.el('edit-romanization').value = cue ? cueRomanization(cue) : '';
         this.el('edit-translation').value = cue?.translation ?? '';
         this.el('editor-error').hidden = true;
         this.el('edit-text').focus();
