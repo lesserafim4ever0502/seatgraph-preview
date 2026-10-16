@@ -219,3 +219,14 @@
   .trainer .rate-control { grid-column: 1 / -1; justify-content: space-between; align-items: center; }
   .trainer .rate-control > span { position: static; width: auto; height: auto; clip-path: none; }
 }
+
+/* Manual study is the default; audio and external references stay optional. */
+.video-reference { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 16px; margin-bottom: 12px; }
+.video-reference > .trainer-help { flex-basis: 100%; font-size: 12px; line-height: 1.7; color: var(--sg-muted); }
+.video-reference details { min-width: 0; font-size: 12px; }
+.video-reference summary { min-height: 44px; display: flex; align-items: center; cursor: pointer; }
+.video-reference details[open] { flex-basis: 100%; order: 2; }
+.manual-controls { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.manual-controls button { min-height: 48px; flex: 1 1 100px; }
+.local-source { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.local-source .audio-privacy { flex-basis: 100%; }

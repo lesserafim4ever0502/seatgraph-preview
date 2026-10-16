@@ -1,9 +1,8 @@
-import { cueRomanization } from './romanization.js?v=a06e93f955f1';
-import { TrainingMediaPlayer } from './media.js?v=a06e93f955f1';
-import { youtubeId } from './youtube.js?v=a06e93f955f1';
-import { answerVisible, cueEnd, cueSeekTime, formatTime, getCueState, getLoopRange, toAudioTime, toSongTime } from './engine.js?v=a06e93f955f1';
-import { CUE_TYPES, DataError, parseSong } from './model.js?v=a06e93f955f1';
-import { LIBRARY_KEY, MAX_LIBRARY_BYTES, PROGRESS, loadLibrary, parseBackup, parseCueLines, parseLibrary, saveLibrary, shiftSong } from './library.js?v=a06e93f955f1';
+import { LocalAudioPlayer } from './audio.js?v=4867232d32ae';
+import { cueRomanization } from './romanization.js?v=4867232d32ae';
+import { answerVisible, cueEnd, cueSeekTime, formatTime, getCueState, getLoopRange, toAudioTime, toSongTime } from './engine.js?v=4867232d32ae';
+import { CUE_TYPES, DataError, parseSong } from './model.js?v=4867232d32ae';
+import { LIBRARY_KEY, MAX_LIBRARY_BYTES, PROGRESS, loadLibrary, parseBackup, parseCueLines, parseLibrary, saveLibrary, shiftSong } from './library.js?v=4867232d32ae';
 const storage = {
     getItem: (key) => window.localStorage.getItem(key),
     setItem: (key, value) => window.localStorage.setItem(key, value),
@@ -35,6 +34,8 @@ export class FanchantTrainer {
     catalog;
     song;
     mode = 'learn';
+    sourceMode = 'manual';
+    manualRevealed = false;
     preRoll = 3;
     postRoll = 2;
     selectedId = null;
@@ -54,7 +55,7 @@ export class FanchantTrainer {
     events = new AbortController();
     downloads = new Map();
     player;
-    constructor(root, demo, catalog = [], loadYouTube) {
+    constructor(root, demo, catalog = []) {
         this.root = root;
         this.demo = demo;
         this.catalog = catalog;
@@ -67,7 +68,7 @@ export class FanchantTrainer {
         }
         catch { /* Warning from loadLibrary is displayed below. */ }
         this.storageWarning = loaded.warning ?? '';
-        this.player = new TrainingMediaPlayer(this.el('local-audio'), this.el('youtube-player'), loadYouTube);
+        this.player = new LocalAudioPlayer(this.el('local-audio'));
         this.bind();
         this.rebuild();
         this.unsubscribe = this.player.subscribe(snapshot => this.render(snapshot));
@@ -89,7 +90,12 @@ export class FanchantTrainer {
         write(notice, this.t(key, parameters));
         notice.hidden = false;
     }
-    clearMedia() { this.player.clear(); this.el('youtube-url').value = ''; }
+    clearMedia() {
+        this.sourceMode = 'manual';
+        this.manualRevealed = false;
+        this.listSignature = '';
+        this.player.clear();
+    }
     errorMessage(error) {
         return error instanceof DataError ? this.t(error.code, { field: error.field }) : this.t('readFailed');
     }
@@ -152,25 +158,41 @@ export class FanchantTrainer {
     }
     bind() {
         this.on(this.el('media-source'), 'change', () => {
-            this.player.useSource(this.el('media-source').value === 'youtube' ? 'youtube' : 'local');
+            this.sourceMode = this.el('media-source').value === 'local' ? 'local' : 'manual';
+            this.manualRevealed = false;
+            this.listSignature = '';
+            this.player.pause();
+            this.player.stopLoop();
+            this.render(this.player.snapshot);
         });
-        this.on(this.el('youtube-form'), 'submit', event => {
-            event.preventDefault();
-            void this.player.selectVideo(this.el('youtube-url').value);
+        this.on(this.el('youtube-reference'), 'click', () => { this.player.pause(); this.player.stopLoop(); });
+        this.on(this.el('audio-clear'), 'click', () => this.clearMedia());
+        for (const [id, direction] of [['manual-prev', -1], ['manual-next', 1]]) {
+            this.on(this.el(id), 'click', () => {
+                if (this.sourceMode !== 'manual')
+                    return;
+                const index = this.song.cues.findIndex(cue => cue.id === this.selectedId);
+                const cue = this.song.cues[index + direction];
+                if (cue)
+                    this.jump(cue);
+            });
+        }
+        this.on(this.el('manual-reveal'), 'click', () => {
+            if (this.sourceMode !== 'manual' || this.mode === 'learn' || !this.song.cues.length)
+                return;
+            this.manualRevealed = !this.manualRevealed;
+            this.listSignature = '';
+            this.render(this.player.snapshot);
         });
-        this.on(this.el('youtube-reference'), 'click', () => {
-            const source = this.catalog.find(entry => entry.song.id === this.song.id)?.video ?? this.song.sources?.find(source => youtubeId(source.url));
-            if (source) {
-                this.el('youtube-url').value = source.url;
-                void this.player.selectVideo(source.url);
-            }
-        });
-        this.on(this.el('youtube-clear'), 'click', () => this.clearMedia());
         this.on(this.el('audio-file'), 'change', () => {
             const input = this.el('audio-file');
             const file = input.files?.[0];
-            if (file)
+            if (file) {
+                this.sourceMode = 'local';
+                this.manualRevealed = false;
+                this.listSignature = '';
                 this.player.selectFile(file);
+            }
             input.value = '';
         });
         this.on(this.el('play'), 'click', () => this.player.toggle());
@@ -214,6 +236,7 @@ export class FanchantTrainer {
                     return;
                 this.el('batch-cues').value = '';
                 this.mode = button.dataset.mode;
+                this.manualRevealed = false;
                 this.editing = false;
                 this.closeEditor(false);
                 this.listSignature = '';
@@ -224,6 +247,7 @@ export class FanchantTrainer {
             if (this.editing && this.el('batch-cues').value.trim() && !window.confirm(this.t('discardDraft')))
                 return;
             this.editing = !this.editing;
+            this.manualRevealed = false;
             if (this.editing)
                 this.player.pause();
             else {
@@ -383,7 +407,7 @@ export class FanchantTrainer {
         this.on(window, 'keydown', event => {
             const key = event;
             const target = key.target;
-            if (key.code !== 'KeyT' || key.repeat || key.altKey || key.ctrlKey || key.metaKey || !this.editing || !this.player.snapshot.ready)
+            if (key.code !== 'KeyT' || key.repeat || key.altKey || key.ctrlKey || key.metaKey || !this.editing || this.sourceMode !== 'local' || !this.player.snapshot.ready)
                 return;
             if (target instanceof HTMLElement && (['INPUT', 'TEXTAREA', 'SELECT'].includes(target.tagName) || target.isContentEditable))
                 return;
@@ -506,28 +530,13 @@ export class FanchantTrainer {
             links.append(link);
         }
         const video = entry?.video;
-        const fallback = this.song.sources?.find(source => youtubeId(source.url));
+        setHidden(this.el('video-reference'), !video);
         const reference = this.el('youtube-reference');
-        reference.hidden = !video;
+        reference.href = video?.url ?? '';
         if (video)
-            write(reference, this.t('loadOfficialVideo', { kind: this.t(`video_${video.kind}`) }));
-        else {
-            reference.hidden = !fallback;
-            if (fallback)
-                write(reference, this.t('useReferenceVideo', { source: fallback.label }));
-        }
-        const info = this.el('youtube-reference-info');
-        info.hidden = !video;
-        if (video)
-            write(info, this.t('curatedVideoInfo', { title: video.title, publisher: video.publisher }));
-        const note = this.el('youtube-version-note');
-        note.hidden = !video;
-        if (video)
-            write(note, this.t(entry?.tourVariant ? 'videoTourVersion' : 'videoVersionHelp'));
-        const original = this.el('youtube-reference-original');
-        original.hidden = !video;
-        if (video)
-            original.href = video.url;
+            write(reference, this.t('openOfficialVideo', { kind: this.t('video_' + video.kind) }));
+        write(this.el('youtube-reference-info'), video ? this.t('curatedVideoInfo', { title: video.title, publisher: video.publisher }) : '');
+        write(this.el('youtube-version-note'), video ? this.t(entry?.tourVariant ? 'videoTourVersion' : 'videoVersionHelp') : '');
     }
     renderSetlist() {
         const query = this.el('song-search').value.trim().toLocaleLowerCase();
@@ -555,37 +564,33 @@ export class FanchantTrainer {
     }
     render(snapshot) {
         write(this.el('mode-label'), this.t(this.mode));
-        const online = snapshot.source === 'youtube';
-        this.el('media-source').value = online ? 'youtube' : 'local';
-        setHidden(this.el('youtube-source'), !online);
-        setHidden(this.el('local-source'), online);
-        setHidden(this.el('youtube-panel'), !online || !snapshot.videoId);
-        this.el('youtube-clear').disabled = !snapshot.videoId && !snapshot.loading;
-        const original = this.el('youtube-original');
-        original.href = snapshot.videoId ? `https://www.youtube.com/watch?v=${snapshot.videoId}` : 'https://www.youtube.com/';
-        write(this.el('audio-status'), online ? this.t(snapshot.loading ? 'youtubeLoading' : snapshot.ready ? 'youtubeLoaded' : 'noVideo') : snapshot.loading ? this.t('audioLoading', { name: snapshot.fileName }) : snapshot.fileName ? this.t('audioReady', { name: snapshot.fileName }) : this.t('noAudio'));
-        const reference = this.catalog.find(entry => entry.song.id === this.song.id)?.video ?? this.song.sources?.find(source => youtubeId(source.url));
-        setHidden(this.el('audio-status'), online && !snapshot.loading && !snapshot.ready && !!reference);
-        setHidden(this.el('youtube-reference'), !reference || snapshot.ready && !snapshot.error && snapshot.videoId === youtubeId(reference.url));
-        this.el('youtube-reference').disabled = snapshot.loading;
-        const rates = snapshot.rates?.length ? snapshot.rates : online ? [1] : [0.5, 0.75, 0.85, 1, 1.25];
+        const manual = this.sourceMode === 'manual';
+        const timed = !manual && snapshot.ready;
+        if (manual && !this.song.cues.some(cue => cue.id === this.selectedId)) {
+            this.selectedId = this.song.cues[0]?.id ?? null;
+            this.manualRevealed = false;
+        }
+        this.el('media-source').value = this.sourceMode;
+        setHidden(this.el('local-source'), manual);
+        for (const id of ['audio-transport', 'audio-timeline', 'audio-settings'])
+            setHidden(this.el(id), manual);
+        this.el('audio-clear').hidden = !snapshot.fileName && !snapshot.loading;
+        write(this.el('audio-status'), manual ? this.t('manualStatus') : snapshot.loading ? this.t('audioLoading', { name: snapshot.fileName }) : snapshot.fileName ? this.t('audioReady', { name: snapshot.fileName }) : this.t('chooseAudioFirst'));
         const rate = this.el('rate');
-        if (Array.from(rate.options ?? rate.children).map(option => option.value).join('|') !== rates.join('|'))
-            rate.replaceChildren(...rates.map(value => new Option(`${value}×`, String(value))));
         rate.value = String(snapshot.rate);
-        rate.disabled = online && !snapshot.ready;
+        rate.disabled = !timed;
         const error = this.el('audio-error');
-        setHidden(error, !snapshot.error);
+        setHidden(error, manual || !snapshot.error);
         if (snapshot.error)
             write(error, this.t(snapshot.error));
         const play = this.el('play');
-        play.disabled = !snapshot.ready;
+        play.disabled = !timed;
         write(play, this.t(snapshot.playing ? 'pause' : 'play'));
-        this.el('stamp-time').disabled = !snapshot.ready;
-        this.el('align-cue').disabled = !snapshot.ready || !this.selectedId;
+        this.el('stamp-time').disabled = !timed;
+        this.el('align-cue').disabled = !timed || !this.selectedId;
         write(this.el('audio-time'), `${formatTime(snapshot.time)} / ${formatTime(snapshot.duration)}`);
         const seek = this.el('seek');
-        seek.disabled = !snapshot.ready;
+        seek.disabled = !timed;
         const duration = snapshot.duration || Math.max(1, toAudioTime(this.song.duration ?? (this.song.cues.at(-1)?.time ?? 0) + 2, this.song.audioOffset));
         if (seek.max !== String(duration))
             seek.max = String(duration);
@@ -597,14 +602,24 @@ export class FanchantTrainer {
             this.markerDuration = duration;
             this.layoutMarkers(duration);
         }
-        const state = getCueState(this.song, snapshot.ready ? snapshot.time : (this.song.audioOffset ?? 0) - 1);
+        const state = getCueState(this.song, timed ? snapshot.time : (this.song.audioOffset ?? 0) - 1);
+        const manualIndex = this.song.cues.findIndex(cue => cue.id === this.selectedId);
+        const shown = manual ? this.song.cues[manualIndex] : state.current ?? state.next;
         const stage = this.el('cue-stage');
-        if (stage.dataset.phase !== state.phase)
-            stage.dataset.phase = state.phase;
-        write(this.el('cue-phase'), this.t(!state.current && !state.next && this.song.cues.length ? 'finished' : state.phase));
-        write(this.el('cue-countdown'), !snapshot.ready ? this.t('chooseMediaFirst') : state.current ? this.t('cueNow') : state.countdown === null ? '' : this.t('countdown', { seconds: state.countdown.toFixed(1) }));
-        const shown = state.current ?? state.next;
-        const visible = shown && answerVisible(this.mode, this.song.cues, this.song.cues.indexOf(shown), state.time);
+        const phase = manual ? 'manual' : state.phase;
+        if (stage.dataset.phase !== phase)
+            stage.dataset.phase = phase;
+        write(this.el('cue-phase'), manual ? shown ? this.t('manualPosition', { index: manualIndex + 1, total: this.song.cues.length }) : '' : this.t(!state.current && !state.next && this.song.cues.length ? 'finished' : state.phase));
+        write(this.el('cue-countdown'), manual ? this.t(this.mode === 'learn' ? 'manualLearnHelp' : 'manualRecallHelp') : !timed ? this.t('chooseAudioFirst') : state.current ? this.t('cueNow') : state.countdown === null ? '' : this.t('countdown', { seconds: state.countdown.toFixed(1) }));
+        const visible = shown && (manual ? this.mode === 'learn' || this.manualRevealed : answerVisible(this.mode, this.song.cues, this.song.cues.indexOf(shown), state.time));
+        setHidden(this.el('manual-controls'), !manual || !shown);
+        this.el('manual-prev').disabled = !manual || manualIndex <= 0;
+        this.el('manual-next').disabled = !manual || manualIndex < 0 || manualIndex >= this.song.cues.length - 1;
+        const reveal = this.el('manual-reveal');
+        setHidden(reveal, this.mode === 'learn');
+        reveal.disabled = !manual || !shown;
+        write(reveal, this.t(this.manualRevealed ? 'hideAnswer' : 'showAnswer'));
+        reveal.setAttribute('aria-pressed', String(this.manualRevealed));
         write(this.el('cue-text'), !shown ? this.t(this.song.cues.length ? 'complete' : 'noCues') : visible ? shown.text : this.t(state.current ? 'recall' : 'concealed'));
         write(this.el('cue-note'), shown && visible ? shown.note ?? '' : '');
         const reading = shown && visible ? cueRomanization(shown) : '';
@@ -613,10 +628,10 @@ export class FanchantTrainer {
         write(this.el('cue-translation'), shown && visible ? shown.translation ?? '' : '');
         const previousIndex = state.previous ? this.song.cues.indexOf(state.previous) : -1;
         const revealed = previousIndex >= 0 && state.time >= cueEnd(this.song.cues, previousIndex) ? state.previous : this.song.cues[previousIndex - 1];
-        write(this.el('cue-reveal'), this.mode === 'test' && revealed ? this.t('reveal', { text: revealed.text }) : '');
-        writeReading(this.el('cue-reveal-romanization'), this.mode === 'test' && revealed ? cueRomanization(revealed) : '');
+        write(this.el('cue-reveal'), !manual && this.mode === 'test' && revealed ? this.t('reveal', { text: revealed.text }) : '');
+        writeReading(this.el('cue-reveal-romanization'), !manual && this.mode === 'test' && revealed ? cueRomanization(revealed) : '');
         const selected = this.song.cues.find(cue => cue.id === this.selectedId);
-        const range = selected && snapshot.ready ? getLoopRange(selected, this.song.audioOffset ?? 0, snapshot.duration, this.preRoll, this.postRoll) : null;
+        const range = selected && timed ? getLoopRange(selected, this.song.audioOffset ?? 0, snapshot.duration, this.preRoll, this.postRoll) : null;
         const loop = this.el('loop');
         loop.disabled = !range;
         write(loop, this.t(snapshot.loop ? 'stopLoop' : 'startLoop'));
@@ -626,7 +641,7 @@ export class FanchantTrainer {
         write(this.el('loop-status'), snapshot.loop ? this.t('loopRange', { start: formatTime(snapshot.loop.start, true), end: formatTime(snapshot.loop.end, true) }) : selected ? snapshot.ready && !range ? this.t('loopUnavailable') : this.t('selectedCue', { index: this.song.cues.indexOf(selected) + 1, time: formatTime(selected.time, true) }) : this.t('selectCue'));
         write(this.el('jump-help'), this.t('jumpHelp', { seconds: this.preRoll }));
         write(this.el('storage-status'), this.t(this.storageWarning || 'savedLocal'));
-        const signature = [this.mode, this.editing, this.selectedId, state.current?.id, state.next?.id, state.phase].join('|');
+        const signature = [this.sourceMode, this.manualRevealed, this.mode, this.editing, this.selectedId, state.current?.id, state.next?.id, state.phase].join('|');
         if (signature === this.listSignature)
             return;
         this.listSignature = signature;
@@ -635,16 +650,16 @@ export class FanchantTrainer {
         edit.setAttribute('aria-pressed', String(this.editing));
         write(edit, this.t(this.editing ? 'finishEditing' : 'editCues'));
         setHidden(this.el('editor-actions'), !this.editing);
-        write(this.el('list-help'), this.t(this.editing ? 'editHelp' : `${this.mode}Help`));
+        write(this.el('list-help'), this.t(this.editing ? 'editHelp' : manual ? this.mode === 'learn' ? 'manualLearnHelp' : 'manualRecallHelp' : `${this.mode}Help`));
         this.rows.forEach(({ cue, row, button, text, romanization, type, actions, marker }, index) => {
-            const visible = this.editing || answerVisible(this.mode, this.song.cues, index, state.time);
+            const visible = this.editing || (manual ? this.mode === 'learn' || this.manualRevealed && cue.id === shown?.id : answerVisible(this.mode, this.song.cues, index, state.time));
             write(text, visible ? cue.text : this.t('hiddenAnswer'));
             const reading = visible ? cueRomanization(cue) : '';
             writeReading(romanization, reading);
             setHidden(romanization, !reading);
             write(type, visible ? this.t(cue.type) : this.t('cueLabel', { index: index + 1, time: formatTime(cue.time, true) }));
             row.dataset.selected = String(cue.id === this.selectedId);
-            row.dataset.active = String(cue.id === state.current?.id);
+            row.dataset.active = String(cue.id === (manual ? shown?.id : state.current?.id));
             button.setAttribute('aria-pressed', String(cue.id === this.selectedId));
             marker.setAttribute('aria-pressed', String(cue.id === this.selectedId));
             setHidden(actions, !this.editing);
@@ -672,7 +687,12 @@ export class FanchantTrainer {
     resize() { this.markerDuration = -1; this.render(this.player.snapshot); }
     jump(cue) {
         this.selectedId = cue.id;
+        this.manualRevealed = false;
         this.player.stopLoop();
+        if (this.sourceMode === 'manual') {
+            this.render(this.player.snapshot);
+            return;
+        }
         if (!this.player.snapshot.ready) {
             this.message('chooseAudioFirst');
             this.render(this.player.snapshot);
