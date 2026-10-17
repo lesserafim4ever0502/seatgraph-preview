@@ -1,6 +1,7 @@
 /* Static-export bridge. Translation resources and supported languages live in JSON. */
 (function () {
   "use strict";
+  const runtimeScript = document.currentScript;
   const { config, messages, source } = window.SeatGraphTranslations;
   const own = (object, key) => Object.prototype.hasOwnProperty.call(object, key);
   const sourceKeys = new Map(Object.entries(source).map(([key, value]) => [value, key]));
@@ -36,7 +37,14 @@
     saved = locale;
     try { localStorage.setItem(config.storageKey, locale); } catch (_) { /* Continue in memory. */ }
   }
-  let renderLocale = config.sourceLocale;
+  let renderLocale = locale;
+  const pendingStyle = document.createElement("style");
+  if (locale !== config.sourceLocale) {
+    pendingStyle.textContent = "body{visibility:hidden}";
+    document.head.appendChild(pendingStyle);
+    // Keep the static page usable if initialization fails.
+    setTimeout(() => pendingStyle.remove(), 5000);
+  }
   const listeners = new Set();
   const wrappers = new WeakMap();
   const textBindings = new WeakMap();
@@ -70,7 +78,7 @@
   }
   function syncDocument() {
     scheduled = false;
-    const script = document.querySelector('script[src$="i18n/runtime.js"]');
+    const script = runtimeScript;
     if (script) {
       const root = new URL('../../', script.src);
       document.querySelectorAll('[data-site-route]').forEach(link => {
@@ -136,8 +144,13 @@
     }
     selector.addEventListener("change", (event) => setLocale(event.target.value));
     control.append(icon, selector); host.append(control);
+    // The controller owns later updates, but its loading shell is visible now.
+    document.querySelectorAll("[data-i18n-ignore] [data-i18n]").forEach((element) => {
+      if (element.children.length === 0) element.textContent = t(element.dataset.i18n);
+    });
     new MutationObserver(schedule).observe(document.documentElement, { subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: [...attributes, "content"] });
     syncDocument();
+    pendingStyle.remove();
   }
   function setLocale(value, persist = true) {
     const next = resolveLocale(value);
@@ -183,8 +196,7 @@
   window.SeatGraphI18n = { t, translate, setLocale, resolveLocale, jsxRuntime, wrapComponent, get locale() { return renderLocale; }, get resolvedLocale() { return locale; }, get locales() { return config.locales; } };
   window.addEventListener("storage", (event) => { if (event.key === config.storageKey) setLocale(event.newValue || config.defaultLocale, false); });
   window.addEventListener("popstate", () => setLocale(new URL(location.href).searchParams.get(config.queryParameter) || saved || config.defaultLocale, false));
-  // Not-found pages have no application component to signal hydration completion.
-  window.addEventListener("load", () => {
-    if (!document.querySelector("script[src*='/app/page-'],script[src*='/app/venue/page-']")) ready();
-  }, { once: true });
+  // Static trainer markup is ready before images, fonts or audio finish loading.
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", ready, { once: true });
+  else ready();
 })();

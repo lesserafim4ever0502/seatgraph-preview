@@ -1,6 +1,6 @@
-import { youtubeId } from './youtube-url.js?v=4867232d32ae';
-export { youtubeId } from './youtube-url.js?v=4867232d32ae';
-import { loopBoundary } from './engine.js?v=4867232d32ae';
+import { youtubeId } from './youtube-url.js?v=2cd828935915';
+export { youtubeId } from './youtube-url.js?v=2cd828935915';
+import { loopBoundary } from './engine.js?v=2cd828935915';
 let apiPromise = null;
 export function loadYouTubeAPI() {
     if (window.YT?.Player)
