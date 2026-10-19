@@ -298,6 +298,71 @@
       "publisher": "HYBE LABELS",
       "kind": "mv",
       "verifiedAt": "2026-10-11"
+    },
+    "study": {
+      "source": {
+        "label": "日本官网 · 官方应援谱（学习提示来源）",
+        "url": "https://www.le-sserafim.jp/fanchant/5509687a365b"
+      },
+      "checkedAt": "2026-10-17",
+      "cues": [
+        {
+          "id": "perfect-night-study-1",
+          "section": "开场",
+          "type": "member_name",
+          "text": "김채원 사쿠라 허윤진 카즈하 홍은채",
+          "note": "官方谱在开头点名处标注 0:07；仅作该谱入口参考，不作为同步 Cue。"
+        },
+        {
+          "id": "perfect-night-study-2",
+          "section": "开场之后",
+          "type": "group_name",
+          "text": "FEARNOT · LE SSERAFIM",
+          "note": "五位成员名字之后接粉丝名和团名。"
+        },
+        {
+          "id": "perfect-night-study-3",
+          "section": "第一段",
+          "type": "response",
+          "text": "tonight! · goodbye!",
+          "note": "这是先后两处短回应，分别按对应括号位置喊出，不连读。"
+        },
+        {
+          "id": "perfect-night-study-4",
+          "section": "第一轮之后",
+          "type": "group_name",
+          "text": "LE SSERAFIM",
+          "note": "官方在此轮跟唱段后设置团名回应。"
+        },
+        {
+          "id": "perfect-night-study-5",
+          "section": "第二轮",
+          "type": "action",
+          "text": "第二轮按本段蓝字跟唱，再接团名。",
+          "note": "与第一轮相同的结构不代表所有歌词完全相同。"
+        },
+        {
+          "id": "perfect-night-study-6",
+          "section": "中后段",
+          "type": "member_name",
+          "text": "김채원 사쿠라 허윤진 카즈하 홍은채",
+          "note": "官方中后段再次安排五位成员点名。"
+        },
+        {
+          "id": "perfect-night-study-7",
+          "section": "中后段之后",
+          "type": "group_name",
+          "text": "FEARNOT · Perfect Night",
+          "note": "此处接粉丝名与歌名，区别于开头的团名结尾。"
+        },
+        {
+          "id": "perfect-night-study-8",
+          "section": "最后一轮",
+          "type": "action",
+          "text": "按官方蓝字完成最后一轮与末句。",
+          "note": "完整跟唱文字见官方谱，音频时间仍未逐句校准。"
+        }
+      ]
     }
   },
   {
@@ -334,6 +399,64 @@
       "publisher": "LE SSERAFIM",
       "kind": "performance",
       "verifiedAt": "2026-10-11"
+    },
+    "study": {
+      "source": {
+        "label": "日本官网 · 官方应援谱（学习提示来源）",
+        "url": "https://www.le-sserafim.jp/fanchant/b53fac80ea4d"
+      },
+      "checkedAt": "2026-10-17",
+      "cues": [
+        {
+          "id": "blue-flame-study-1",
+          "section": "开场",
+          "type": "group_name",
+          "text": "LE SSERAFIM",
+          "note": "官方谱标注此开头入口为 0:07；本学习卡只表达顺序，不用于音频同步。"
+        },
+        {
+          "id": "blue-flame-study-2",
+          "section": "前段",
+          "type": "member_name",
+          "text": "김채원 사쿠라 허윤진",
+          "note": "前一组点名按三位成员的顺序喊。"
+        },
+        {
+          "id": "blue-flame-study-3",
+          "section": "第一轮跟唱",
+          "type": "action",
+          "text": "按蓝字逐句接句尾，保持与主旋律同拍。",
+          "note": "完整跟唱原文见官方谱。"
+        },
+        {
+          "id": "blue-flame-study-4",
+          "section": "下一组",
+          "type": "member_name",
+          "text": "카즈하 홍은채",
+          "note": "后一组点名是这两位成员。"
+        },
+        {
+          "id": "blue-flame-study-5",
+          "section": "下一组之后",
+          "type": "group_name",
+          "text": "FEARNOT",
+          "note": "两位成员名字之后接粉丝名。"
+        },
+        {
+          "id": "blue-flame-study-6",
+          "section": "后段",
+          "type": "group_name",
+          "text": "LE SSERAFIM",
+          "note": "官方后段再次标注团名，接在该段蓝字之后。"
+        },
+        {
+          "id": "blue-flame-study-7",
+          "section": "最后一轮",
+          "type": "action",
+          "text": "沿用官方蓝字的句尾参与方式完成最后一轮。",
+          "note": "以所选版本为准，不把日本语版与原版混用。"
+        }
+      ]
     }
   },
   {
@@ -374,6 +497,64 @@
       "publisher": "HYBE LABELS",
       "kind": "mv",
       "verifiedAt": "2026-10-11"
+    },
+    "study": {
+      "source": {
+        "label": "日本官网 · 官方应援谱（学习提示来源）",
+        "url": "https://www.le-sserafim.jp/fanchant/26bc5be4f1a3"
+      },
+      "checkedAt": "2026-10-17",
+      "cues": [
+        {
+          "id": "easy-study-1",
+          "section": "开场",
+          "type": "action",
+          "text": "欢呼后听成员进入第一轮演唱。",
+          "note": "官方谱开头标注欢呼；先辨认四句循环，不抢拍。"
+        },
+        {
+          "id": "easy-study-2",
+          "section": "第一轮",
+          "type": "group_name",
+          "text": "LE SSERAFIM",
+          "note": "两句主旋律收尾分别接团名；团名按官方括号标记喊出。"
+        },
+        {
+          "id": "easy-study-3",
+          "section": "第一轮后",
+          "type": "clap",
+          "text": "拍手七下",
+          "note": "官方谱的拍手符号为连续七下；跟随音源节拍，不自行增加拍数。"
+        },
+        {
+          "id": "easy-study-4",
+          "section": "第二轮",
+          "type": "action",
+          "text": "按官方蓝字接句尾，再接团名。",
+          "note": "先练清每句的收尾，完整跟唱内容打开官方谱核对。"
+        },
+        {
+          "id": "easy-study-5",
+          "section": "第二轮后",
+          "type": "clap",
+          "text": "再次拍手七下",
+          "note": "第二处拍手同样是连续七下。"
+        },
+        {
+          "id": "easy-study-6",
+          "section": "收尾",
+          "type": "member_name",
+          "text": "김채원 사쿠라 허윤진 카즈하 홍은채",
+          "note": "最后一轮之后按谱面顺序喊五位成员名字。"
+        },
+        {
+          "id": "easy-study-7",
+          "section": "收尾之后",
+          "type": "group_name",
+          "text": "LE SSERAFIM · EASY",
+          "note": "成员点名后接团名与歌名。"
+        }
+      ]
     }
   },
   {
@@ -414,6 +595,57 @@
       "publisher": "LE SSERAFIM",
       "kind": "audio",
       "verifiedAt": "2026-10-11"
+    },
+    "study": {
+      "source": {
+        "label": "日本官网 · 官方应援谱（学习提示来源）",
+        "url": "https://www.le-sserafim.jp/fanchant/9a143be180a0"
+      },
+      "checkedAt": "2026-10-17",
+      "cues": [
+        {
+          "id": "1800-hot-n-fun-study-1",
+          "section": "开场",
+          "type": "member_name",
+          "text": "김채원 사쿠라 허윤진 카즈하 홍은채",
+          "note": "官方开头按这五位成员顺序点名。"
+        },
+        {
+          "id": "1800-hot-n-fun-study-2",
+          "section": "开场之后",
+          "type": "group_name",
+          "text": "FEARNOT · LE SSERAFIM",
+          "note": "成员点名后接粉丝名，再接团名。"
+        },
+        {
+          "id": "1800-hot-n-fun-study-3",
+          "section": "第一轮",
+          "type": "action",
+          "text": "第一轮副歌跟唱三句蓝字。",
+          "note": "先完整听清该轮，按官方谱练习；不把三句的顺序调换。"
+        },
+        {
+          "id": "1800-hot-n-fun-study-4",
+          "section": "下一段",
+          "type": "response",
+          "text": "Oh my god",
+          "note": "这是本段的一个短回应；其余参与词见官方谱。"
+        },
+        {
+          "id": "1800-hot-n-fun-study-5",
+          "section": "重复段",
+          "type": "chant",
+          "text": "1-800-hot-n-fun",
+          "note": "官方在重复段连续标出歌名，按节拍逐次跟唱。"
+        },
+        {
+          "id": "1800-hot-n-fun-study-6",
+          "section": "末轮与结束",
+          "type": "action",
+          "text": "按官方谱重复副歌与歌名段，最后欢呼。",
+          "note": "常规版本的顺序不直接代表巡演加长或改编版。"
+        }
+      ]
     }
   },
   {
@@ -542,6 +774,64 @@
       "publisher": "HYBE LABELS",
       "kind": "mv",
       "verifiedAt": "2026-10-11"
+    },
+    "study": {
+      "source": {
+        "label": "日本官网 · 官方应援谱（学习提示来源）",
+        "url": "https://www.le-sserafim.jp/fanchant/d70e0941cbe2"
+      },
+      "checkedAt": "2026-10-17",
+      "cues": [
+        {
+          "id": "antifragile-study-1",
+          "section": "开场",
+          "type": "response",
+          "text": "fragile",
+          "note": "开场先练这个句尾回应，按谱面安排重复。"
+        },
+        {
+          "id": "antifragile-study-2",
+          "section": "开场之后",
+          "type": "group_name",
+          "text": "LE SSERAFIM",
+          "note": "开场短回应之后接团名。"
+        },
+        {
+          "id": "antifragile-study-3",
+          "section": "第一段",
+          "type": "action",
+          "text": "主歌以短回应接句尾，保留成员主句。",
+          "note": "蓝字之外的歌词不需要全部喊成口号。"
+        },
+        {
+          "id": "antifragile-study-4",
+          "section": "预副歌",
+          "type": "response",
+          "text": "Yes gimme that",
+          "note": "先练这一处短句，再按官方蓝字进入预副歌。"
+        },
+        {
+          "id": "antifragile-study-5",
+          "section": "副歌",
+          "type": "action",
+          "text": "跟随官方蓝字重复已学的句尾。",
+          "note": "分清长句跟唱与重复词的节拍；完整内容在官方谱。"
+        },
+        {
+          "id": "antifragile-study-6",
+          "section": "第二段",
+          "type": "action",
+          "text": "第二段使用本段自己的蓝字回应。",
+          "note": "不要只把第一段主歌的回应复制过去。"
+        },
+        {
+          "id": "antifragile-study-7",
+          "section": "桥段与收尾",
+          "type": "action",
+          "text": "桥段先接连续短回应，再回到最后一轮副歌。",
+          "note": "按官方谱末段的排列练习，留意转段。"
+        }
+      ]
     }
   },
   {
@@ -618,6 +908,64 @@
       "publisher": "LE SSERAFIM",
       "kind": "audio",
       "verifiedAt": "2026-10-11"
+    },
+    "study": {
+      "source": {
+        "label": "日本官网 · 官方应援谱（学习提示来源）",
+        "url": "https://www.le-sserafim.jp/fanchant/281ed50f400d"
+      },
+      "checkedAt": "2026-10-17",
+      "cues": [
+        {
+          "id": "crazy-study-1",
+          "section": "开场",
+          "type": "action",
+          "text": "欢呼，接第一段重复句的末尾。",
+          "note": "官方以蓝字标记参与部分；完整句子请打开官方谱。"
+        },
+        {
+          "id": "crazy-study-2",
+          "section": "第一段",
+          "type": "response",
+          "text": "왜!",
+          "note": "括号中的短回应；读音参考 Wae，具体落点以官方谱和当前音源为准。"
+        },
+        {
+          "id": "crazy-study-3",
+          "section": "副歌前",
+          "type": "action",
+          "text": "按蓝字跟唱短句，再进入重复段。",
+          "note": "不要把成员的整段主句都当成独立应援口号。"
+        },
+        {
+          "id": "crazy-study-4",
+          "section": "副歌之后",
+          "type": "group_name",
+          "text": "LE SSERAFIM",
+          "note": "舞蹈段中按官方括号标记喊团名。"
+        },
+        {
+          "id": "crazy-study-5",
+          "section": "第二段",
+          "type": "response",
+          "text": "me! · 쉿! · muah",
+          "note": "这三个短回应按谱面先后分别练习，并非连成一句；쉿 的读音参考 swit。"
+        },
+        {
+          "id": "crazy-study-6",
+          "section": "最后一轮",
+          "type": "action",
+          "text": "重复前面学过的蓝字参与段。",
+          "note": "以官方谱的最后一轮为准，保持短回应与跟唱的区别。"
+        },
+        {
+          "id": "crazy-study-7",
+          "section": "结束",
+          "type": "response",
+          "text": "WHAT?",
+          "note": "最后一处括号短回应之后欢呼。"
+        }
+      ]
     }
   },
   {
@@ -658,6 +1006,57 @@
       "publisher": "HYBE LABELS",
       "kind": "mv",
       "verifiedAt": "2026-10-11"
+    },
+    "study": {
+      "source": {
+        "label": "日本官网 · 官方应援谱（学习提示来源）",
+        "url": "https://www.le-sserafim.jp/fanchant/e7669e1b8c72"
+      },
+      "checkedAt": "2026-10-17",
+      "cues": [
+        {
+          "id": "spaghetti-study-1",
+          "section": "开场",
+          "type": "action",
+          "text": "欢呼后练主歌句尾的短回应。",
+          "note": "官方谱将参与部分标成蓝色；先分清独立回应与连贯跟唱。"
+        },
+        {
+          "id": "spaghetti-study-2",
+          "section": "副歌前",
+          "type": "action",
+          "text": "把连续短回应接稳，再进入副歌。",
+          "note": "按官方蓝字顺序练习，具体原文见来源。"
+        },
+        {
+          "id": "spaghetti-study-3",
+          "section": "第一轮副歌",
+          "type": "chant",
+          "text": "Eat it up",
+          "note": "先单独练这组三词短句；后续扩展与重复按官方谱跟唱。"
+        },
+        {
+          "id": "spaghetti-study-4",
+          "section": "第二段",
+          "type": "action",
+          "text": "按第二段的蓝字回应，不照搬第一段句尾。",
+          "note": "两段主歌蓝字内容不同，分开练习。"
+        },
+        {
+          "id": "spaghetti-study-5",
+          "section": "末段",
+          "type": "group_name",
+          "text": "LE SSERAFIM",
+          "note": "末段指定位置接团名；不要提前插入。"
+        },
+        {
+          "id": "spaghetti-study-6",
+          "section": "收尾",
+          "type": "chant",
+          "text": "S.PA.GHE.TTI",
+          "note": "官方收尾把歌名拆成四组发音，跟节拍完成后欢呼。"
+        }
+      ]
     }
   },
   {
@@ -694,6 +1093,57 @@
       "publisher": "HYBE LABELS",
       "kind": "mv",
       "verifiedAt": "2026-10-11"
+    },
+    "study": {
+      "source": {
+        "label": "日本官网 · 官方应援谱（学习提示来源）",
+        "url": "https://www.le-sserafim.jp/fanchant/a98d1378df1f"
+      },
+      "checkedAt": "2026-10-17",
+      "cues": [
+        {
+          "id": "unforgiven-study-1",
+          "section": "开场",
+          "type": "action",
+          "text": "欢呼后，按第一段蓝字接短句。",
+          "note": "常规发行版与巡演特别编曲分别校准。"
+        },
+        {
+          "id": "unforgiven-study-2",
+          "section": "第一段之后",
+          "type": "group_name",
+          "text": "LE SSERAFIM",
+          "note": "按官方括号标记接团名。"
+        },
+        {
+          "id": "unforgiven-study-3",
+          "section": "进入副歌",
+          "type": "action",
+          "text": "副歌成对的呼应按蓝字顺序跟唱。",
+          "note": "先听清每组之间的停顿，完整原文见官方谱。"
+        },
+        {
+          "id": "unforgiven-study-4",
+          "section": "第二段",
+          "type": "response",
+          "text": "What?",
+          "note": "按第二段括号标记喊这一处短回应。"
+        },
+        {
+          "id": "unforgiven-study-5",
+          "section": "第二轮",
+          "type": "action",
+          "text": "重复本轮团名与副歌参与段。",
+          "note": "以本轮蓝字为准，不把所有成员歌词都当成应援词。"
+        },
+        {
+          "id": "unforgiven-study-6",
+          "section": "收尾",
+          "type": "group_name",
+          "text": "LE SSERAFIM",
+          "note": "官方末尾的团名之后欢呼。"
+        }
+      ]
     }
   },
   {
@@ -882,6 +1332,57 @@
       "publisher": "LE SSERAFIM",
       "kind": "performance",
       "verifiedAt": "2026-10-11"
+    },
+    "study": {
+      "source": {
+        "label": "日本官网 · 官方应援谱（学习提示来源）",
+        "url": "https://www.le-sserafim.jp/fanchant/e697bc26436c"
+      },
+      "checkedAt": "2026-10-17",
+      "cues": [
+        {
+          "id": "no-celestial-study-1",
+          "section": "开场",
+          "type": "group_name",
+          "text": "LE SSERAFIM",
+          "note": "官方谱开头标注 0:06；本学习卡无同步时间。"
+        },
+        {
+          "id": "no-celestial-study-2",
+          "section": "第一段",
+          "type": "action",
+          "text": "第一段按蓝字接句尾与短回应。",
+          "note": "完整原文见官方谱，不把成员主句全部改成口号。"
+        },
+        {
+          "id": "no-celestial-study-3",
+          "section": "进入副歌",
+          "type": "response",
+          "text": "down to earth",
+          "note": "按括号中的短回应练习，后续位置仍按原谱。"
+        },
+        {
+          "id": "no-celestial-study-4",
+          "section": "副歌",
+          "type": "response",
+          "text": "angel · goddess",
+          "note": "两个蓝字词分处各自句尾，不连读。"
+        },
+        {
+          "id": "no-celestial-study-5",
+          "section": "第二段",
+          "type": "action",
+          "text": "第二段练完本段蓝字，再回到副歌回应。",
+          "note": "先辨认本段与第一段不同的参与句。"
+        },
+        {
+          "id": "no-celestial-study-6",
+          "section": "末段",
+          "type": "action",
+          "text": "按谱面末段重复短回应，再完成最后一轮。",
+          "note": "常规音源与现场改编的结构可能不同。"
+        }
+      ]
     }
   },
   {
@@ -918,6 +1419,57 @@
       "publisher": "HYBE LABELS",
       "kind": "mv",
       "verifiedAt": "2026-10-11"
+    },
+    "study": {
+      "source": {
+        "label": "日本官网 · 官方应援谱（学习提示来源）",
+        "url": "https://www.le-sserafim.jp/fanchant/83f2f918a2eb"
+      },
+      "checkedAt": "2026-10-17",
+      "cues": [
+        {
+          "id": "smart-study-1",
+          "section": "开场",
+          "type": "action",
+          "text": "欢呼后进入副歌的句尾回应。",
+          "note": "先把两种主要句尾练清，再接主歌。"
+        },
+        {
+          "id": "smart-study-2",
+          "section": "第一轮",
+          "type": "response",
+          "text": "smarter · winner",
+          "note": "两种句尾按官方谱的先后与重复次数分别接，不连成一句。"
+        },
+        {
+          "id": "smart-study-3",
+          "section": "第一段",
+          "type": "response",
+          "text": "my sugar",
+          "note": "官方括号内的短回应；对应位置和重复变化见官方谱。"
+        },
+        {
+          "id": "smart-study-4",
+          "section": "第一段之后",
+          "type": "action",
+          "text": "跟唱蓝字的重复音节，保持短促。",
+          "note": "句尾重复音节与普通主句分开练习。"
+        },
+        {
+          "id": "smart-study-5",
+          "section": "下一段",
+          "type": "response",
+          "text": "쉿",
+          "note": "读音参考 swit；按官方谱把这一处重复五次。"
+        },
+        {
+          "id": "smart-study-6",
+          "section": "第二轮与收尾",
+          "type": "action",
+          "text": "按谱面重复两种主要句尾，留意末尾变化。",
+          "note": "第二段的括号回应和结尾不同，完整内容以官方原谱为准。"
+        }
+      ]
     }
   }
 ]

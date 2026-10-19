@@ -1,8 +1,8 @@
-import { LocalAudioPlayer } from './audio.js?v=2cd828935915';
-import { cueRomanization } from './romanization.js?v=2cd828935915';
-import { answerVisible, cueEnd, cueSeekTime, formatTime, getCueState, getLoopRange, toAudioTime, toSongTime } from './engine.js?v=2cd828935915';
-import { CUE_TYPES, DataError, parseSong } from './model.js?v=2cd828935915';
-import { LIBRARY_KEY, MAX_LIBRARY_BYTES, PROGRESS, loadLibrary, parseBackup, parseCueLines, parseLibrary, saveLibrary, shiftSong } from './library.js?v=2cd828935915';
+import { LocalAudioPlayer } from './audio.js?v=db6ef9b51ca8';
+import { cueRomanization } from './romanization.js?v=db6ef9b51ca8';
+import { answerVisible, cueEnd, cueSeekTime, formatTime, getCueState, getLoopRange, toAudioTime, toSongTime } from './engine.js?v=db6ef9b51ca8';
+import { CUE_TYPES, DataError, parseSong } from './model.js?v=db6ef9b51ca8';
+import { LIBRARY_KEY, MAX_LIBRARY_BYTES, PROGRESS, loadLibrary, parseBackup, parseCueLines, parseLibrary, saveLibrary, shiftSong } from './library.js?v=db6ef9b51ca8';
 const storage = {
     getItem: (key) => window.localStorage.getItem(key),
     setItem: (key, value) => window.localStorage.setItem(key, value),
@@ -55,6 +55,11 @@ export class FanchantTrainer {
     events = new AbortController();
     downloads = new Map();
     player;
+    get studyGuide() {
+        return this.sourceMode === 'manual' && !this.editing && !this.song.cues.length
+            ? this.catalog.find(entry => entry.song.id === this.song.id)?.study : undefined;
+    }
+    get activeCues() { return this.studyGuide?.cues ?? this.song.cues; }
     constructor(root, demo, catalog = []) {
         this.root = root;
         this.demo = demo;
@@ -95,6 +100,7 @@ export class FanchantTrainer {
         this.manualRevealed = false;
         this.listSignature = '';
         this.player.clear();
+        this.rebuild();
     }
     errorMessage(error) {
         return error instanceof DataError ? this.t(error.code, { field: error.field }) : this.t('readFailed');
@@ -163,7 +169,7 @@ export class FanchantTrainer {
             this.listSignature = '';
             this.player.pause();
             this.player.stopLoop();
-            this.render(this.player.snapshot);
+            this.rebuild();
         });
         this.on(this.el('youtube-reference'), 'click', () => { this.player.pause(); this.player.stopLoop(); });
         this.on(this.el('audio-clear'), 'click', () => this.clearMedia());
@@ -171,14 +177,14 @@ export class FanchantTrainer {
             this.on(this.el(id), 'click', () => {
                 if (this.sourceMode !== 'manual')
                     return;
-                const index = this.song.cues.findIndex(cue => cue.id === this.selectedId);
-                const cue = this.song.cues[index + direction];
+                const index = this.activeCues.findIndex(cue => cue.id === this.selectedId);
+                const cue = this.activeCues[index + direction];
                 if (cue)
                     this.jump(cue);
             });
         }
         this.on(this.el('manual-reveal'), 'click', () => {
-            if (this.sourceMode !== 'manual' || this.mode === 'learn' || !this.song.cues.length)
+            if (this.sourceMode !== 'manual' || this.mode === 'learn' || !this.activeCues.length)
                 return;
             this.manualRevealed = !this.manualRevealed;
             this.listSignature = '';
@@ -240,7 +246,7 @@ export class FanchantTrainer {
                 this.editing = false;
                 this.closeEditor(false);
                 this.listSignature = '';
-                this.render(this.player.snapshot);
+                this.rebuild();
             });
         });
         this.on(this.el('edit-toggle'), 'click', () => {
@@ -255,7 +261,7 @@ export class FanchantTrainer {
                 this.el('batch-cues').value = '';
             }
             this.listSignature = '';
-            this.render(this.player.snapshot);
+            this.rebuild();
         });
         this.on(this.el('add-cue'), 'click', () => this.openEditor());
         this.on(this.el('editor-cancel'), 'click', () => this.closeEditor());
@@ -453,15 +459,16 @@ export class FanchantTrainer {
         const list = this.el('cue-list'), markers = this.el('cue-markers');
         list.replaceChildren();
         markers.replaceChildren();
-        this.rows = this.song.cues.map((cue, index) => {
+        this.rows = this.activeCues.map((cue, index) => {
             const row = document.createElement('li');
             row.className = 'cue-row';
             row.dataset.cueId = cue.id;
             const button = document.createElement('button');
             button.type = 'button';
             button.className = 'cue-go';
-            const timestamp = document.createElement('time');
-            timestamp.textContent = formatTime(cue.time, true);
+            const timestamp = document.createElement('time' in cue ? 'time' : 'span');
+            timestamp.className = 'cue-position';
+            timestamp.textContent = 'time' in cue ? formatTime(cue.time, true) : cue.section;
             const text = document.createElement('span');
             text.className = 'cue-row-text';
             const romanization = document.createElement('span');
@@ -479,12 +486,13 @@ export class FanchantTrainer {
             const edit = document.createElement('button');
             edit.type = 'button';
             edit.textContent = this.t('edit');
-            edit.setAttribute('aria-label', `${this.t('edit')} · ${this.t('cueLabel', { index: index + 1, time: formatTime(cue.time, true) })}`);
-            edit.addEventListener('click', () => this.openEditor(cue));
+            edit.setAttribute('aria-label', `${this.t('edit')} · ${index + 1}`);
+            edit.addEventListener('click', () => { if ('time' in cue)
+                this.openEditor(cue); });
             const remove = document.createElement('button');
             remove.type = 'button';
             remove.textContent = this.t('delete');
-            remove.setAttribute('aria-label', `${this.t('delete')} · ${this.t('cueLabel', { index: index + 1, time: formatTime(cue.time, true) })}`);
+            remove.setAttribute('aria-label', `${this.t('delete')} · ${index + 1}`);
             remove.addEventListener('click', () => {
                 if (!window.confirm(this.t('deleteConfirm')))
                     return;
@@ -499,6 +507,8 @@ export class FanchantTrainer {
             actions.append(edit, remove);
             row.append(button, actions);
             list.append(row);
+            if (!('time' in cue))
+                return { cue, row, button, text, romanization, type, actions };
             const marker = document.createElement('button');
             marker.type = 'button';
             marker.className = 'cue-marker';
@@ -515,12 +525,15 @@ export class FanchantTrainer {
     }
     renderSources() {
         const entry = this.catalog.find(item => item.song.id === this.song.id);
-        write(this.el('timing-status'), this.t(this.song.sample ? 'sampleNote' : this.song.timingStatus === 'anchors' ? 'anchorTiming' : this.song.timingStatus === 'user' ? 'userTiming' : 'missingTiming', { count: this.song.cues.length }));
+        write(this.el('timing-status'), this.t(this.studyGuide ? 'studyGuideTiming' : this.song.sample ? 'sampleNote' : this.song.timingStatus === 'anchors' ? 'anchorTiming' : this.song.timingStatus === 'user' ? 'userTiming' : 'missingTiming', { count: this.activeCues.length }));
         write(this.el('version-note'), this.song.versionNote ?? '');
         write(this.el('official-status'), this.t(entry ? entry.official ? 'officialAvailable' : 'noOfficial' : 'customSong'));
         const links = this.el('source-links');
         links.replaceChildren();
-        for (const source of this.song.sources ?? []) {
+        const sources = [...this.song.sources ?? []];
+        if (this.studyGuide && !sources.some(source => source.url === this.studyGuide.source.url))
+            sources.unshift(this.studyGuide.source);
+        for (const source of sources) {
             const link = document.createElement('a');
             link.href = source.url;
             link.target = '_blank';
@@ -566,8 +579,9 @@ export class FanchantTrainer {
         write(this.el('mode-label'), this.t(this.mode));
         const manual = this.sourceMode === 'manual';
         const timed = !manual && snapshot.ready;
-        if (manual && !this.song.cues.some(cue => cue.id === this.selectedId)) {
-            this.selectedId = this.song.cues[0]?.id ?? null;
+        const activeCues = this.activeCues;
+        if (manual && !activeCues.some(cue => cue.id === this.selectedId)) {
+            this.selectedId = activeCues[0]?.id ?? null;
             this.manualRevealed = false;
         }
         this.el('media-source').value = this.sourceMode;
@@ -603,24 +617,24 @@ export class FanchantTrainer {
             this.layoutMarkers(duration);
         }
         const state = getCueState(this.song, timed ? snapshot.time : (this.song.audioOffset ?? 0) - 1);
-        const manualIndex = this.song.cues.findIndex(cue => cue.id === this.selectedId);
-        const shown = manual ? this.song.cues[manualIndex] : state.current ?? state.next;
+        const manualIndex = activeCues.findIndex(cue => cue.id === this.selectedId);
+        const shown = manual ? activeCues[manualIndex] : state.current ?? state.next;
         const stage = this.el('cue-stage');
         const phase = manual ? 'manual' : state.phase;
         if (stage.dataset.phase !== phase)
             stage.dataset.phase = phase;
-        write(this.el('cue-phase'), manual ? shown ? this.t('manualPosition', { index: manualIndex + 1, total: this.song.cues.length }) : '' : this.t(!state.current && !state.next && this.song.cues.length ? 'finished' : state.phase));
+        write(this.el('cue-phase'), manual ? shown ? this.t('manualPosition', { index: manualIndex + 1, total: activeCues.length }) : '' : this.t(!state.current && !state.next && this.song.cues.length ? 'finished' : state.phase));
         write(this.el('cue-countdown'), manual ? this.t(this.mode === 'learn' ? 'manualLearnHelp' : 'manualRecallHelp') : !timed ? this.t('chooseAudioFirst') : state.current ? this.t('cueNow') : state.countdown === null ? '' : this.t('countdown', { seconds: state.countdown.toFixed(1) }));
-        const visible = shown && (manual ? this.mode === 'learn' || this.manualRevealed : answerVisible(this.mode, this.song.cues, this.song.cues.indexOf(shown), state.time));
+        const visible = shown && (manual ? this.mode === 'learn' || this.manualRevealed : 'time' in shown && answerVisible(this.mode, this.song.cues, this.song.cues.indexOf(shown), state.time));
         setHidden(this.el('manual-controls'), !manual || !shown);
         this.el('manual-prev').disabled = !manual || manualIndex <= 0;
-        this.el('manual-next').disabled = !manual || manualIndex < 0 || manualIndex >= this.song.cues.length - 1;
+        this.el('manual-next').disabled = !manual || manualIndex < 0 || manualIndex >= activeCues.length - 1;
         const reveal = this.el('manual-reveal');
         setHidden(reveal, this.mode === 'learn');
         reveal.disabled = !manual || !shown;
         write(reveal, this.t(this.manualRevealed ? 'hideAnswer' : 'showAnswer'));
         reveal.setAttribute('aria-pressed', String(this.manualRevealed));
-        write(this.el('cue-text'), !shown ? this.t(this.song.cues.length ? 'complete' : 'noCues') : visible ? shown.text : this.t(state.current ? 'recall' : 'concealed'));
+        write(this.el('cue-text'), !shown ? this.t(activeCues.length ? 'complete' : 'noCues') : visible ? shown.text : this.t(state.current ? 'recall' : 'concealed'));
         write(this.el('cue-note'), shown && visible ? shown.note ?? '' : '');
         const reading = shown && visible ? cueRomanization(shown) : '';
         writeReading(this.el('cue-romanization'), reading);
@@ -648,20 +662,21 @@ export class FanchantTrainer {
         this.root.querySelectorAll('[data-mode]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.mode === this.mode)));
         const edit = this.el('edit-toggle');
         edit.setAttribute('aria-pressed', String(this.editing));
+        write(this.el('list-heading'), this.t(this.studyGuide ? 'studyGuideHeading' : 'cueList'));
         write(edit, this.t(this.editing ? 'finishEditing' : 'editCues'));
         setHidden(this.el('editor-actions'), !this.editing);
-        write(this.el('list-help'), this.t(this.editing ? 'editHelp' : manual ? this.mode === 'learn' ? 'manualLearnHelp' : 'manualRecallHelp' : `${this.mode}Help`));
+        write(this.el('list-help'), this.studyGuide ? this.t('studyGuideHelp', { date: this.studyGuide.checkedAt }) : this.t(this.editing ? 'editHelp' : manual ? this.mode === 'learn' ? 'manualLearnHelp' : 'manualRecallHelp' : `${this.mode}Help`));
         this.rows.forEach(({ cue, row, button, text, romanization, type, actions, marker }, index) => {
-            const visible = this.editing || (manual ? this.mode === 'learn' || this.manualRevealed && cue.id === shown?.id : answerVisible(this.mode, this.song.cues, index, state.time));
+            const visible = this.editing || (manual ? this.mode === 'learn' || this.manualRevealed && cue.id === shown?.id : 'time' in cue && this.song.cues[index]?.id === cue.id && answerVisible(this.mode, this.song.cues, index, state.time));
             write(text, visible ? cue.text : this.t('hiddenAnswer'));
             const reading = visible ? cueRomanization(cue) : '';
             writeReading(romanization, reading);
             setHidden(romanization, !reading);
-            write(type, visible ? this.t(cue.type) : this.t('cueLabel', { index: index + 1, time: formatTime(cue.time, true) }));
+            write(type, visible ? this.t(cue.type) : this.t('time' in cue ? 'cueLabel' : 'studyGuideLine', { index: index + 1, time: 'time' in cue ? formatTime(cue.time, true) : '' }));
             row.dataset.selected = String(cue.id === this.selectedId);
             row.dataset.active = String(cue.id === (manual ? shown?.id : state.current?.id));
             button.setAttribute('aria-pressed', String(cue.id === this.selectedId));
-            marker.setAttribute('aria-pressed', String(cue.id === this.selectedId));
+            marker?.setAttribute('aria-pressed', String(cue.id === this.selectedId));
             setHidden(actions, !this.editing);
         });
     }
@@ -670,6 +685,8 @@ export class FanchantTrainer {
         const width = this.el('cue-markers').clientWidth || 240;
         const lanes = [];
         this.rows.forEach(({ cue, marker }) => {
+            if (!marker || !('time' in cue))
+                return;
             const audioTime = toAudioTime(cue.time, this.song.audioOffset);
             marker.hidden = audioTime < 0 || audioTime > duration;
             if (marker.hidden)
@@ -693,6 +710,8 @@ export class FanchantTrainer {
             this.render(this.player.snapshot);
             return;
         }
+        if (!('time' in cue))
+            return;
         if (!this.player.snapshot.ready) {
             this.message('chooseAudioFirst');
             this.render(this.player.snapshot);

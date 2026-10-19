@@ -1,5 +1,5 @@
-import { DataError, MAX_JSON_BYTES, parseSong, parseSongJSON, STORAGE_KEY } from './model.js?v=2cd828935915';
-import { youtubeId } from './youtube-url.js?v=2cd828935915';
+import { DataError, MAX_JSON_BYTES, parseSong, parseSongJSON, STORAGE_KEY } from './model.js?v=db6ef9b51ca8';
+import { youtubeId } from './youtube-url.js?v=db6ef9b51ca8';
 export const LIBRARY_KEY = 'seatgraph.fanchant.library.v2';
 export const MAX_LIBRARY_BYTES = 8 * MAX_JSON_BYTES;
 export const PROGRESS = ['new', 'learning', 'mastered'];
@@ -22,7 +22,26 @@ export function parseCatalog(value) {
                 throw new DataError('invalidObject', 'catalog.video');
             video = { url: input.url, title: input.title, publisher: input.publisher, kind: input.kind, verifiedAt: input.verifiedAt };
         }
-        return { song: parseSong(data.song), order: data.order, official: data.official, priority: data.priority, tourVariant: data.tourVariant, ...(video ? { video } : {}) };
+        let study;
+        if (data.study !== undefined) {
+            const input = object(data.study);
+            if (typeof input.checkedAt !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(input.checkedAt) || !Array.isArray(input.cues) || !input.cues.length || input.cues.length > 200)
+                throw new DataError('invalidObject', 'catalog.study');
+            const source = parseSong({ id: 'study', title: 'Study', cues: [], sources: [input.source] }).sources[0];
+            const ids = new Set();
+            const cues = input.cues.map(value => {
+                const item = object(value);
+                if (['time', 'prepareAt', 'endTime'].some(key => Object.hasOwn(item, key)) || typeof item.section !== 'string' || !item.section.trim() || item.section.length > 100)
+                    throw new DataError('invalidObject', 'catalog.study.cue');
+                const { time: _time, ...cue } = parseSong({ id: 'study', title: 'Study', cues: [{ ...item, time: 0 }] }).cues[0];
+                if (ids.has(cue.id))
+                    throw new DataError('duplicateId', 'catalog.study.cue');
+                ids.add(cue.id);
+                return { ...cue, section: item.section };
+            });
+            study = { source, checkedAt: input.checkedAt, cues };
+        }
+        return { song: parseSong(data.song), order: data.order, official: data.official, priority: data.priority, tourVariant: data.tourVariant, ...(video ? { video } : {}), ...(study ? { study } : {}) };
     });
     if (new Set(entries.map(item => item.song.id)).size !== entries.length || new Set(entries.map(item => item.order)).size !== entries.length)
         throw new DataError('duplicateId', 'catalog');
